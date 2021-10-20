@@ -13,7 +13,7 @@ phases:
   # Now we want to actually build our React app
   build:
    commands:
-      - npm run build
+      - npm run build 
 # Artifacts will specify what files will be uploaded to s3
 # This will include all files within the "build" folder
 artifacts:
