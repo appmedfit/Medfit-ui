@@ -11,7 +11,7 @@ function App() {
             <div className="card1">
               <div className="card-body1">
 
-                <h3>WELCOME To Medfit UI </h3>
+                <h3>WELCOME To Medfit APP</h3>
 
 
                 <AddTask />
