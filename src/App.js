@@ -1,26 +1,20 @@
 import React from "react";
-import TaskList from "./components/Tasklist/TaskList";
-import AddTask from "./components/Add-Task/AddTask";
+import { Router, Route } from 'react-router-dom';
+
+import { history } from './helpers/history';
+import { PrivateRoute } from './routing/PrivateRouter';
+import  HomePage  from './views/HomePage';
+import  LoginPage from './views/LoginPage';
 import "./styles.css";
 function App() {
   return (
     <div className="App">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-7">
-            <div className="card1">
-              <div className="card-body1">
-
-                <h3>welcome To Medfit UI </h3>
-
-
-                <AddTask />
-                <TaskList />
-              </div>
-            </div>
+       <Router history={history}>
+          <div>
+              <PrivateRoute exact path="/" component={HomePage} />
+              <Route path="/login" component={LoginPage} />
           </div>
-        </div>
-      </div>
+       </Router>
     </div>
   );
 }
