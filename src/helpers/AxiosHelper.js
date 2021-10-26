@@ -6,7 +6,7 @@ const client=axios.create({
 
 })
 client.defaults.headers.common['Authorization'] = sessionStorage.getItem('user') ? 'Bearer '+JSON.parse( sessionStorage.getItem('user'))['currentUser']['token']:""
-
+console.log(JSON.parse( sessionStorage.getItem('user'))['currentUser']['token'])
 const axiosClient= async (options)=>{
     const onSuccess=(response)=>response.data
     const onError=(error)=>{
