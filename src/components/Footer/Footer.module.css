@@ -1,0 +1,13 @@
+.footer {
+ 
+
+    width: 100%;
+   
+    background-color: #070101;
+    color: white;
+    display: flex;
+    
+  
+    box-shadow: 0 2px 8px rgba(211, 168, 168, 0.25);
+  
+  }

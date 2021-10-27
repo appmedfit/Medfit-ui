@@ -1,0 +1,72 @@
+/* .header {
+ 
+
+  width: 100%;
+  height: 5rem;
+  background-color: #FBE7E7;
+  color: white;
+  display: flex;
+  
+
+  box-shadow: 0 2px 8px rgba(211, 168, 168, 0.25);
+
+}
+
+.main-image {
+  width: 100%;
+  height: 25rem;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.main-image img {
+  width: 110%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
+}
+
+.med-icon{
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 1%;
+  z-index: 0;
+ overflow: hidden;
+}
+
+.consult{
+  color: #444AD3;
+  margin-left: 30%;
+  font-size: 20px;
+}
+.bg_light{
+  background-color: #FBE7E7 !important;
+}
+
+ */
+
+ .login{
+  height: fit-content;
+  width: 35px;
+}
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #FBE7E7 !important;
+}
+.consult{
+  color: #ff2e73;
+  margin-right: 11%;
+  font-size: 18px;
+  font-weight: 600;
+}
+.brand{
+  color: black;
+  padding: 6px;
+  font-weight: 600;
+}

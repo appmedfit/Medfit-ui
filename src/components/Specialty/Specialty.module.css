@@ -1,0 +1,56 @@
+.Dermat1{
+    margin-top: 40px;
+    margin-left: 100px;
+    width: 500px;
+    height: 300px;
+    
+}
+
+.first{
+    display: flex;
+    align-items: space-between;
+    }
+
+
+.h1{
+    margin-top: 60px;
+    margin-left: 110px; 
+}
+
+.p1{
+     margin-left: -3%;
+    margin-top: 200px;
+    color: grey;
+    justify-self: left;
+   
+}
+
+.p2{
+    margin-left: -27%;
+    margin-top: 160px;  
+}
+
+.card1{
+  margin-left: 45%;
+  margin-right: 30%; 
+  min-height: 50%;
+}
+
+.card2{
+    align-items: flex;
+}
+
+.doc1{
+    padding-top: 10px;
+    width: 40%;
+    height: 60%;
+}
+.docName{
+    margin-top: 10%;
+    padding-left: 50%;
+}
+
+.exp{
+
+    padding-left: 80%;  
+}
