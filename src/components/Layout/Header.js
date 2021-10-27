@@ -5,7 +5,7 @@ import login from '../../assets/login.png'
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/auth.slice";
-import Login from "../../services/auth.service";
+import {Login} from "../../services/auth.service";
 import { useHistory } from "react-router";
 const Header = (props) => {
   const {isAuthenticated} = useSelector((state)=>

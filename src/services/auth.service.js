@@ -2,7 +2,7 @@ import axiosClient  from "../helpers/AxiosHelper"
 import constants  from "../helpers/constants"
 import { login } from "../store/auth.slice"
 
- const Login=(data)=> async(dispatch)=> {
+export const Login=(data)=> async(dispatch)=> {
   console.log(data)
     return axiosClient({
         method:'POST',
@@ -20,4 +20,17 @@ import { login } from "../store/auth.slice"
 
 }
 
-export default Login
+export const SignUp=(data)=> async(dispatch)=> {
+    console.log(data)
+      return axiosClient({
+          method:'POST',
+          url:constants.signUp,
+          data:data,
+          responseType:'json'
+      }).then((resp)=>{
+          console.log(resp)
+      }).catch((error)=>{
+          console.log(error)
+      })
+  
+  }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Login from "../services/auth.service";
+import {Login} from "../services/auth.service";
 import { useHistory } from "react-router";
 const LoginPage = () =>{
     const history=useHistory()
