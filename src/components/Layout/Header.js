@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/auth.slice";
 import {Login} from "../../services/auth.service";
 import { useHistory } from "react-router";
+import { Link} from 'react-router-dom';
 const Header = (props) => {
   const {isAuthenticated} = useSelector((state)=>
   ( sessionStorage.getItem('user')? JSON.parse(sessionStorage.getItem('user'))  :state.auth)
@@ -43,10 +44,12 @@ const Header = (props) => {
      
   //     </div>className="navbar navbar-light" style="background-color: #e3f2fd;"
   <nav className="navbar navbar-light bg_light">
-  <a className="navbar-brand" href="#">
+      <Link to={`/`}>
+  <a className="navbar-brand" >
     <img  src={medIcon} width="35" height="35" className="d-inline-block align-top" alt=""/>
     <span className="brand">MEDFIT</span> 
   </a>
+  </Link>  
   <p className="consult">Online Consultation</p>
  <div>
 

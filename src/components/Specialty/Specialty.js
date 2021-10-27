@@ -2,16 +2,17 @@ import classes from './Specialty.module.css'
 import Dermat1 from '../../assets/Dermat1.jpg'
 import Card from './../UI/Card'
 import doc1 from '../../assets/doc1.jpg'
-
+import { useHistory,useParams } from "react-router";
 
 const Specialty = () => {
+   let { specialityId } = useParams();
   return (
         <div>
           <div className={classes.first}>
             <img className={classes.Dermat1} src={Dermat1} alt='dermat' />
             <h1  className={classes.h1}>Dermatology Consultation</h1>
             <div><br/></div>
-            
+            <h2>{specialityId}</h2>
             <p className={classes.p2}>About</p>
         <p className={classes.p1}>
 

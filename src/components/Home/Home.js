@@ -49,7 +49,7 @@ const Home = () => {
                   {
                     SpecialtyData.map((spl,index)=>
                    
-                        <div className={classes.col} key={index} onClick={()=>{history.push('/speciality')}}>
+                        <div className={classes.col} key={index} onClick={()=>{history.push('/speciality/'+spl.name)}}>
                           
                             <div className="card" style={{width: "11rem"}}>
                             <img className="card-img-top" src={spl.imgSrc} alt={spl.name}/>

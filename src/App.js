@@ -23,7 +23,6 @@ function App() {
                 <Route exact path="/" component={HomePage} /> 
                 <Route path="/login" component={LoginPage} />
                 <Route path="/speciality/:specialityId" component={Specialty} />
-             
             </Switch>
             <Footer/>
        </Router>
