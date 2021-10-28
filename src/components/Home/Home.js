@@ -23,7 +23,7 @@ import {
 const Home = () => {
   const history=useHistory()
   const SpecialtyData=[
-    {'name':'Dermat',imgSrc:Dermat,link:''},
+    {'name':'Dermatology',imgSrc:Dermat,link:''},
     {'name':'Physician',imgSrc:Physician,link:''},
     {'name':'ENT',imgSrc:ENT,link:''},
     {'name':'Ortho',imgSrc:Ortho,link:''},
@@ -35,6 +35,8 @@ const Home = () => {
     {'name':'Ophthal',imgSrc:Ophthal,link:''}
     
   ]
+
+
   return (
     <Fragment>
       <Router>

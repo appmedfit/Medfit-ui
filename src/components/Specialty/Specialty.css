@@ -14,11 +14,11 @@
 
 .h1{
     margin-top: 60px;
-    margin-left: 110px; 
+    margin-left: 250px; 
 }
 
 .p1{
-     margin-left: -3%;
+     margin-left: -140%;
     margin-top: 200px;
     color: grey;
     justify-self: left;
@@ -31,9 +31,8 @@
 }
 
 .card1{
-  margin-left: 45%;
-  margin-right: 30%; 
-  min-height: 50%;
+  margin-left: 55%;
+  
 }
 
 .card2{
