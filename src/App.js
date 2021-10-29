@@ -11,7 +11,6 @@ import {
 import { history } from './helpers/history';
 import { PrivateRoute } from './routing/PrivateRouter';
 import  HomePage  from './views/HomePage';
-import  LoginPage from './views/LoginPage';
 import Specialty from "./components/Specialty/Specialty";
 import Header from './components/Layout/Header';
 import Footer from './components/Footer/Footer'
@@ -21,7 +20,6 @@ function App() {
               <Header />
               <Switch>
                 <Route exact path="/" component={HomePage} /> 
-                <Route path="/login" component={LoginPage} />
                 <Route path="/speciality/:specialityId" component={Specialty} />
             </Switch>
             <Footer/>

@@ -9,13 +9,6 @@ export const Login=(data)=> async(dispatch)=> {
         url:constants.signIn,
         data:data,
         responseType:'json'
-    }).then((resp)=>{
-        sessionStorage.setItem('user',JSON.stringify({currentUser:resp.user,isAuthenticated:true}))
-     
-        dispatch(login(resp.user))
-       
-    }).catch((error)=>{
-        console.log(error)
     })
 
 }
@@ -27,10 +20,16 @@ export const SignUp=(data)=> async(dispatch)=> {
           url:constants.signUp,
           data:data,
           responseType:'json'
-      }).then((resp)=>{
-          console.log(resp)
-      }).catch((error)=>{
-          console.log(error)
       })
-  
+  }
+
+
+  export const SignOut=(data)=> async(dispatch)=> {
+    console.log(data)
+      return axiosClient({
+          method:'POST',
+          url:constants.SignOut,
+          data:data,
+          responseType:'json'
+      })
   }
