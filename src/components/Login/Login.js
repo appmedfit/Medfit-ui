@@ -86,7 +86,8 @@ function LoginForm({toggleShow,handleModalShowHide}) {
         setState({
             email : "",
             password : "",
-            role:""
+            role:"",
+            name:""
         })
       
     }
@@ -94,7 +95,7 @@ function LoginForm({toggleShow,handleModalShowHide}) {
     const [state , setState] = useState({
         email : "",
         password : "",
-        role:""
+        role:"", name:""
     })
     const [toggleShowGoogle, setToggleShowGoogle]=useState(false)
 
