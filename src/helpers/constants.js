@@ -5,7 +5,8 @@ const constants={
     signIn:'user/signIn',
     signUp:'user/signUp',
     getStudents:'/student',
-    SignOut:'user/signOut'
+    SignOut:'user/signOut',
+    getSpeciality:"specialty"
 
 }
 

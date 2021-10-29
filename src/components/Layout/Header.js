@@ -4,8 +4,7 @@ import medicon_login from '../../assets/medicon_login.png'
 import {auth , provider,firebase}  from '../../services/firebase';
 import classes from './Header.css';
 import login from '../../assets/login.png'
-import { useSelector } from 'react-redux';
-import { useDispatch } from "react-redux";
+import { useSelector ,useDispatch} from 'react-redux';
 import { logout } from "../../store/auth.slice";
 import {Login,SignOut} from "../../services/auth.service";
 import { useHistory } from "react-router";

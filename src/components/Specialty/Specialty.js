@@ -1,48 +1,25 @@
 import classes from './Specialty.css'
 import DermatologySpeciality from '../../assets/DermatologySpeciality.jpg'
 import GeneralPhysicianSpeciality from '../../assets/general_physician_speciality.jpg'
-
-
-
-import Card from './../UI/Card'
 import { useHistory,useParams } from "react-router";
 import doc from '../../assets/DocIcon.jpg'
-import { useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
+import { getSpeciality } from '../../services/specialty.service';
+import { useSelector ,useDispatch} from 'react-redux';
 const Specialty = () => {
    let { specialityId } = useParams();
+  const dispatch=useDispatch
+    const Specialtyimg= {'Dermatology':DermatologySpeciality,'GenPhysician':GeneralPhysicianSpeciality} 
 
-    const SpecialtyData=[
-    {'name':'Dermatology','type':'Dermatology Consultation',imgSrc:DermatologySpeciality,link:'',
-     'about': 'Dermatologist specializes in issues related to Skin and Hair. They treat conditions, disorders and inflammatory symptoms of any age and gender. Common problems like Acne, Pigmentation, Hair Fall, Loose Skin, Excess Hair, Warts are treated.'
-          ,doctors:[
-            {'name':'Sanjeev Prasad','experience':'10 yrs','degree':'MBBS, MD','location':'xyz clinic',nextSlot:'02:45 PM',fee:700},
-            {'name':'Sanjeev Prasad','experience':'10 yrs','degree':'MBBS, MD','location':'xyz clinic',nextSlot:'02:45 PM',fee:700},
-            {'name':'Sanjeev Prasad','experience':'10 yrs','degree':'MBBS, MD','location':'xyz clinic',nextSlot:'02:45 PM',fee:700}
-          ] 
-    },
-
-
-    {'name':'GenPhysician','type':'General Physician Consultation',imgSrc:GeneralPhysicianSpeciality,link:'','about':'General Physicians provide long-term, comprehensive care and can manage both common and complex diseases. They examine, diagnose, treat acute illnesses (e.g., infections, influenza) and chronic diseases (e.g., diabetes, high blood pressure)',
-    
-    doctors:[
-      {'name':'Sanjeev Prasad','experience':'10 yrs','degree':'MBBS, MD','location':'xyz clinic',nextSlot:'02:45 PM',fee:700},
-      {'name':'Sanjeev Prasad','experience':'10 yrs','degree':'MBBS, MD','location':'xyz clinic',nextSlot:'02:45 PM',fee:700},
-      {'name':'Sanjeev Prasad','experience':'10 yrs','degree':'MBBS, MD','location':'xyz clinic',nextSlot:'02:45 PM',fee:700}
-    ] 
-  }
-  ] 
-  
-  let [data]= SpecialtyData.filter((row)=>{
-   return row.name== specialityId
- })
+const [data,setData]=useState({})
 
   useEffect(() => {
     if(specialityId){
-      [data]= SpecialtyData.filter((row)=>{
-        console.log(specialityId)  
-       return row.name== specialityId
-     })
+      
+          getSpeciality(specialityId).then((resp)=>{
+            console.log(resp)
+            setData(resp)
+          })
     }
     
   }, [specialityId])
@@ -53,12 +30,12 @@ const Specialty = () => {
      
           <div className="container">
             <div className="inner_container">
-            { data ? 
+            { data &&data?.doctors ? 
              <div  className="row">
             <div className="col">
               <div className="imgcard">
 
-                  <img className="spl_img" src={data.imgSrc} alt='spl_img' />
+                  <img className="spl_img" src={Specialtyimg[data.name]} alt='spl_img' />
             </div>
             </div>
             <div className="col">
