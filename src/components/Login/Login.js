@@ -7,32 +7,17 @@ import { useHistory } from "react-router";
 import { login as loginAction} from "../../store/auth.slice"
 import {auth , provider,firebase}  from '../../services/firebase';
 import  '../Layout/Header.css';
-function LoginForm({toggleShow,handleModalShowHide}) {
+function LoginForm({toggleLogin,handleLoginModalShowHide,handleSignupModalShowHide}) {
     const history=useHistory()
     const dispatch = useDispatch();
     const handleModal=()=>{
-        handleModalShowHide()
-        setIsSignIn(true)
+        handleLoginModalShowHide()
     }
 
-    const [isSignin , setIsSignIn]=useState(true)
-
-    const handleLogin=()=>{
-        dispatch(loginService(state))
-        .then((resp)=>{
-            sessionStorage.setItem('user',JSON.stringify({currentUser:resp.user,isAuthenticated:true}))
-            dispatch(loginAction(resp.user))
-            handleModal()
-        }).catch((error)=>{
-            console.log(error)
-        })
-    }
     const handleGoogle =()=>{
         auth.signInWithPopup(provider).then((result)=>{
             var credential = result.credential;
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = credential.accessToken;
-            // The signed-in user info.
+           var token = credential.accessToken;
             var user = result.user;
             firebase.auth().currentUser.getIdToken(true).then(function(token) {
                 const id=user.uid
@@ -41,7 +26,7 @@ function LoginForm({toggleShow,handleModalShowHide}) {
                 let newUser={user:{...newUser,token}}
                 sessionStorage.setItem('user',JSON.stringify({currentUser:newUser , isAuthenticated:true}))
                 dispatch(loginAction(newUser))
-                handleContinueModalHide()
+                handleModal()
               }).catch(function(error) {
                 // Handle error
                 console.log(error)
@@ -64,57 +49,32 @@ function LoginForm({toggleShow,handleModalShowHide}) {
     }
 
     const handleSubmit=()=>{
-        console.log(isSignin)
-        if(isSignin){
-               handleLogin();
-        }
-        if(!isSignin){
-            dispatch(signUpService(state))
-            .then((resp)=>{
-                    if(resp=="successfully signed up"){
-                        handleLogin();
-                    }
-                 
-            }).catch((error)=>{
-                if(error.data=="The email address is already in use by another account."){
-                    handleLogin();
-                }
-                console.log(error)
+        
+        dispatch(loginService(state))
+        .then((resp)=>{
+            sessionStorage.setItem('user',JSON.stringify({currentUser:resp.user,isAuthenticated:true}))
+            dispatch(loginAction(resp.user))
+            handleModal()
+            setState({
+                email : "",
+                password : ""
             })
-
-        }
-        setState({
-            email : "",
-            password : "",
-            role:"",
-            name:""
+        }).catch((error)=>{
+            console.log(error)
         })
+      
       
     }
 
     const [state , setState] = useState({
         email : "",
-        password : "",
-        role:"", name:""
+        password : ""
     })
-    const [toggleShowGoogle, setToggleShowGoogle]=useState(false)
+  
 
-    const handleContinueModalShowHide=()=>{
-        setToggleShowGoogle((i)=> !i)
-        handleModalShowHide()
-    }
 
-    const handleContinueEmailModalShowHide=()=>{
-        setToggleShowGoogle((i)=> !i)
-        handleModalShowHide()
-        setIsSignIn(false)
+ 
 
-    }
-
-    const handleContinueModalHide=()=>{
-        setToggleShowGoogle((i)=> !i)
-      
-    }
 
 
     const handleChange = (e) => {
@@ -132,9 +92,9 @@ function LoginForm({toggleShow,handleModalShowHide}) {
   return(
          <>
             <>
-             <Modal show={toggleShow}>
+             <Modal show={toggleLogin}>
                   
-                    <Modal.Body>
+                 <Modal.Body>
                     <span className="float-right" style={{cursor:'pointer'}} onClick={ handleModal}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
                         <path fill="#aeaeae" fillRule="evenodd" d="M10.047.335L6 4.386 1.953.335a1.145 1.145 0 0 0-1.618 0 1.14 1.14 0 0 0 0 1.613L4.382 6 .335 10.052a1.14 1.14 0 0 0 0 1.613 1.145 1.145 0 0 0 1.618 0L6 7.614l4.047 4.051c.446.447 1.17.447 1.618 0a1.14 1.14 0 0 0 0-1.613L7.618 6l4.047-4.052a1.14 1.14 0 0 0 0-1.613 1.145 1.145 0 0 0-1.618 0z"/>
@@ -157,23 +117,6 @@ function LoginForm({toggleShow,handleModalShowHide}) {
                       />
                        
                       </div>
-                      { !isSignin &&
-                            <div className="radioInputContainer"> 
-                      
-                                    <div className="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="user" name="role" value="user" className="custom-control-input" onChange={handleChange}
-                                        checked={state.role==='user'}
-                                        />
-                                        <label className="custom-control-label" htmlFor="user">User</label>
-                                        </div>
-                                        <div className="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="doctor" value="doctor" name="role" className="custom-control-input" onChange={handleChange}
-                                        checked={state.role==='doctor'}
-                                        />
-                                        <label className="custom-control-label" htmlFor="doctor">Doctor</label>
-                                        </div>
-                             </div>
-                      }
                     
                       <div className="ActionContainer">
                         <button className="ContinueButton"  onClick={handleSubmit}> Continue</button>
@@ -189,69 +132,31 @@ function LoginForm({toggleShow,handleModalShowHide}) {
                             
                        </div>
 
-                       <div className="ActionContainerOtherMethods" onClick={handleContinueModalShowHide}>
+                       <div className="ActionContainerOtherMethods">
                            <div className="ContinueButtonWhite">Continue with  
                               <div className="SocialMediaEmailsContainer ">
-                                  <img src="https://static.cure.fit/assets/images/google-logo.svg" className="SocialMediaIcon "/>
-                                  <img src="https://static.cure.fit/assets/images/email.png" className="SocialMediaIcon "/>
+                                  <img src="https://static.cure.fit/assets/images/google-logo.svg" className="SocialMediaIcon " onClick={handleGoogle}/>
                               </div>
                            </div>
                         </div>
                       <br/>
+                      <div className="ActionContainerOtherMethods" onClick={()=>{handleSignupModalShowHide();handleLoginModalShowHide(); }}>
+                           <div className="ContinueButtonBlue">Sign Up
+                              <div className="SocialMediaEmailsContainer ">
+                              <img src="https://static.cure.fit/assets/images/email.png" className="SocialMediaIcon "  />
+                            
+                              </div>
+                           </div>
+                        </div>
                     </div>
 
                    
                    </div>
                    
-                    </Modal.Body>
-            </Modal>
+             </Modal.Body>
+        </Modal>
             </>
-            <>
-            <Modal show={toggleShowGoogle}>
-                  
-            <Modal.Body>
-                <span className="float-right" style={{cursor:'pointer'}} onClick={handleContinueModalHide }>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
-                    <path fill="#aeaeae" fillRule="evenodd" d="M10.047.335L6 4.386 1.953.335a1.145 1.145 0 0 0-1.618 0 1.14 1.14 0 0 0 0 1.613L4.382 6 .335 10.052a1.14 1.14 0 0 0 0 1.613 1.145 1.145 0 0 0 1.618 0L6 7.614l4.047 4.051c.446.447 1.17.447 1.618 0a1.14 1.14 0 0 0 0-1.613L7.618 6l4.047-4.052a1.14 1.14 0 0 0 0-1.613 1.145 1.145 0 0 0-1.618 0z"/>
-                </svg>
-                </span>
-                  <div className="login_conatiner">
-                    <img  src={medicon_login} width="127" height="112" className="loginicon" alt=""/>
-                    <h3 className="loginicon">MEDFIT</h3>
-                    <br/>
-                    <br/>
-                    <div> 
-                        <div className="channels">
-                            <div className="AuthButtonContainer">
-                                <button type="button" className="signIntile-buttonContainer-googleLogin" onClick={handleGoogle}>
-                                    <div className="socialAuthContainer">
-                                        <div className="singleTile">
-                                            <img src="https://static.cure.fit/assets/images/google-new.svg" alt="Google logo" className="logoIcon"/>
-                                                <span className="btnText">Sign in with Google</span>
-                                       </div>
-                                    </div>
-                                 </button>
-                             </div>
-                            <br/>
-                            <div className="AuthButtonContainer" onClick={handleContinueEmailModalShowHide}>
-                                <button type="button" className="emailLogin-signIntile-emailLine">
-                                    <div className="socialAuthContainer">
-                                        <div className="css-1ljhhni-singleTile">
-                                            <img src="https://static.cure.fit/assets/images/mail-new.svg" alt="Sign in with Email" className="logoIcon"/>
-                                                <span className="BtnText">Sign in with email</span>
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                            <br/>
-                            <br/>
-                        </div>    
-                     </div>
-                 </div>
-                 
-                  </Modal.Body>
-            </Modal>
-            </>
+
          </>
      
     )

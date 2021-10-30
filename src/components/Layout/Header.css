@@ -81,7 +81,7 @@
 }
 
 .emailInput {
-  width: 205px;
+  width: 220px;
   border: none;
   text-align: left;
   background-color: transparent;
@@ -117,14 +117,13 @@
   height: 45px;
   border-radius: 31px;
   font-size: 18px;
-  background-image: linear-gradient(
-99deg, rgb(202, 202, 202), rgb(199, 199, 199));
+  background-color: #007bff
 }
 .modal-content {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 76%;
+  width: 82%;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
@@ -166,6 +165,23 @@
 }
 .ContinueButtonWhite {
   color: rgb(0, 0, 0);
+  box-shadow: rgb(202 202 202) 0px 3px 16px 0px;
+  border: 0px;
+  width: 69%;
+  height: 50px;
+   border-radius: 31px;
+  font-size: 18px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ContinueButtonBlue {
+  color: #1f74e8;
   box-shadow: rgb(202 202 202) 0px 3px 16px 0px;
   border: 0px;
   width: 69%;
@@ -259,4 +275,35 @@
 
 .radioInputContainer{
   margin-left: 74px;
+}
+
+.signUpContainer{
+
+}
+.is-danger {
+  margin-left: 28px;
+  margin-top: -13 px ;
+  color: red;
+  padding: 2px;
+}
+.invalid-feedback {
+  display: inline;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.is-success {
+  margin-left: 28px;
+  margin-top: -13 px ;
+  color: #28a745;;
+  padding: 2px;
+}
+.valid-feedback {
+  display: inline;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #28a745;;
 }

@@ -1,16 +1,14 @@
 import { Fragment ,useState} from 'react';
 import medIcon from '../../assets/medicon.jpg'
 import medicon_login from '../../assets/medicon_login.png'
-import {auth , provider,firebase}  from '../../services/firebase';
 import classes from './Header.css';
 import login from '../../assets/login.png'
 import { useSelector ,useDispatch} from 'react-redux';
 import { logout } from "../../store/auth.slice";
-import {Login,SignOut} from "../../services/auth.service";
+import {SignOut} from "../../services/auth.service";
 import { useHistory } from "react-router";
 import { Link} from 'react-router-dom';
-import { Button,Modal } from 'react-bootstrap'
-
+import  SignUpForm from '../SignUp/SignUp'
 import LoginForm from '../Login/Login'
 
 const Header = (props) => {
@@ -19,11 +17,17 @@ const Header = (props) => {
                         )
     const history=useHistory()
     const dispatch = useDispatch();
-    const [toggleShow, setToggleShow]=useState(false)
+    const [toggleLogin, setToggleLogin]=useState(false)
+    const [toggleSignup, setToggleSignup]=useState(false)
 
-    const handleModalShowHide=()=>{
-      setToggleShow((i)=> !i)
+    const handleLoginModalShowHide=()=>{
+      setToggleLogin((i)=> !i)
     }
+
+    const handleSignupModalShowHide=()=>{
+      setToggleSignup((i)=> !i)
+    }
+
     const handleLogout=()=>{
       
         // Sign-out successful.
@@ -38,16 +42,7 @@ const Header = (props) => {
         
         
     }
-    const handleLogin=()=>{
-        
-      dispatch(Login({
-          "email":"kvenkatcharan1@gmail.com",
-          "password":"Charan123"
-      })).then(()=>{
-          
-      })
-      
-  }
+
   return (
           <>
 
@@ -65,14 +60,14 @@ const Header = (props) => {
             {
               isAuthenticated?
               <button className="btn btn-outline-primary" onClick={handleLogout}>Logout</button>:
-              <button className="btn btn-outline-primary" onClick={handleModalShowHide}>Login</button>
+              <button className="btn btn-outline-primary" onClick={handleLoginModalShowHide}>Login</button>
             }
             
           </div>
           </nav>
 
-            <LoginForm  toggleShow={toggleShow} handleModalShowHide={handleModalShowHide}  />
-
+            <LoginForm  toggleLogin={toggleLogin} handleLoginModalShowHide={handleLoginModalShowHide} handleSignupModalShowHide={handleSignupModalShowHide}  />
+            <SignUpForm toggleSignup={toggleSignup} handleLoginModalShowHide={handleLoginModalShowHide}  handleSignupModalShowHide={handleSignupModalShowHide} />
 
           </>
   );
