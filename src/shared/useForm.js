@@ -10,7 +10,7 @@ const useForm = (callback, validate) => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback();
     }
-  }, [errors,]);
+  }, [errors]);
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
@@ -19,16 +19,16 @@ const useForm = (callback, validate) => {
     setIsSubmitting(true);
   };
 
-  const resetForm=()=>{
-    setValues({})
-    console.log(values)
-  }
+  const resetForm = () => {
+    setValues({});
+    console.log(values);
+  };
   const handleChange = (event) => {
     setValues((values) => ({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }));
-   // console.log(values);
+    // console.log(values);
   };
 
   return {
@@ -36,7 +36,7 @@ const useForm = (callback, validate) => {
     handleSubmit,
     values,
     errors,
-    resetForm
+    resetForm,
   };
 };
 

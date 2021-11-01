@@ -1,4 +1,6 @@
-export default function createSlots(params) {
+import * as moment from "moment";
+
+export function createSlots() {
   let timeSlots = {
     timeSlotHeaders: ["9AM-12PM", "12PM-3PM", "3PM-6PM", "6PM-9PM"],
     timeSlots: [
@@ -153,3 +155,10 @@ export default function createSlots(params) {
   };
   return timeSlots;
 }
+
+export const isTimeCompleted = (day) => {
+  const today = moment();
+  const someday = moment(day);
+  const diff = someday.diff(today, "minutes");
+  return diff - 30;
+};
