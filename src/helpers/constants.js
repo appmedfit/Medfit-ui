@@ -1,7 +1,8 @@
 import { SignOut } from "../services/auth.service";
 
 const constants = {
-  baseUrl: "http://localhost:8080/api/v1/",
+  baseUrl: "https://medfit-backend.herokuapp.com/api/v1/",
+  //"http://localhost:8080/api/v1/",
   signIn: "user/signIn",
   signUp: "user/signUp",
   getStudents: "/student",
@@ -13,6 +14,7 @@ const constants = {
   addDoctorSlots: "availableSlots",
   booking: "availableSlots/booking",
   bookingDetails: "availableSlots/bookingDetails",
+  getSpeciality: "specialty",
 };
 
 export default constants;
