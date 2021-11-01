@@ -38,9 +38,9 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
         patientName: patient.name,
         doctorName: doctor.name,
       };
-      console.log(bookingInfo);
+      // console.log(bookingInfo);
       dispatch(bookSlot(bookingInfo)).then((res) => {
-        console.log(res);
+        //     console.log(res);
         getSlots({
           doctorId: doctor.id,
           fullDate: selectedDate.fullDate,
@@ -66,7 +66,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
 
   const changeDateHandler = (slotDate) => {
     setSelectedDate(slotDate);
-    console.log("date changed", slotDate);
+    // console.log("date changed", slotDate);
     getSlots({
       doctorId: doctor.id,
       fullDate: slotDate.fullDate,

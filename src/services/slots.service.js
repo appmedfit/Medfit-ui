@@ -2,7 +2,6 @@ import axiosClient from "../helpers/AxiosHelper";
 import constants from "../helpers/constants";
 
 export const addDoctorSlots = (data) => async (dispatch) => {
-  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.addDoctorSlots,
@@ -21,7 +20,6 @@ export const getDoctorSlots = (data) => async (dispatch) => {
 };
 
 export const bookSlot = (data) => async (dispatch) => {
-  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.booking,
@@ -31,7 +29,6 @@ export const bookSlot = (data) => async (dispatch) => {
 };
 
 export const bookingDetails = (data) => async (dispatch) => {
-  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.bookingDetails,

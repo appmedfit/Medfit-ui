@@ -46,7 +46,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
           isEditable: false,
         };
       });
-    console.log(availableSlotsData);
+    //  console.log(availableSlotsData);
     dispatch(addDoctorSlots(availableSlotsData)).then(() => {
       getSlots({
         doctorId: userDoctor.id,

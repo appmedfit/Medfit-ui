@@ -99,7 +99,7 @@ function PatientPreviousBookingsPage() {
       let newData =
         res.length > 0
           ? res.map((data) => {
-              console.log(data);
+              // console.log(data);
               return {
                 doctorName: data.doctorName,
                 specialty: data.specialty,

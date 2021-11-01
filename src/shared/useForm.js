@@ -21,7 +21,7 @@ const useForm = (callback, validate) => {
 
   const resetForm = () => {
     setValues({});
-    console.log(values);
+    //   console.log(values);
   };
   const handleChange = (event) => {
     setValues((values) => ({

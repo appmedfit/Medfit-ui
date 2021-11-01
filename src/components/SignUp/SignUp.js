@@ -28,7 +28,6 @@ function SignUpForm({
   );
 
   const resetForm = () => {
-    console.log(values);
     if (values)
       Object.keys(values).forEach((key) => {
         handleChange({ target: { value: "", name: key } });
@@ -43,12 +42,11 @@ function SignUpForm({
   };
 
   function handleSignup() {
-    console.log(values);
     setMsg("");
     seterr("");
     dispatch(signUpService(values))
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         setMsg(resp.data);
         handleModal();
         handleLoginModalShowHide();

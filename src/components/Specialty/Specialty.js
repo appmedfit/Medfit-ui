@@ -24,12 +24,10 @@ const Specialty = () => {
   useEffect(() => {
     if (specialityId) {
       getSpeciality(specialityId).then((resp) => {
-        console.log(resp);
         setspecialtyData(resp);
       });
       getUsersWithCondition({ specialty: specialityId, role: "doctor" }).then(
         (resp) => {
-          console.log(resp);
           setDoctorsdata(resp);
         }
       );

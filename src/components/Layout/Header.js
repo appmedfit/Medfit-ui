@@ -41,7 +41,7 @@ const Header = (props) => {
     // Sign-out successful.
     dispatch(SignOut({}))
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         sessionStorage.clear();
         history.push("/");
         dispatch(logout());
