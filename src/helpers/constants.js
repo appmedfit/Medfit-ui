@@ -7,6 +7,13 @@ const constants = {
   signUp: "user/signUp",
   getStudents: "/student",
   SignOut: "user/signOut",
+  getUsersWithCondition: "user/getUsersWithCondition",
+  updateUser: "user/updateUser",
+  getSpeciality: "specialty",
+  getDoctorSlots: "availableSlots/getSlots",
+  addDoctorSlots: "availableSlots",
+  booking: "availableSlots/booking",
+  bookingDetails: "availableSlots/bookingDetails",
   getSpeciality: "specialty",
 };
 

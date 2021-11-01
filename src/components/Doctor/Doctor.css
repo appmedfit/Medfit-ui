@@ -1,0 +1,22 @@
+.doc-main {
+  margin-top: 10rem;
+  margin-left: 5rem;
+  margin-right: 15rem;
+}
+
+.doc-landing-card {
+  height: 20rem;
+  box-shadow: lavender;
+  margin-top: 10rem;
+  margin-left: 10rem;
+  margin-right: 20rem;
+  background-color: rgb(216, 200, 214);
+}
+
+.doc-landing-button {
+  align-items: flex;
+  flex-direction: row;
+  padding-right: 5px;
+  justify-content: space-between;
+  padding-left: 8px;
+}

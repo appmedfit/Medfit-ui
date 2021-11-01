@@ -46,7 +46,7 @@
 
  */
 
- .login{
+.login {
   height: fit-content;
   width: 35px;
 }
@@ -57,15 +57,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  background-color: #FBE7E7 !important;
+  background-color: #fbe7e7 !important;
 }
-.consult{
+.consult {
   color: #ff2e73;
   margin-right: 11%;
   font-size: 18px;
   font-weight: 600;
 }
-.brand{
+.brand {
   color: black;
   padding: 6px;
   font-weight: 600;
@@ -76,7 +76,7 @@
   display: flex;
   flex-direction: column;
 }
-.loginicon{
+.loginicon {
   align-self: center;
 }
 
@@ -88,7 +88,7 @@
   outline: none;
   color: rgb(0, 0, 0);
   font-size: 15px;
-  font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
   padding-left: 10px;
 }
@@ -117,7 +117,7 @@
   height: 45px;
   border-radius: 31px;
   font-size: 18px;
-  background-color: #007bff
+  background-color: #007bff;
 }
 .modal-content {
   position: relative;
@@ -127,20 +127,20 @@
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
 }
 
-
-.Tnc{
+.Tnc {
   color: rgb(102, 102, 102);
-    font-size: 12px;
-    font-family: BrandonTextWeb-Medium, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    letter-spacing: 0px;
-    width: 69%;
-    margin: 20px auto;
-    text-align: left;
+  font-size: 12px;
+  font-family: BrandonTextWeb-Medium, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
+  letter-spacing: 0px;
+  width: 69%;
+  margin: 20px auto;
+  text-align: left;
 }
 .TncText {
   display: list-item;
@@ -149,10 +149,11 @@
 }
 .TncAnchor {
   cursor: pointer;
-  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
   color: rgb(224, 32, 32) !important;
 }
-.ActionContainerOtherMethods{
+.ActionContainerOtherMethods {
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;
@@ -161,7 +162,6 @@
   flex-direction: column;
   bottom: 6%;
   width: 100%;
-
 }
 .ContinueButtonWhite {
   color: rgb(0, 0, 0);
@@ -169,7 +169,7 @@
   border: 0px;
   width: 69%;
   height: 50px;
-   border-radius: 31px;
+  border-radius: 31px;
   font-size: 18px;
   background: rgb(255, 255, 255);
   display: flex;
@@ -186,7 +186,7 @@
   border: 0px;
   width: 69%;
   height: 50px;
-   border-radius: 31px;
+  border-radius: 31px;
   font-size: 18px;
   background: rgb(255, 255, 255);
   display: flex;
@@ -239,7 +239,8 @@
 .btnText {
   font-size: 16px;
   color: rgb(255, 255, 255);
-  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
   vertical-align: middle;
 }
 
@@ -273,16 +274,15 @@
   box-shadow: rgb(0 0 0 / 30%) 0px 2px 2px 0px;
 }
 
-.radioInputContainer{
+.radioInputContainer {
   margin-left: 74px;
 }
 
-.signUpContainer{
-
+.signUpContainer {
 }
 .is-danger {
   margin-left: 28px;
-  margin-top: -13 px ;
+  margin-top: -13 px;
   color: red;
   padding: 2px;
 }
@@ -296,8 +296,8 @@
 
 .is-success {
   margin-left: 28px;
-  margin-top: -13 px ;
-  color: #28a745;;
+  margin-top: -13 px;
+  color: #28a745;
   padding: 2px;
 }
 .valid-feedback {
@@ -305,5 +305,14 @@
   width: 100%;
   margin-top: 0.25rem;
   font-size: 80%;
-  color: #28a745;;
+  color: #28a745;
+}
+
+.profile {
+}
+
+.bs-popover-auto[x-placement^="bottom"],
+.bs-popover-bottom {
+  margin-top: -0.5rem !important
+;
 }

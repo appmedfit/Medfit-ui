@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import medicon_login from "../../assets/medicon_login.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
-import createSlots from "../../helpers/createSlots";
+import { createSlots } from "../../helpers/createSlots";
 
 import "./SlotBooking.css";
+import { addDoctorSlots, getDoctorSlots } from "../../services/slots.service";
 function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -15,47 +14,115 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
     handlBookingModalShowHide();
   };
 
+  const { currentUser: userDoctor } = useSelector((state) =>
+    sessionStorage.getItem("user")
+      ? JSON.parse(sessionStorage.getItem("user"))
+      : state.auth
+  );
+
   const handleBookSlot = (data) => {
-    data.isSelected = !data.isSelected;
-    let newslots = slots.map((slot) => {
-      if (slot.value == data.value) slot = data;
-      return slot;
-    });
-    setSlots(newslots);
+    if (data.isEditable) {
+      data.isSelected = !data.isSelected;
+      let newslots = slots.map((slot) => {
+        if (slot.value == data.value) slot = data;
+        return slot;
+      });
+      setSlots(newslots);
+    }
   };
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
+
   const handleSubmit = () => {
-    console.log(slots.filter((slot) => slot.isSelected));
+    // console.log(selectedDate.fullDate);
+    let availableSlotsData = slots
+      .filter((slot) => slot.isSelected)
+      .map((slot) => {
+        return {
+          ...slot,
+          fullDate: selectedDate.fullDate,
+          detailText: slot.detailText,
+          doctorId: userDoctor.id,
+          specialty: userDoctor.specialty,
+          isBooked: false,
+          isEditable: false,
+        };
+      });
+    //  console.log(availableSlotsData);
+    dispatch(addDoctorSlots(availableSlotsData)).then(() => {
+      getSlots({
+        doctorId: userDoctor.id,
+        fullDate: selectedDate.fullDate,
+      });
+    });
     setSlots(timeSlots);
   };
+
+  const getSlots = ({ doctorId, fullDate }) => {
+    dispatch(
+      getDoctorSlots({
+        doctorId,
+        fullDate,
+      })
+    ).then((dbSlots) => {
+      let newTimeSlots =
+        dbSlots.length < 0
+          ? timeSlots
+          : timeSlots.map((slot) => {
+              let newSLot = dbSlots.filter((dbSlot) => {
+                return dbSlot.value === slot.value;
+              })[0];
+              return newSLot
+                ? newSLot
+                : {
+                    ...slot,
+                    doctorId: userDoctor.id,
+                    specialty: userDoctor.specialty,
+                    fullDate: selectedDate.fullDate,
+                    isBooked: false,
+                    isEditable: true,
+                  };
+            });
+
+      setSlots(newTimeSlots);
+    });
+  };
+
+  const changeDateHandler = (slotDate) => {
+    setSelectedDate(slotDate);
+    console.log("date changed", slotDate);
+    getSlots({
+      doctorId: userDoctor.id,
+      fullDate: slotDate.fullDate,
+    });
+  };
+  useEffect(() => {
+    getSlots({ doctorId: userDoctor.id, fullDate: selectedDate.fullDate });
+  }, [selectedDate]);
 
   const SlotBookingDateHeaders = getNextSevenDays();
   const [selectedDate, setSelectedDate] = useState(SlotBookingDateHeaders[0]);
   let { timeSlotHeaders, timeSlots } = createSlots();
   const [slots, setSlots] = useState(timeSlots);
-  const changeDateHandler = (slotDate) => {
-    console.log(slotDate, selectedDate);
-    setSelectedDate(slotDate);
-    console.log(slotDate, selectedDate);
-  };
-  //   console.log(getNextSevenDays());
-  console.log(createSlots());
 
-  // const slotSelectHandle = (slot) => {
-
-  // }
   return (
     <>
       <>
-        <Modal show={toggleSlotBooking} size="lg" dialogClassName="modal-70w">
+        <Modal
+          show={toggleSlotBooking}
+          size="lg"
+          dialogClassName="modal-70w"
+          onShow={() => {
+            setSelectedDate(SlotBookingDateHeaders[0]);
+            getSlots({
+              doctorId: userDoctor.id,
+              fullDate: selectedDate.fullDate,
+            });
+          }}
+        >
           <Modal.Body>
             <div className="DialogTitleComp">
               <div className="Title">Choose Your Slot</div>
               <span
-                className="float-right"
+                className="float-right-slot-booking"
                 style={{ cursor: "pointer" }}
                 onClick={handleModal}
               >
