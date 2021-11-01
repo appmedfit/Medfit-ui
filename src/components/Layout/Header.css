@@ -1,0 +1,309 @@
+/* .header {
+ 
+
+  width: 100%;
+  height: 5rem;
+  background-color: #FBE7E7;
+  color: white;
+  display: flex;
+  
+
+  box-shadow: 0 2px 8px rgba(211, 168, 168, 0.25);
+
+}
+
+.main-image {
+  width: 100%;
+  height: 25rem;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.main-image img {
+  width: 110%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
+}
+
+.med-icon{
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 1%;
+  z-index: 0;
+ overflow: hidden;
+}
+
+.consult{
+  color: #444AD3;
+  margin-left: 30%;
+  font-size: 20px;
+}
+.bg_light{
+  background-color: #FBE7E7 !important;
+}
+
+ */
+
+ .login{
+  height: fit-content;
+  width: 35px;
+}
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #FBE7E7 !important;
+}
+.consult{
+  color: #ff2e73;
+  margin-right: 11%;
+  font-size: 18px;
+  font-weight: 600;
+}
+.brand{
+  color: black;
+  padding: 6px;
+  font-weight: 600;
+}
+
+.login_conatiner {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+}
+.loginicon{
+  align-self: center;
+}
+
+.emailInput {
+  width: 220px;
+  border: none;
+  text-align: left;
+  background-color: transparent;
+  outline: none;
+  color: rgb(0, 0, 0);
+  font-size: 15px;
+  font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  padding-left: 10px;
+}
+
+.InputContainer {
+  border-bottom: 2px solid rgb(151, 151, 151);
+  width: fit-content;
+  margin: 20px auto;
+  align-self: center;
+}
+
+.ActionContainer {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.ContinueButton {
+  color: rgb(255, 255, 255);
+  box-shadow: none;
+  border: 0px;
+  width: 69%;
+  height: 45px;
+  border-radius: 31px;
+  font-size: 18px;
+  background-color: #007bff
+}
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 82%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+
+.Tnc{
+  color: rgb(102, 102, 102);
+    font-size: 12px;
+    font-family: BrandonTextWeb-Medium, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    letter-spacing: 0px;
+    width: 69%;
+    margin: 20px auto;
+    text-align: left;
+}
+.TncText {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+.TncAnchor {
+  cursor: pointer;
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  color: rgb(224, 32, 32) !important;
+}
+.ActionContainerOtherMethods{
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-direction: column;
+  bottom: 6%;
+  width: 100%;
+
+}
+.ContinueButtonWhite {
+  color: rgb(0, 0, 0);
+  box-shadow: rgb(202 202 202) 0px 3px 16px 0px;
+  border: 0px;
+  width: 69%;
+  height: 50px;
+   border-radius: 31px;
+  font-size: 18px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ContinueButtonBlue {
+  color: #1f74e8;
+  box-shadow: rgb(202 202 202) 0px 3px 16px 0px;
+  border: 0px;
+  width: 69%;
+  height: 50px;
+   border-radius: 31px;
+  font-size: 18px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.SocialMediaEmailsContainer {
+  display: inline-block;
+}
+.SocialMediaIcon {
+  margin: 0px 8px;
+}
+
+.channels {
+  position: relative;
+  border-radius: 6px;
+}
+
+.AuthButtonContainer {
+  padding: 0px 30px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.channels button {
+  margin-bottom: 15px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.socialAuthContainer {
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.singleTile {
+  display: table-cell;
+}
+.channels button img {
+  padding: 0px 20px;
+}
+
+.btnText {
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  vertical-align: middle;
+}
+
+.signIntile-buttonContainer-googleLogin {
+  padding: 0px;
+  width: 100%;
+  border-radius: 5px;
+  border: 0px;
+  transition: all 0.3s ease-out 0s;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  height: 50px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 4px 6px 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: rgb(67, 133, 244);
+}
+
+.emailLogin-signIntile-emailLine {
+  background-color: rgb(255, 255, 255);
+  padding: 0px;
+  width: 100%;
+  border-radius: 5px;
+  border: 0px;
+  transition: all 0.3s ease-out 0s;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  height: 50px;
+  box-shadow: rgb(0 0 0 / 30%) 0px 2px 2px 0px;
+}
+
+.radioInputContainer{
+  margin-left: 74px;
+}
+
+.signUpContainer{
+
+}
+.is-danger {
+  margin-left: 28px;
+  margin-top: -13 px ;
+  color: red;
+  padding: 2px;
+}
+.invalid-feedback {
+  display: inline;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.is-success {
+  margin-left: 28px;
+  margin-top: -13 px ;
+  color: #28a745;;
+  padding: 2px;
+}
+.valid-feedback {
+  display: inline;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #28a745;;
+}

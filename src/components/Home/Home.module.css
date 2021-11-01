@@ -1,0 +1,83 @@
+.Dermat{
+    padding-left: 50px;
+    height: 15rem;
+    width: 18rem;
+}
+.Physician{
+    padding-left: 52px;
+    height: 15rem;
+    width: 18rem;
+}
+
+.Specialty{
+    display: flex;  
+}
+
+.Specialty1{
+    display: flex; 
+    margin-top: 5%;  
+}
+
+.ENT{
+    padding-left: 54px;
+    height: 15rem;
+    width: 18rem;
+}
+
+.Ortho{
+    padding-left: 56px;
+    height: 15rem;
+    width: 18rem;
+}
+
+.Paediatric{
+    padding-left: 58px;
+    height: 15rem;
+    width: 18rem;
+}
+
+.Ophthal{
+    padding-left: 50px;
+    height: 15rem;
+    width: 18rem;
+}
+.Urology{
+    padding-left: 52px;
+    height: 15rem;
+    width: 18rem;
+}
+
+.Sexologist{
+    padding-left: 56px;
+    height: 15rem;
+    width: 18rem;
+}
+
+.spl{
+    font-size: 24px !important;
+    font-family: BrandonTextWeb-Medium,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif !important;
+    color: #000 !important;
+    margin-bottom: 4px!important;
+    padding: 0px!important;
+    margin-left: 180px;
+}
+
+.subtitle{
+    font-size: 16px;
+    line-height: 1.31;
+    -webkit-letter-spacing: -0.2px;
+    -moz-letter-spacing: -0.2px;
+    -ms-letter-spacing: -0.2px;
+    letter-spacing: -0.2px;
+    color: #908e8e;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    margin-bottom: 30px;
+    margin-left: 180px;
+}
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    padding: 20px;
+}

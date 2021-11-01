@@ -1,0 +1,164 @@
+.DialogTitleComp {
+  padding: 20px;
+  position: relative;
+  cursor: default;
+}
+.Title {
+  width: inherit;
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.float-right {
+  float: right !important;
+  margin-top: -30px;
+}
+.DialogBody {
+  position: relative;
+  padding: 0px;
+  min-height: 39.3em;
+}
+.StyleWrapper-StyleWrapper .dates-available-widget .date-selection {
+  box-shadow: rgb(0 0 0 / 8%) 0px 11px 16px 0px;
+  height: 5.5em;
+  max-height: 77px;
+  margin: 0px auto;
+  overflow: hidden;
+  padding: 10px 50px 5px;
+}
+.StyleWrapper-StyleWrapper .dates-available-widget ul {
+  display: flex;
+  list-style: none;
+  margin: 0px;
+  padding: 0px 0px 10px;
+}
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+.StyleWrapper-StyleWrapper .dates-available-widget ul li {
+  cursor: pointer;
+  padding-right: 50px;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.StyleWrapper-StyleWrapper .dates-available-widget .day {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 14px;
+}
+.StyleWrapper-StyleWrapper .dates-available-widget .day .selected {
+  color: rgb(255, 50, 120);
+}
+.StyleWrapper-StyleWrapper .dates-available-widget .day .date.selected {
+  border-radius: 30px;
+  border: 1px solid;
+  color: white;
+  background-color: rgb(255, 50, 120);
+}
+.StyleWrapper-StyleWrapper .dates-available-widget .day .date {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  font-weight: bold;
+}
+
+.StyleWrapper-StyleWrapper .dates-available-widget .day .date p {
+  padding-top: 3px;
+  margin-top: 1rem;
+}
+
+.StyleWrapper-StyleWrapper .dates-available-widget::-webkit-scrollbar-thumb {
+  background: rgb(200, 208, 216);
+  border-radius: 10px;
+}
+
+.StyleWrapper-StyleWrapper .dates-available-widget .slot-selection {
+  margin: 0px 0px 0px 20px;
+  height: 450px;
+  overflow: auto;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
+.StyleWrapper-StyleWrapper .dates-available-widget .slot-selection .slot {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin: 40px 0px;
+}
+
+.StyleWrapper-StyleWrapper .dates-available-widget .slot-selection .time-range {
+  flex-basis: 15%;
+  font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
+}
+.StyleWrapper-StyleWrapper .dates-available-widget .slot-selection .interval {
+  flex-basis: 85%;
+}
+.StyleWrapper-StyleWrapper .dates-available-widget .slot-selection .time-slot {
+  border-radius: 5px;
+  margin: 0px 20px 15px 0px;
+  height: 35px;
+  width: 70px;
+  min-width: fit-content;
+  min-height: fit-content;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.11);
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.11) 0px 2px 5px 0px;
+}
+
+.StyleWrapper-StyleWrapper
+  .dates-available-widget
+  .slot-selection
+  .time-slot.selected {
+  border-radius: 30px;
+  border: 1px solid;
+  color: white;
+  background-color: rgb(255, 50, 120);
+}
+
+.StyleWrapper-StyleWrapper
+  .dates-available-widget
+  .slot-selection
+  .time-slot
+  .disabled {
+  background-color: rgba(217, 217, 217, 0.4);
+  border: 1 px solid rgba(217, 217, 217, 0.4);
+  color: rgba(62, 69, 72, 0.4);
+  cursor: default;
+  box-shadow: rgb(0 0 0 / 11%) 0px 2px 5px 0px;
+}
+.time-slot-text {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

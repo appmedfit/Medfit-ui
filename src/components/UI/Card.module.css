@@ -1,0 +1,31 @@
+.card {
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: #FBE7E7;
+  height:50%;
+  width: 70%;
+  
+}
+
+.logo{
+  flex-direction: row;
+}
+
+.doc1{
+  padding-top: 10px;
+  width: 30%;
+  height: 40%;
+  border-radius: 5rem;
+}
+
+.button{
+ align-items: flex;
+ flex-direction: row;
+ justify-content: space-evenly;
+ padding-left: 5px;
+}
+
+.clinic{
+ margin-right: 5px;
+}
