@@ -1,4 +1,3 @@
-import { SignOut } from "../services/auth.service";
 
 const constants = {
   baseUrl: "https://medfit-backend.herokuapp.com/api/v1/",
