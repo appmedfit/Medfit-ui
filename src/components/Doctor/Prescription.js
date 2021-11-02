@@ -1,76 +1,72 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import {
-  Login as loginService,
-  SignUp as signUpService,
-} from "../../services/auth.service";
 import medicon_login from "../../assets/medicon_login.png";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { login as loginAction } from "../../store/auth.slice";
-import "../Layout/Header.css";
-import classes from "./Prescription.css";
-import { textChangeRangeIsUnchanged } from "typescript";
+import "./Prescription.css";
+import { bookingDetails, updateBooking } from "../../services/slots.service";
 
-function Prescription({
-  toggleLogin,
-  handleLoginModalShowHide,
-  handleSignupModalShowHide,
-}) {
+function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleModal = () => {
-    handleLoginModalShowHide();
-  };
-
-  const mapUser = (user) => {
-    const customClaims = user.customClaims || { role: "" };
-    const role = customClaims.role ? customClaims.role : "user";
-    return {
-      id: user.uid,
-      email: user.email || "",
-      name: user.name || "",
-      role: user.role || "user",
-    };
+    handlePresbModalShowHide();
   };
 
   const handleSubmit = () => {
-    dispatch(loginService(state))
-      .then((resp) => {
-        sessionStorage.setItem(
-          "user",
-          JSON.stringify({ currentUser: resp.user, isAuthenticated: true })
-        );
-        dispatch(loginAction(resp.user));
+    dispatch(updateBooking(selectedBooking))
+      .then((res) => {
+        console.log(res);
         handleModal();
-        setState({
-          email: "",
-          password: "",
-        });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
+  const handleChangeBooking = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (value != "") {
+      let rec = data.filter((ele) => ele.id == value)[0];
+      setSelectedBooking(rec);
+    } else {
+      setSelectedBooking({});
+    }
+  };
+
+  const handleChangePrescribtion = (e) => {
+    const { name, value } = e.target;
+    setSelectedBooking((rec) => {
+      return { ...rec, prescribtion: value, status: "completed" };
+    });
+    console.log(selectedBooking);
+  };
+
+  const handleOnShow = () => {
+    getData();
+    setData([]);
+    setSelectedBooking({ prescribtion: "" });
+    console.log(data);
+  };
+
+  const [data, setData] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState({});
+
+  const getData = () => {
+    dispatch(bookingDetails({ doctorId: doctor.id })).then((res) => {
+      setData(res);
+    });
   };
 
   return (
     <>
       <>
-        <Modal show={toggleLogin}>
+        <Modal
+          show={togglePresc}
+          onShow={handleOnShow}
+          dialogClassName="modal-70w"
+        >
           <Modal.Body>
             <span
               className="float-right"
@@ -101,26 +97,42 @@ function Prescription({
               <h3 className="loginicon">Prescription</h3>
               <div>
                 <div className="InputContainer">
-                  <select value="Radish">
-                    <option value="Orange">Patient1</option>
-                    <option value="Radish">Patient2</option>
-                    <option value="Cherry">Patient3</option>
+                  <select
+                    name="bookingid"
+                    className="SelectInput"
+                    onChange={handleChangeBooking}
+                  >
+                    <option value="">Select Slot</option>
+
+                    {data &&
+                      data.length > 0 &&
+                      data.map((row) => (
+                        <option value={row.id}>
+                          {row.fullDate + " " + row.detailText}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="InputContainer">
                   <textarea
-                    name="password"
+                    name="prescribtion"
                     type="textarea"
                     rows="10"
-                    cols="70"
+                    cols="33"
                     placeholder="Enter Prescription"
-                    className="emailInput"
-                    value={state.password}
-                    onChange={handleChange}
+                    className="textarea"
+                    value={selectedBooking.prescribtion}
+                    onChange={handleChangePrescribtion}
                   />
                 </div>
-
-                <button className="btn  prescbtion-btn">Submit</button>
+                <div className="">
+                  <button
+                    className="btn  prescription-btn"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
             </div>
           </Modal.Body>

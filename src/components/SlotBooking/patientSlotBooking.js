@@ -158,7 +158,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
                   </div>
                   <section className="slot-selection ">
                     {timeSlotHeaders.map((tsHeader) => (
-                      <div className="slot">
+                      <div className="slot" key={tsHeader}>
                         <>
                           <div className="time-range">{tsHeader}</div>
 
@@ -171,6 +171,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
                                     slot.fullDate + " " + slot.detailText
                                   ) > 0 && (
                                     <button
+                                      key={slot.id}
                                       onClick={() => handleBookSlot(slot)}
                                       className={`time-slot ${
                                         slot.isSelected ? "" : ""

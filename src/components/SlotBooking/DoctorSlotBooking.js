@@ -120,7 +120,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
         >
           <Modal.Body>
             <div className="DialogTitleComp">
-              <div className="Title">Choose Your Slot</div>
+              <div className="Title">Mark Your Available Slots</div>
               <span
                 className="float-right-slot-booking"
                 style={{ cursor: "pointer" }}

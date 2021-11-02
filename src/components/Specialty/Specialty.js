@@ -20,26 +20,45 @@ const Specialty = () => {
   const [doctorsdata, setDoctorsdata] = useState([]);
   const [toggleSlotBooking, setToggleSlotBooking] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState();
+  const [doctorsSearchdata, setdoctorsSearchdata] = useState([]);
 
+  const searchDoctors = (searchTerm) => {
+    let doctorSearchdata = doctorsdata.filter((doctor) => {
+      if (searchTerm == "undefined" || searchTerm == null || searchTerm == "") {
+        return true;
+      } else {
+        return JSON.stringify(doctor)
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      }
+    });
+    setdoctorsSearchdata(doctorSearchdata);
+  };
   useEffect(() => {
     if (specialityId) {
+      console.log("hi");
       getSpeciality(specialityId).then((resp) => {
         setspecialtyData(resp);
       });
       getUsersWithCondition({ specialty: specialityId, role: "doctor" }).then(
         (resp) => {
           setDoctorsdata(resp);
+          searchDoctors();
         }
       );
     }
   }, [specialityId]);
+
+  useEffect(() => {
+    searchDoctors();
+  }, [doctorsdata]);
 
   const handlBookingModalShowHide = () => {
     setToggleSlotBooking((i) => !i);
   };
 
   const handleCLickBookSlot = (doctor) => {
-    console.log(doctor);
+    // console.log(doctor);
     setSelectedDoctor(doctor);
     setToggleSlotBooking((i) => !i);
   };
@@ -85,14 +104,18 @@ const Specialty = () => {
                     id="care_doctor_search_input"
                     className="care-search-input-container "
                   >
-                    <input placeholder="search by  doctors name " type="text" />
+                    <input
+                      placeholder="search by "
+                      type="text"
+                      onChange={(e) => searchDoctors(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="doctors_inner_container">
                   <div className="row">
-                    {doctorsdata &&
-                      doctorsdata.map((doctor) => (
-                        <div className="col-sm-12">
+                    {doctorsSearchdata &&
+                      doctorsSearchdata.map((doctor) => (
+                        <div className="col-sm-12" key={doctor.id}>
                           <div className="card doc-card">
                             <div className="card-body">
                               <div className="row">

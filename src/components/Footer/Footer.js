@@ -15,16 +15,14 @@ const Footer = () => {
           <div className="row">
             <div className="col">
               <br />
-              At MEDFIT, we make group workouts fun, daily food healthy & tasty,
-              mental fitness easy with yoga & meditation, and medical &
-              lifestyle care hassle-free. #BeBetterEveryDay
+              At MEDFIT, we make daily food healthy & tasty, mental fitness easy
+              with yoga and medical & lifestyle care hassle-free.
+              #BeBetterEveryDay
             </div>
             <div className="col">
               <ul>
                 <li> CONTACT US</li>
                 <li>BLOG</li>
-                <li>PARTNER</li>
-                <li> CAREERS</li>
               </ul>
             </div>
           </div>

@@ -3,6 +3,7 @@ import constants from "../helpers/constants";
 import { login } from "../store/auth.slice";
 
 export const Login = (data) => async (dispatch) => {
+  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.signIn,
@@ -12,6 +13,7 @@ export const Login = (data) => async (dispatch) => {
 };
 
 export const SignUp = (data) => async (dispatch) => {
+  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.signUp,
@@ -21,6 +23,7 @@ export const SignUp = (data) => async (dispatch) => {
 };
 
 export const updateUser = (data) => async (dispatch) => {
+  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.updateUser,
@@ -30,6 +33,7 @@ export const updateUser = (data) => async (dispatch) => {
 };
 
 export const SignOut = (data) => async (dispatch) => {
+  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.SignOut,
@@ -39,6 +43,7 @@ export const SignOut = (data) => async (dispatch) => {
 };
 
 export const getUsersWithCondition = async (data) => {
+  console.log(data);
   return axiosClient({
     method: "POST",
     url: constants.getUsersWithCondition,

@@ -4,16 +4,18 @@ import { login } from "../store/auth.slice";
 
 export const getStudents = () => async (dispatch) => {
   console.log();
-  return axiosClient({
-    method: "Get",
-    url: constants.getStudents,
+  return dispatch(
+    axiosClient({
+      method: "Get",
+      url: constants.getStudents,
 
-    responseType: "json",
-  })
-    .then((resp) => {
-      //    console.log(resp)
+      responseType: "json",
     })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((resp) => {
+        //    console.log(resp)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  );
 };

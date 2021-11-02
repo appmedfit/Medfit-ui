@@ -143,8 +143,8 @@ input:focus-visible {
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
-  border: 1 px solid transparent;
-  padding: 8 px 20px 7px !important;
+  border: 1px solid transparent;
+  padding: 8px 20px 7px !important;
   font-size: 14px;
   line-height: 1.42857143;
   -webkit-user-select: none;

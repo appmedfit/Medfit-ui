@@ -12,7 +12,7 @@ import SignUpForm from "../SignUp/SignUp";
 import LoginForm from "../Login/Login";
 import { Button, Overlay, Popover } from "react-bootstrap";
 const Header = (props) => {
-  const { isAuthenticated } = useSelector((state) =>
+  const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
       ? JSON.parse(sessionStorage.getItem("user"))
       : state.auth
@@ -26,9 +26,11 @@ const Header = (props) => {
   const ref = useRef(null);
   const handleLoginModalShowHide = () => {
     setToggleLogin((i) => !i);
+    setShowPopup(false);
   };
 
   const handleProfileClick = (event) => {
+    console.log(event);
     setShowPopup((i) => !i);
     setTarget(event.target);
   };
@@ -45,6 +47,7 @@ const Header = (props) => {
         sessionStorage.clear();
         history.push("/");
         dispatch(logout());
+        setShowPopup(false);
       })
       .catch((error) => {
         // An error happened.
@@ -55,7 +58,7 @@ const Header = (props) => {
     <>
       <nav className="navbar navbar-light bg_light">
         <Link to={`/`}>
-          <a className="navbar-brand">
+          <span className="navbar-brand">
             <img
               src={medicon_login}
               width="35"
@@ -64,7 +67,7 @@ const Header = (props) => {
               alt=""
             />
             <span className="brand">MEDFIT</span>
-          </a>
+          </span>
         </Link>
         <p className="consult">Online Consultation</p>
         <div>
@@ -77,26 +80,32 @@ const Header = (props) => {
                   onClick={handleProfileClick}
                   alt="login"
                 />
-                <Overlay
-                  show={showPopup}
-                  target={target}
-                  placement="bottom-end"
-                  container={ref}
-                  containerPadding={10}
-                >
-                  <Popover id="popover-contained">
-                    <Popover.Header as="h3">Popover bottom</Popover.Header>
-                    <Popover.Body>
-                      <ul>
-                        <Link to={`/previousbookings`}>
-                          <li onClick={handleProfileClick}> My Bookings</li>
-                        </Link>
+                {showPopup && (
+                  <Overlay
+                    show={showPopup}
+                    target={target}
+                    placement="bottom-end"
+                    container={ref}
+                    containerPadding={10}
+                  >
+                    <Popover id="popover-contained">
+                      <Popover.Header as="h3">
+                        {currentUser.name}
+                      </Popover.Header>
+                      <Popover.Body>
+                        <ul>
+                          <Link to={`/previousbookings`}>
+                            <li onClick={handleProfileClick}>
+                              Previous Sessions
+                            </li>
+                          </Link>
 
-                        <li onClick={handleLogout}>Logout</li>
-                      </ul>
-                    </Popover.Body>
-                  </Popover>
-                </Overlay>
+                          <li onClick={handleLogout}>Logout</li>
+                        </ul>
+                      </Popover.Body>
+                    </Popover>
+                  </Overlay>
+                )}
               </div>
             ) : (
               <button
