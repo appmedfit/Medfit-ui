@@ -36,3 +36,12 @@ export const bookingDetails = (data) => async (dispatch) => {
     responseType: "json",
   });
 };
+
+export const updateBooking = (data) => async (dispatch) => {
+  return axiosClient({
+    method: "POST",
+    url: constants.updateBooking,
+    data: data,
+    responseType: "json",
+  });
+};

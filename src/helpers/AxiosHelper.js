@@ -1,10 +1,13 @@
 import axios from "axios";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/auth.slice";
 import constants from "./constants";
 
 const client = axios.create({
   baseURL: constants.baseUrl,
 });
-
+//
 const axiosClient = async (options) => {
   options.headers = {
     Authorization: sessionStorage.getItem("user")
@@ -12,9 +15,14 @@ const axiosClient = async (options) => {
         JSON.parse(sessionStorage.getItem("user"))["currentUser"]["token"]
       : "",
   };
+
   const onSuccess = (response) => response.data;
   const onError = (error) => {
     if (error.response) {
+      console.log("err", error.response);
+      if (error.response?.data?.message == "Unauthorized") {
+        sessionExpired();
+      }
       return Promise.reject(error.response || error.message);
     }
   };
@@ -24,6 +32,11 @@ const axiosClient = async (options) => {
   } catch (error) {
     return onError(error);
   }
+};
+
+const sessionExpired = () => {
+  //sessionStorage.clear();
+  // dispatch(logout());
 };
 
 export default axiosClient;
