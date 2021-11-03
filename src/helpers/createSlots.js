@@ -156,9 +156,9 @@ export function createSlots() {
   return timeSlots;
 }
 
-export const isTimeCompleted = (day) => {
-  const today = moment();
-  const someday = moment(day);
+export const isTimeCompleted = (day1, day2) => {
+  const today = day2 ? moment(day2) : moment();
+  const someday = moment(day1);
   const diff = someday.diff(today, "minutes");
-  return diff - 30;
+  return diff - 10;
 };

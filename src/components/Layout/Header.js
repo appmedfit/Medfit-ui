@@ -1,4 +1,4 @@
-import { Fragment, useState, useRef } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import medIcon from "../../assets/medicon.jpg";
 import medicon_login from "../../assets/medicon_login.png";
 import classes from "./Header.css";
@@ -15,7 +15,7 @@ const Header = (props) => {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
       ? JSON.parse(sessionStorage.getItem("user"))
-      : state.auth
+      : {}
   );
   const history = useHistory();
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const Header = (props) => {
   };
 
   const handleLogout = () => {
-    // Sign-out successful.
+    console.log("log");
     dispatch(SignOut({}))
       .then((resp) => {
         // console.log(resp);
@@ -53,6 +53,12 @@ const Header = (props) => {
         // An error happened.
       });
   };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      handleLogout();
+    }
+  }, [isAuthenticated]);
 
   return (
     <>

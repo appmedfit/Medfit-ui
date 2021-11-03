@@ -5,11 +5,11 @@
 .textarea {
   padding: 20px;
   height: 150px;
-  width: 270px !important;
+  width: 320px !important;
 }
 
 .SelectInput {
-  width: 270px;
+  width: 320px;
   border: none;
   text-align: left;
   background-color: transparent;
@@ -39,4 +39,37 @@
   box-shadow: 0 3px 16px 0 #6c757d;
   font-family: BrandonTextWeb-Bold, Helvetica Neue, Helvetica, Roboto, Arial,
     sans-serif;
+}
+
+.ActionButtonContainer-Prescription {
+  width: 100%;
+}
+
+.Button-Prescription {
+  display: inline-block;
+  margin-bottom: 0px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: linear-gradient(99deg, rgb(247, 69, 48), rgb(255, 50, 120));
+  border: 1px solid transparent;
+  font-size: 18px;
+  line-height: 1.42857;
+  user-select: none;
+  transition: all 0.15s ease 0s;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  box-shadow: rgb(247 123 155 / 71%) 0px 3px 16px 0px;
+  opacity: 1;
+  width: 100%;
+  font-family: BrandonTextWeb-Medium, "Helvetica Neue", Helvetica, Roboto, Arial,
+    sans-serif;
+  padding: 8px 24px !important;
+}
+
+.loading {
+  margin-top: 74%;
 }

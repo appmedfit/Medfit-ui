@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
 import { createSlots } from "../../helpers/createSlots";
-
+import LoadingPage from "../Loader/Loader";
 import "./SlotBooking.css";
 import { addDoctorSlots, getDoctorSlots } from "../../services/slots.service";
 function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handleModal = () => {
     handlBookingModalShowHide();
   };
@@ -33,6 +34,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
 
   const handleSubmit = () => {
     // console.log(selectedDate.fullDate);
+    setLoading(true);
     let availableSlotsData = slots
       .filter((slot) => slot.isSelected)
       .map((slot) => {
@@ -47,43 +49,54 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
         };
       });
     //  console.log(availableSlotsData);
-    dispatch(addDoctorSlots(availableSlotsData)).then(() => {
-      getSlots({
-        doctorId: userDoctor.id,
-        fullDate: selectedDate.fullDate,
+    dispatch(addDoctorSlots(availableSlotsData))
+      .then(() => {
+        setLoading(false);
+        getSlots({
+          doctorId: userDoctor.id,
+          fullDate: selectedDate.fullDate,
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
       });
-    });
     setSlots(timeSlots);
   };
 
   const getSlots = ({ doctorId, fullDate }) => {
+    setLoading(true);
     dispatch(
       getDoctorSlots({
         doctorId,
         fullDate,
       })
-    ).then((dbSlots) => {
-      let newTimeSlots =
-        dbSlots.length < 0
-          ? timeSlots
-          : timeSlots.map((slot) => {
-              let newSLot = dbSlots.filter((dbSlot) => {
-                return dbSlot.value === slot.value;
-              })[0];
-              return newSLot
-                ? newSLot
-                : {
-                    ...slot,
-                    doctorId: userDoctor.id,
-                    specialty: userDoctor.specialty,
-                    fullDate: selectedDate.fullDate,
-                    isBooked: false,
-                    isEditable: true,
-                  };
-            });
+    )
+      .then((dbSlots) => {
+        let newTimeSlots =
+          dbSlots.length < 0
+            ? timeSlots
+            : timeSlots.map((slot) => {
+                let newSLot = dbSlots.filter((dbSlot) => {
+                  return dbSlot.value === slot.value;
+                })[0];
+                return newSLot
+                  ? newSLot
+                  : {
+                      ...slot,
+                      doctorId: userDoctor.id,
+                      specialty: userDoctor.specialty,
+                      fullDate: selectedDate.fullDate,
+                      isBooked: false,
+                      isEditable: true,
+                    };
+              });
 
-      setSlots(newTimeSlots);
-    });
+        setSlots(newTimeSlots);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
   };
 
   const changeDateHandler = (slotDate) => {
@@ -140,74 +153,110 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
                 </svg>
               </span>
             </div>
-            <div className="dialogBody ">
-              <div className="StyleWrapper-StyleWrapper">
-                <section className="dates-available-widget">
-                  <div className="date-selection">
-                    <ul>
-                      {SlotBookingDateHeaders.map((head, index) => (
-                        <li
-                          key={head.fullDate}
-                          onClick={() => changeDateHandler(head)}
-                        >
-                          <div className="day">
-                            <div
-                              className={`name ${
-                                selectedDate.dayName == head.dayName
-                                  ? "selected"
-                                  : ""
-                              }`}
-                            >
-                              {head.dayName}
-                            </div>
-                            <div
-                              className={`date ${
-                                selectedDate.day == head.day ? "selected" : ""
-                              }`}
-                            >
-                              <p> {head.day}</p>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <section className="slot-selection ">
-                    {timeSlotHeaders.map((tsHeader) => (
-                      <div className="slot">
-                        <>
-                          <div className="time-range">{tsHeader}</div>
-
-                          <div className="interval">
-                            {slots.map(
-                              (slot) =>
-                                tsHeader == slot.slotHeader && (
-                                  <button
-                                    onClick={() => handleBookSlot(slot)}
-                                    className={`time-slot ${
-                                      slot.isSelected ? "selected" : ""
-                                    }`}
-                                  >
-                                    <div className="time-slot-text">
-                                      <div>{slot.value}</div>
-                                    </div>
-                                  </button>
-                                )
-                            )}
-                          </div>
-                        </>
-                      </div>
-                    ))}
-                  </section>
-                  <div className="ActionContainer">
-                    <button className="ContinueButton" onClick={handleSubmit}>
-                      {" "}
-                      Continue
-                    </button>
-                  </div>
-                </section>
+            {loading ? (
+              <div className="doc-loading">
+                <LoadingPage />
               </div>
-            </div>
+            ) : (
+              <div className="dialogBody ">
+                <div className="StyleWrapper-StyleWrapper">
+                  <section className="dates-available-widget">
+                    <div className="date-selection">
+                      <ul>
+                        {SlotBookingDateHeaders.map((head, index) => (
+                          <li
+                            key={head.fullDate}
+                            onClick={() => changeDateHandler(head)}
+                          >
+                            <div className="day">
+                              <div
+                                className={`name ${
+                                  selectedDate.dayName == head.dayName
+                                    ? "selected"
+                                    : ""
+                                }`}
+                              >
+                                {head.dayName}
+                              </div>
+                              <div
+                                className={`date ${
+                                  selectedDate.day == head.day ? "selected" : ""
+                                }`}
+                              >
+                                <p> {head.day}</p>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <section className="slot-selection ">
+                      {timeSlotHeaders.map((tsHeader) => (
+                        <div className="slot">
+                          <>
+                            <div className="time-range">{tsHeader}</div>
+
+                            <div className="interval">
+                              {slots.map(
+                                (slot) =>
+                                  tsHeader == slot.slotHeader && (
+                                    <button
+                                      onClick={() => handleBookSlot(slot)}
+                                      className={`time-slot ${
+                                        slot.isSelected && !slot.isBooked
+                                          ? "selected"
+                                          : slot.isSelected && slot.isBooked
+                                          ? "booked"
+                                          : "available"
+                                      }`}
+                                    >
+                                      <div className="time-slot-text">
+                                        <div>{slot.value}</div>
+                                      </div>
+                                    </button>
+                                  )
+                              )}
+                            </div>
+                          </>
+                        </div>
+                      ))}
+                    </section>
+                    <div className="button-info-container">
+                      <div className="button-info">
+                        <button className="time-slot  available">
+                          <div className="time-slot-text">
+                            <div>09:00</div>
+                          </div>
+                        </button>{" "}
+                        <span> Open Slot</span>
+                      </div>
+                      <div className="button-info">
+                        <button className="time-slot  selected">
+                          <div className="time-slot-text">
+                            <div>09:00</div>
+                          </div>
+                        </button>{" "}
+                        <span> Marked as Available</span>
+                      </div>
+                      <div className="button-info">
+                        <button className="time-slot  booked">
+                          <div className="time-slot-text">
+                            <div>09:00</div>{" "}
+                          </div>
+                        </button>
+                        <span> Slot booked by Patient</span>
+                      </div>
+                    </div>
+                    <div className="SlotActionContainer">
+                      <button className="ContinueButton" onClick={handleSubmit}>
+                        {" "}
+                        Continue
+                      </button>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
           </Modal.Body>
         </Modal>
       </>

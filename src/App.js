@@ -11,6 +11,7 @@ import PatientPreviousBookingsPage from "./components/PreviousBookings/PatientPr
 import DoctorPreviousBookingsPage from "./components/PreviousBookings/DoctorPreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
 import { useSelector, useDispatch } from "react-redux";
+import "./styles.css";
 function App() {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -20,27 +21,29 @@ function App() {
   return (
     <Router history={history}>
       <Header />
-      <Switch>
-        <Route
-          exact
-          path="/"
-          component={
-            currentUser && currentUser.role == "doctor"
-              ? DoctorLandingPage
-              : HomePage
-          }
-        />
-        {/* <PrivateRoute exact path="/" component={HomePage} /> */}
-        <Route path="/speciality/:specialityId" component={Specialty} />
-        <Route
-          path="/previousbookings"
-          component={
-            currentUser && currentUser.role == "doctor"
-              ? DoctorPreviousBookingsPage
-              : PatientPreviousBookingsPage
-          }
-        />
-      </Switch>
+      <div className="appBody">
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={
+              currentUser && currentUser.role == "doctor"
+                ? DoctorLandingPage
+                : HomePage
+            }
+          />
+          {/* <PrivateRoute exact path="/" component={HomePage} /> */}
+          <Route path="/speciality/:specialityId" component={Specialty} />
+          <Route
+            path="/previousbookings"
+            component={
+              currentUser && currentUser.role == "doctor"
+                ? DoctorPreviousBookingsPage
+                : PatientPreviousBookingsPage
+            }
+          />
+        </Switch>
+      </div>
       <Footer />
     </Router>
   );
