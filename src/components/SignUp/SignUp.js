@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal, Row, Col, Container } from "react-bootstrap";
-import {
-  Login as loginService,
-  SignUp as signUpService,
-} from "../../services/auth.service";
-import medicon_login from "../../assets/medicon_login.png";
+import React, { useState } from "react";
+import { Modal, Row, Col, Container, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import { login as loginAction } from "../../store/auth.slice";
+import { SignUp as signUpService } from "../../services/auth.service";
+import medicon_login from "../../assets/medicon_login.png";
 import "../Layout/Header.css";
 import useForm from "../../shared/useForm";
 import validate from "../../shared/SignupFormValidationRules";
@@ -17,11 +12,10 @@ function SignUpForm({
   handleSignupModalShowHide,
   handleLoginModalShowHide,
 }) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const [msg, setMsg] = useState("");
   const [err, seterr] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const { values, errors, handleChange, handleSubmit } = useForm(
     handleSignup,
     validate
@@ -44,14 +38,17 @@ function SignUpForm({
   function handleSignup() {
     setMsg("");
     seterr("");
+    setLoading(true);
     dispatch(signUpService(values))
       .then((resp) => {
         // console.log(resp);
         setMsg(resp.data);
+        setLoading(false);
         handleModal();
         handleLoginModalShowHide();
       })
       .catch((error) => {
+        setLoading(false);
         seterr(error.data);
       });
   }
@@ -340,7 +337,12 @@ function SignUpForm({
                   <div className="ActionContainer">
                     <button className="ContinueButton" type="submit">
                       {" "}
-                      Sign Up
+                      Sign Up{" "}
+                      {loading ? (
+                        <Spinner animation="border" role="status" />
+                      ) : (
+                        ""
+                      )}
                     </button>
                   </div>
 

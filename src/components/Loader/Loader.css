@@ -1,0 +1,14 @@
+.center {
+  margin: auto;
+  width: 50%;
+  max-width: 400px;
+  min-width: 150px;
+  position: absolute;
+  top: 45%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+div.loader {
+  font-size: 100px;
+}
