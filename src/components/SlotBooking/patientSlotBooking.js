@@ -25,6 +25,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
   );
   const handleBookSlot = (slot) => {
     if (!slot.isBooked) {
+      setLoading(true);
       if (patient.length == 0) {
         alert("login");
         return;
@@ -37,18 +38,23 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
         prescribtion: "",
         patientName: patient.name,
         doctorName: doctor.name,
+        patientEmail: patient.email,
       };
-      // console.log(bookingInfo);
-      dispatch(bookSlot(bookingInfo)).then((res) => {
-        //     console.log(res);
-        getSlots({
-          doctorId: doctor.id,
-          fullDate: selectedDate.fullDate,
-          isBooked: false,
+      console.log(bookingInfo, "bookin");
+      dispatch(bookSlot(bookingInfo))
+        .then((res) => {
+          //     console.log(res);
+          getSlots({
+            doctorId: doctor.id,
+            fullDate: selectedDate.fullDate,
+            isBooked: false,
+          });
+          handleModal();
+          console.log("booking is done");
+        })
+        .catch((err) => {
+          setLoading(false);
         });
-        handleModal();
-        console.log("booking is done");
-      });
     }
   };
 
