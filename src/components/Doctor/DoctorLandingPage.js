@@ -1,5 +1,5 @@
 import "./Doctor.css";
-import doc from "../../assets/DocIcon.jpg";
+import doc1 from "../../assets/doc1.jpg";
 import { Fragment, useState } from "react";
 import Prescription from "./Prescription";
 import DoctorSlotBooking from "../SlotBooking/DoctorSlotBooking";
@@ -32,7 +32,7 @@ const Doctor = () => {
                   <div className="col-sm-4">
                     <img
                       className="doc_profile_image"
-                      src={doc}
+                      src={doc1}
                       alt="spl_img"
                     />
                   </div>

@@ -1,10 +1,12 @@
 .doc-landing-card {
   height: 15rem;
-  box-shadow: lavender;
+  box-shadow: rgb(141, 141, 204);
   margin-top: 3rem;
-  margin-left: 10rem;
+  margin-left: 6rem;
   margin-right: 20rem;
-  background-color: rgb(216, 200, 214);
+  background-color: rgb(240, 215, 240);
+  min-height: 330px;
+  width: 80%;
 }
 
 .doc-landing-button {
@@ -17,6 +19,7 @@
 }
 
 .doc-container {
+  padding-top: 90px;
   min-height: 500px;
 }
 
@@ -39,3 +42,9 @@
   font-family: BrandonTextWeb-Bold, Helvetica Neue, Helvetica, Roboto, Arial,
     sans-serif;
 }
+
+.doc_profile_image{
+  height: 140%;
+  width: 90%;
+}
+
