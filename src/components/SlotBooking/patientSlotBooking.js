@@ -1,10 +1,10 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
 import { createSlots, isTimeCompleted } from "../../helpers/createSlots";
-
+import LoadingPage from "../Loader/Loader";
 import "./SlotBooking.css";
 import {
   addDoctorSlots,
@@ -53,15 +53,41 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
   };
 
   const getSlots = ({ doctorId, fullDate, isBooked }) => {
+    console.log("*");
+    setLoading(true);
     dispatch(
       getDoctorSlots({
         doctorId,
         fullDate,
         isBooked,
       })
-    ).then((dbSlots) => {
-      setSlots(dbSlots);
-    });
+    )
+      .then((dbSlots) => {
+        setLoading(false);
+        let newSlots = dbSlots.filter((slot) => {
+          return isTimeCompleted(slot.fullDate + " " + slot.detailText) > 0;
+        });
+        console.log(newSlots);
+        newSlots = newSlots.sort((slot1, slot2) =>
+          isTimeCompleted(
+            slot1.fullDate + " " + slot1.detailText,
+            slot2.fullDate + " " + slot2.detailText
+          )
+        );
+        console.log(newSlots);
+        setSlots(newSlots);
+        let timeSlotHeadersnew = timeSlotHeadersOld.map((slotHeader) => {
+          return {
+            slotHeader: slotHeader,
+            isAvailable: newSlots.some((slot) => slotHeader == slot.slotHeader),
+          };
+        });
+        setTimeSlotHeaders(timeSlotHeadersnew);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   const changeDateHandler = (slotDate) => {
@@ -84,9 +110,10 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
 
   const SlotBookingDateHeaders = getNextSevenDays();
   const [selectedDate, setSelectedDate] = useState(SlotBookingDateHeaders[0]);
-  let { timeSlotHeaders, timeSlots } = createSlots();
+  let { timeSlotHeaders: timeSlotHeadersOld } = createSlots();
+  const [timeSlotHeaders, setTimeSlotHeaders] = useState(timeSlotHeadersOld);
   const [slots, setSlots] = useState();
-
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <>
@@ -157,36 +184,52 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
                     </ul>
                   </div>
                   <section className="slot-selection ">
-                    {timeSlotHeaders.map((tsHeader) => (
-                      <div className="slot" key={tsHeader}>
-                        <>
-                          <div className="time-range">{tsHeader}</div>
+                    {loading ? (
+                      <LoadingPage />
+                    ) : timeSlotHeaders && slots && slots.length > 0 ? (
+                      timeSlotHeaders.map(
+                        (tsHeader) =>
+                          tsHeader.isAvailable && (
+                            <div className="slot" key={tsHeader.slotHeader}>
+                              <>
+                                <div className="time-range">
+                                  {tsHeader.slotHeader}
+                                </div>
 
-                          <div className="interval">
-                            {slots &&
-                              slots.map(
-                                (slot) =>
-                                  tsHeader == slot.slotHeader &&
-                                  isTimeCompleted(
-                                    slot.fullDate + " " + slot.detailText
-                                  ) > 0 && (
-                                    <button
-                                      key={slot.id}
-                                      onClick={() => handleBookSlot(slot)}
-                                      className={`time-slot ${
-                                        slot.isSelected ? "" : ""
-                                      }`}
-                                    >
-                                      <div className="time-slot-text">
-                                        <div>{slot.value}</div>
-                                      </div>
-                                    </button>
-                                  )
-                              )}
-                          </div>
-                        </>
+                                <div className="interval">
+                                  {slots &&
+                                    slots.length > 0 &&
+                                    slots.map(
+                                      (slot) =>
+                                        tsHeader.slotHeader ==
+                                          slot.slotHeader && (
+                                          <button
+                                            key={slot.id}
+                                            onClick={() => handleBookSlot(slot)}
+                                            className={`time-slot ${
+                                              slot.isSelected ? "" : ""
+                                            }`}
+                                          >
+                                            <div className="time-slot-text">
+                                              <div>{slot.value}</div>
+                                            </div>
+                                          </button>
+                                        )
+                                    )}
+                                </div>
+                              </>
+                            </div>
+                          )
+                      )
+                    ) : (
+                      <div className="norecords">
+                        <div className="col">
+                          <br />
+
+                          <h2> Slots Not Available</h2>
+                        </div>
                       </div>
-                    ))}
+                    )}
                   </section>
                 </section>
               </div>

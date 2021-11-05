@@ -3,6 +3,7 @@ import Table from "../Table/Table";
 import styled from "styled-components";
 import { bookingDetails } from "../../services/slots.service";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingPage from "../Loader/Loader";
 function DoctorPreviousBookingsPage() {
   const dispatch = useDispatch();
   const { currentUser: doctor } = useSelector((state) =>
@@ -91,25 +92,32 @@ function DoctorPreviousBookingsPage() {
   );
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getData = () => {
-    dispatch(bookingDetails({ doctorId: doctor.id })).then((res) => {
-      let newData =
-        res.length > 0
-          ? res.map((data) => {
-              //   console.log(data);
-              return {
-                patientName: data.patientName,
-                specialty: data.specialty,
-                bookingDate: data.fullDate + " " + data.detailText,
-                consultancyFee: data.consultancyFee + " ₹",
-                prescribtion: data.prescribtion,
-                status: "active",
-              };
-            })
-          : [];
-      setData(newData);
-    });
+    setLoading(true);
+    dispatch(bookingDetails({ doctorId: doctor.id }))
+      .then((res) => {
+        let newData =
+          res.length > 0
+            ? res.map((data) => {
+                //   console.log(data);
+                return {
+                  patientName: data.patientName,
+                  specialty: data.specialty,
+                  bookingDate: data.fullDate + " " + data.detailText,
+                  consultancyFee: data.consultancyFee + " ₹",
+                  prescribtion: data.prescribtion,
+                  status: "active",
+                };
+              })
+            : [];
+        setData(newData);
+        setLoading(faalse);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
   };
   useEffect(() => {
     getData();
@@ -117,7 +125,19 @@ function DoctorPreviousBookingsPage() {
   return (
     <Styles>
       <div className="table_container">
-        {data && data.length > 0 && <Table columns={columns} data={data} />}
+        {loading ? (
+          <LoadingPage />
+        ) : data && data.length > 0 ? (
+          <Table columns={columns} data={data} />
+        ) : (
+          <div className="norecords">
+            <div className="col">
+              <br />
+
+              <h2> Sessions Not Available</h2>
+            </div>
+          </div>
+        )}
       </div>
     </Styles>
   );

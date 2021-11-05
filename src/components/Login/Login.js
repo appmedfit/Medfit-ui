@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import {
-  Login as loginService,
-  SignUp as signUpService,
-  updateUser,
-} from "../../services/auth.service";
-import medicon_login from "../../assets/medicon_login.png";
+import { Modal, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { Login as loginService, updateUser } from "../../services/auth.service";
+import medicon_login from "../../assets/medicon_login.png";
 import { login as loginAction } from "../../store/auth.slice";
-import { auth, provider, firebase } from "../../services/firebase";
+import { auth, provider } from "../../services/firebase";
 import "../Layout/Header.css";
+import { useHistory } from "react-router";
 function LoginForm({
   toggleLogin,
   handleLoginModalShowHide,
@@ -18,6 +14,11 @@ function LoginForm({
 }) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
   const handleModal = () => {
     handleLoginModalShowHide();
   };
@@ -65,6 +66,7 @@ function LoginForm({
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     dispatch(loginService(state))
       .then((resp) => {
         sessionStorage.setItem(
@@ -72,21 +74,21 @@ function LoginForm({
           JSON.stringify({ currentUser: resp.user, isAuthenticated: true })
         );
         dispatch(loginAction(resp.user));
+        setLoading(false);
         handleModal();
         setState({
           email: "",
           password: "",
         });
+        if (resp.user.role == "doctor") {
+          history.push("/");
+        }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   };
-
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -154,7 +156,12 @@ function LoginForm({
                 <div className="ActionContainer">
                   <button className="ContinueButton" onClick={handleSubmit}>
                     {" "}
-                    Continue
+                    Continue{" "}
+                    {loading ? (
+                      <Spinner animation="border" role="status" />
+                    ) : (
+                      ""
+                    )}
                   </button>
                 </div>
 
