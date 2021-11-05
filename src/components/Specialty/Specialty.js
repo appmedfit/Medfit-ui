@@ -6,6 +6,13 @@ import doc from "../../assets/DocIcon.jpg";
 import DermatologySpeciality from "../../assets/DermatologySpeciality.jpg";
 import GeneralPhysicianSpeciality from "../../assets/general_physician_speciality.jpg";
 import ENTSpeciality from "../../assets/ENTSpeciality.png";
+import OrthoSpeciality from "../../assets/OrthoSpeciality.jpg"
+import SexologistSpeciality from "../../assets/SexologistSpeciality.jpg"
+import PaediatricSpeciality from "../../assets/PaediatricSpeciality.jpg"
+import UrologySpeciality from "../../assets/UrologySpeciality.jpg"
+import PhysioTheraphySpeciality from "../../assets/PhysioTheraphySpeciality.jpg"
+import DentalSpeciality from "../../assets/DentalSpeciality.jpg"
+import OphthalSpeciality from "../../assets/OphthalSpeciality.jpg"
 import SlotBooking from "../SlotBooking/patientSlotBooking";
 import { getUsersWithCondition } from "../../services/auth.service";
 import { getSpeciality } from "../../services/specialty.service";
@@ -18,6 +25,13 @@ const Specialty = () => {
     Dermatology: DermatologySpeciality,
     GenPhysician: GeneralPhysicianSpeciality,
     ENTSpeciality: ENTSpeciality,
+    OrthoSpeciality : OrthoSpeciality,
+    PaediatricSpeciality:PaediatricSpeciality,
+    SexologistSpeciality : SexologistSpeciality,
+    UrologySpeciality : UrologySpeciality,
+    PhysioTheraphySpeciality : PhysioTheraphySpeciality,
+    DentalSpeciality : DentalSpeciality,
+    OphthalSpeciality : OphthalSpeciality
   };
 
   let dt = [
@@ -29,6 +43,62 @@ const Specialty = () => {
       name: "ENT",
       type: "ENT Consultation",
     },
+    {
+      about:
+        "Orthopedist focus on the treatment & prevention of skeletal deformities such as disorders of the bones, joints, muscles, ligaments, tendons, nerves and skin. They treat fractures and dislocations, sports injuries, sciatica, low back pain, ruptured disks and scoliosis, knock knees, bow legs, bunions and hammer toes, arthritis, osteoporosis and more.",
+      imgSrc: "OrthoSpeciality",
+      link: "",
+      name: "Ortho",
+      type: "Ortho Consultation",
+    },
+    {
+      about:
+        "Paediatricians manage the health of your child, including physical, behavior, and mental health issues. They are trained to diagnose and treat childhood illnesses, from minor health problems to serious diseases.",
+      imgSrc: "PaediatricSpeciality",
+      link: "",
+      name: "Paediatric",
+      type: "Paediatric Consultation",
+    },
+    {
+      about:
+        "Sexologist specialises in issues of sexual health, development, relationships, dysfunction and disorders. They treat common issues like Premature Ejaculation, Erectile Dysfunction, impotency and can provide medication or therapy to overcome sex problems.",
+      imgSrc: "SexologistSpeciality",
+      link: "",
+      name: "Sexology",
+      type: "Sexologist Consultation",
+    },
+    {
+      about:
+        "Urolgogist specializes in surgical and medical treatment of diseases of urinary tract in both men and women and reproductive tract in men. They treat issues of prostate, bladder, urethra, kidneys, adrenal glands and ED and UTIs.",
+      imgSrc: "UrologySpeciality",
+      link: "",
+      name: "Urolgogy",
+      type: "Urolgogist Consultation",
+    },
+    {
+      about:
+        "Our experts will help you with pain management of your shoulder, back and ankle issues. They will also help in improving posture, mobility and ergonomics while you are working at home.",
+      imgSrc: "PhysioTheraphySpeciality",
+      link: "",
+      name: "PhysioTheraphy",
+      type: "PhysioTheraphy Consultation",
+    },
+    {
+      about:
+        "Dentist specializes in treating teeth, gums and parts of the mouth. They remove tooth decay, fill cavities, repair/remove damaged tooth and help you relieve your tooth pain with a veriety of treatments.",
+      imgSrc: "DentalSpeciality",
+      link: "",
+      name: "Dental",
+      type: "Dental Consultation",
+    },
+    {
+      about:
+        "Ophthalmologist specializes in eye and vision care. They diagnose and treat all eye diseases, performs eye surgery and prescribe and fit eyeglasses and contact lenses to correct vision problems.",
+      imgSrc: "OphthalSpeciality",
+      link: "",
+      name: "Ophthal",
+      type: "Ophthal Consultation",
+    }
   ];
 
   const [specialtyData, setspecialtyData] = useState({});
