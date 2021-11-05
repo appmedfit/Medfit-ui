@@ -6,11 +6,13 @@ import medicon_login from "../../assets/medicon_login.png";
 import { login as loginAction } from "../../store/auth.slice";
 import { auth, provider } from "../../services/firebase";
 import "../Layout/Header.css";
+import { useHistory } from "react-router";
 function LoginForm({
   toggleLogin,
   handleLoginModalShowHide,
   handleSignupModalShowHide,
 }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [state, setState] = useState({
     email: "",
@@ -78,6 +80,9 @@ function LoginForm({
           email: "",
           password: "",
         });
+        if (resp.user.role == "doctor") {
+          history.push("/");
+        }
       })
       .catch((error) => {
         setLoading(false);

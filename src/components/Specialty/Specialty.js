@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import doc from "../../assets/DocIcon.jpg";
 import DermatologySpeciality from "../../assets/DermatologySpeciality.jpg";
 import GeneralPhysicianSpeciality from "../../assets/general_physician_speciality.jpg";
+import ENTSpeciality from "../../assets/ENTSpeciality.png";
 import SlotBooking from "../SlotBooking/patientSlotBooking";
 import { getUsersWithCondition } from "../../services/auth.service";
 import { getSpeciality } from "../../services/specialty.service";
@@ -16,7 +17,19 @@ const Specialty = () => {
   const Specialtyimg = {
     Dermatology: DermatologySpeciality,
     GenPhysician: GeneralPhysicianSpeciality,
+    ENTSpeciality: ENTSpeciality,
   };
+
+  let dt = [
+    {
+      about:
+        "ENT doctor specializes in treatment of ear, nose and throat and related areas in your head and neck. They treat ear infection, hearing loss, trouble with balance, allergies, sinusitis, tonsillitis, swallowing and voice issues. They can also help with snoring or apnea.",
+      imgSrc: "ENTSpeciality",
+      link: "",
+      name: "ENT",
+      type: "ENT Consultation",
+    },
+  ];
 
   const [specialtyData, setspecialtyData] = useState({});
   const [doctorsdata, setDoctorsdata] = useState([]);
