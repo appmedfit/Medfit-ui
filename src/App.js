@@ -29,7 +29,7 @@ function App() {
             path="/"
             component={
               currentUser && currentUser.role == "doctor"
-                ? Checkout
+                ? DoctorLandingPage
                 : HomePage
             }
           />
