@@ -22,7 +22,7 @@ const Home = () => {
     { name: "ENT", imgSrc: ENT, link: "" },
     { name: "Ortho", imgSrc: Ortho, link: "" },
     { name: "Paediatric", imgSrc: Paediatric, link: "" },
-    { name: "Sexologist", imgSrc: Sexologist, link: "" },
+    { name: "Sexology", imgSrc: Sexologist, link: "" },
     { name: "Urology", imgSrc: Urology, link: "" },
     { name: "PhysioTheraphy", imgSrc: PhysioTheraphy, link: "" },
     { name: "Dental", imgSrc: Dental, link: "" },
