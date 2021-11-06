@@ -1,0 +1,168 @@
+.checkout-summary .header {
+    font-size: 22px;
+    font-family: BrandonTextWeb-Bold,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif!important;
+    padding-bottom: 10px;
+}
+
+.checkout-summary{
+        display: flex;
+        flex-direction: column;
+        padding-top: 20px;    
+}
+
+.checkout-summary .summary {
+    display: flex;
+}
+
+.checkout-summary .summary .left {
+
+    flex-basis: 24%;
+}
+
+.checkout-summary .title {
+    font-family: BrandonTextWeb-Bold,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif!important;
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+.checkout-summary .sub-title {
+    color: #747474;
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.img {
+    max-width: 50%;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+}
+
+
+.page-container{
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.left-div{
+    width: 50%;
+}
+
+.widget{
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px
+  solid rgba(151, 151, 151, 0.53);
+}
+
+.css-1s4n3pk-Image {
+    width: 30px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+img {
+    vertical-align: middle;
+    border: 0;
+}
+
+.e1bck8jo2{
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px
+ solid rgba(151, 151, 151, 0.53);
+}
+
+
+.css-1s4n3pk-Image {
+    width: 30px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+img {
+    vertical-align: middle;
+    border: 0;
+}
+
+.css-1ne0vsu-Data {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.css-2uoqjy-Title {
+    font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 18px;
+}
+
+.css-jemnnk-PaymentDetail {
+    padding: 10% 0px;
+}
+
+.css-13q0u04-ActionButtonContainer {
+    width: 100%;
+}
+
+.css-1vndij4-Button {
+    display: inline-block;
+    margin-bottom: 0px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: linear-gradient(
+99deg, rgb(247, 69, 48), rgb(255, 50, 120));
+    border: 1px solid transparent;
+    font-size: 18px;
+    line-height: 1.42857;
+    user-select: none;
+    transition: all 0.15s ease 0s;
+    border-radius: 30px;
+    color: rgb(255, 255, 255);
+    box-shadow: rgb(247 123 155 / 71%) 0px 3px 16px 0px;
+    opacity: 1;
+    width: 100%;
+    font-family: BrandonTextWeb-Medium, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    padding: 8px 24px !important;
+}
+
+.css-1f4cn3e-Details {
+    display: flex;
+    font-size: 16px;
+    color: rgb(36, 36, 36);
+    justify-content: space-between;
+    padding: 5px 0px;
+}
+
+.css-jemnnk-PaymentDetail {
+    padding: 10% 0px;
+}
+
+
+
+.css-r3hz89-WidgetSection {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px
+ solid rgba(151, 151, 151, 0.53);
+}
+
+.css-1f4cn3e-Details:last-child {
+    font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    color: black;
+    padding: 10px 0px;
+}

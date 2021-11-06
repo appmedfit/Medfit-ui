@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import PatientPreviousBookingsPage from "./components/PreviousBookings/PatientPreviousBookingsPage";
 import DoctorPreviousBookingsPage from "./components/PreviousBookings/DoctorPreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
+import Checkout from "./components/Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
 function App() {
@@ -28,7 +29,7 @@ function App() {
             path="/"
             component={
               currentUser && currentUser.role == "doctor"
-                ? DoctorLandingPage
+                ? Checkout
                 : HomePage
             }
           />
