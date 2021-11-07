@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
 import { createSlots, isTimeCompleted } from "../../helpers/createSlots";
+import { setBookingInfo } from "../../store/booking.slice";
+
 import LoadingPage from "../Loader/Loader";
 import "./SlotBooking.css";
 import {
@@ -39,22 +41,10 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
         patientName: patient.name,
         doctorName: doctor.name,
         patientEmail: patient.email,
+        doctor: doctor,
       };
-      console.log(bookingInfo, "bookin");
-      dispatch(bookSlot(bookingInfo))
-        .then((res) => {
-          //     console.log(res);
-          getSlots({
-            doctorId: doctor.id,
-            fullDate: selectedDate.fullDate,
-            isBooked: false,
-          });
-          handleModal();
-          console.log("booking is done");
-        })
-        .catch((err) => {
-          setLoading(false);
-        });
+      dispatch(setBookingInfo(bookingInfo));
+      history.push("/checkout");
     }
   };
 

@@ -7,6 +7,7 @@ import { createSlots } from "../../helpers/createSlots";
 import LoadingPage from "../Loader/Loader";
 import "./SlotBooking.css";
 import { addDoctorSlots, getDoctorSlots } from "../../services/slots.service";
+
 function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
   const history = useHistory();
   const dispatch = useDispatch();

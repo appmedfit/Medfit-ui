@@ -29,7 +29,7 @@ function App() {
             path="/"
             component={
               currentUser && currentUser.role == "doctor"
-                ? Checkout
+                ? DoctorLandingPage
                 : HomePage
             }
           />
@@ -43,6 +43,7 @@ function App() {
                 : PatientPreviousBookingsPage
             }
           />
+          <Route path="/checkout" component={Checkout} />
         </Switch>
       </div>
       <Footer />

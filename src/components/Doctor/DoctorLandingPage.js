@@ -31,7 +31,7 @@ const Doctor = () => {
                 <div className="row">
                   <div className="col-sm-4">
                     <img
-                      className="doc_profile_image"
+                      className="doc_landing_profile_image"
                       src={doc1}
                       alt="spl_img"
                     />
