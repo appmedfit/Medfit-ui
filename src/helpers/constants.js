@@ -1,8 +1,7 @@
-
 const constants = {
-  baseUrl: "https://medfit-backend.herokuapp.com/api/v1/",
+  baseUrl: "http://localhost:8080/api/v1/",
+  //"https://medfit-backend.herokuapp.com/api/v1/",
   //      "https://medfit-backend.herokuapp.com/api/v1/",
-  //"http://localhost:8080/api/v1/",
   signIn: "user/signIn",
   signUp: "user/signUp",
   getStudents: "/student",
@@ -16,6 +15,8 @@ const constants = {
   bookingDetails: "slots/bookingDetails",
   getSpeciality: "specialty",
   updateBooking: "slots/updateBooking",
+  getNextSevenDaysDoctorSlots: "slots/nextSevenDaysSlots",
+  updateConsultancyFee: "user/updateConsultancyFee",
 };
 
 export default constants;

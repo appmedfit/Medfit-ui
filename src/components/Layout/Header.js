@@ -80,38 +80,83 @@ const Header = (props) => {
           <div className="profile">
             {isAuthenticated ? (
               <div ref={ref}>
-                <img
+                {/* <img
                   className="login"
                   src={login}
                   onClick={handleProfileClick}
                   alt="login"
-                />
-                {showPopup && (
-                  <Overlay
-                    show={showPopup}
-                    target={target}
-                    placement="bottom-end"
-                    container={ref}
-                    containerPadding={10}
-                  >
-                    <Popover id="popover-contained">
-                      <Popover.Header as="h3">
-                        {currentUser.name}
-                      </Popover.Header>
-                      <Popover.Body>
-                        <ul>
-                          <Link to={`/previousbookings`}>
-                            <li onClick={handleProfileClick}>
-                              Previous Sessions
-                            </li>
-                          </Link>
+                /> */}
 
-                          <li onClick={handleLogout}>Logout</li>
-                        </ul>
-                      </Popover.Body>
-                    </Popover>
-                  </Overlay>
-                )}
+                <div>
+                  {/* <Overlay
+                      show={showPopup}
+                      target={target}
+                      placement="bottom-end"
+                      container={ref}
+                      containerPadding={10}
+                    >
+                      <Popover id="popover-contained">
+                        <Popover.Header as="h3">
+                          {currentUser.name}
+                        </Popover.Header>
+                        <Popover.Body>
+                          <ul>
+                            <Link to={`/previousbookings`}>
+                              <li onClick={handleProfileClick}>
+                                Previous Sessions
+                              </li>
+                            </Link>
+
+                            <li onClick={handleLogout}>Logout</li>
+                          </ul>
+                        </Popover.Body>
+                      </Popover>
+                    </Overlay> */}
+                  <div>
+                    <div class="profile_info">
+                      <img
+                        src={login}
+                        onClick={handleProfileClick}
+                        style={{ maxWidth: "30px" }}
+                        alt="#"
+                      />
+                      <div class="profile_info_iner">
+                        {currentUser.role == "doctor" ? (
+                          <>
+                            {" "}
+                            <p>{currentUser.degree} </p>
+                            <h5>Dr. {currentUser.name}</h5>
+                          </>
+                        ) : (
+                          <>
+                            <h5> {currentUser.name}</h5>
+                          </>
+                        )}
+
+                        <div class="profile_info_details">
+                          <a
+                            onClick={() => {
+                              history.push("/");
+                            }}
+                          >
+                            Dashboard <i class="ti-user"></i>
+                          </a>
+                          <a
+                            onClick={() => {
+                              history.push("/previousbookings");
+                            }}
+                          >
+                            Previous Sessions <i class="ti-user"></i>
+                          </a>
+
+                          <a onClick={handleLogout}>
+                            Log Out <i class="ti-shift-left"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             ) : (
               <button

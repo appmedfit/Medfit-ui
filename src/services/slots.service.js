@@ -19,6 +19,15 @@ export const getDoctorSlots = (data) => async (dispatch) => {
   });
 };
 
+export const getNextSevenDaysDoctorSlots = (data) => async (dispatch) => {
+  return axiosClient({
+    method: "POST",
+    url: constants.getNextSevenDaysDoctorSlots,
+    data: data,
+    responseType: "json",
+  });
+};
+
 export const bookSlot = (data) => async (dispatch) => {
   return axiosClient({
     method: "POST",

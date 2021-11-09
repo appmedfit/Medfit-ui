@@ -6,13 +6,14 @@ import { PrivateRoute } from "./routing/PrivateRouter";
 import HomePage from "./views/HomePage";
 import Specialty from "./components/Specialty/Specialty";
 import Header from "./components/Layout/Header";
-import Footer from "./components/Footer/Footer";
+import FooterPage from "./components/Footer/Footer";
 import PatientPreviousBookingsPage from "./components/PreviousBookings/PatientPreviousBookingsPage";
 import DoctorPreviousBookingsPage from "./components/PreviousBookings/DoctorPreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
 import Checkout from "./components/Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
+
 function App() {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -46,7 +47,7 @@ function App() {
           <Route path="/checkout" component={Checkout} />
         </Switch>
       </div>
-      <Footer />
+      <FooterPage />
     </Router>
   );
 }

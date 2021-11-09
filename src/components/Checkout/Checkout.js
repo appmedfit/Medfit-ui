@@ -23,6 +23,7 @@ function Checkout(props) {
     setLoading(true);
     dispatch(bookSlot(bookingInfo))
       .then((res) => {
+        console.log(res);
         setLoading(false);
         setToggleSuccessModal(true);
         console.log("booking is done");
@@ -139,26 +140,26 @@ function Checkout(props) {
           style={{ marginTop: "112px", paddingTop: "20px" }}
         >
           <Modal.Body>
-            <div class="success-modal-dialog success-modal-confirm">
-              <div class="success-modal-content">
-                <div class="success-modal-header">
-                  <div class="icon-box">
-                    <i class="material-icons">&#xE876;</i>
+            <div className="success-modal-dialog success-modal-confirm">
+              <div className="success-modal-content">
+                <div className="success-modal-header">
+                  <div className="icon-box">
+                    <i className="material-icons">&#xE876;</i>
                   </div>
-                  <h4 class="success-modal-title">Awesome!</h4>
+                  <h4 className="success-modal-title">Awesome!</h4>
                 </div>
-                <div class="success-modal-body">
-                  <p class="text-center">
+                <div className="success-modal-body">
+                  <p className="text-center">
                     Your booking has been confirmed. Check your email for
                     details.
                   </p>
                 </div>
-                <div class="success-modal-footer">
+                <div className="success-modal-footer">
                   <button
                     onClick={() => {
                       history.push("/");
                     }}
-                    class="btn btn-success btn-block"
+                    className="btn btn-success btn-block"
                     data-dismiss="modal"
                   >
                     OK

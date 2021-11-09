@@ -35,6 +35,7 @@ const axiosClient = async (options) => {
 };
 
 const sessionExpired = () => {
+  // const dispatch = useDispatch();
   sessionStorage.clear();
   // dispatch(logout());
 };

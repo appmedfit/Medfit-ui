@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import "./Prescription.css";
 import { bookingDetails, updateBooking } from "../../services/slots.service";
 import LoadingPage from "../Loader/Loader";
+import { getTimeDiff } from "../../helpers/createSlots";
 
 function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
   const [loading, setLoading] = useState(false);
@@ -42,7 +43,12 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
   const handleChangePrescribtion = (e) => {
     const { name, value } = e.target;
     setSelectedBooking((rec) => {
-      return { ...rec, prescribtion: value, status: "completed" };
+      return {
+        ...rec,
+        prescribtion: value,
+        status: "completed",
+        prescriptionStatus: "completed",
+      };
     });
     console.log(selectedBooking);
   };
@@ -59,9 +65,13 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
 
   const getData = () => {
     setLoading(true);
-    dispatch(bookingDetails({ doctorId: doctor.id }))
+    dispatch(bookingDetails({ doctorId: doctor.id, prescribtion: "" }))
       .then((res) => {
-        setData(res);
+        let data = res.filter((booking) => {
+          let diff = getTimeDiff(booking.SlotDateTime, "today");
+          return diff + 30 < 0;
+        });
+        setData(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -155,11 +165,11 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
                         Submit
                       </button>
 
-                      {/* <div class="ActionButtonContainer-Prescription">
+                      {/* <div className="ActionButtonContainer-Prescription">
                     <button
                       color="primary"
                       type="button"
-                      class="Button-Prescription"
+                      className="Button-Prescription"
                     >
                       Proceed to pay
                     </button>

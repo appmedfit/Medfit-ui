@@ -81,7 +81,7 @@ function PatientPreviousBookingsPage() {
         accessor: "consultancyFee",
       },
       {
-        Header: "Prescribition",
+        Header: "Prescription",
         accessor: "prescribtion",
       },
       {

@@ -177,3 +177,12 @@ input:focus-visible {
     sans-serif;
   float: right;
 }
+
+.load_more {
+  text-align: center;
+  color: #ff3980;
+  padding: 5px;
+  width: 105px;
+  margin-left: 195px;
+  cursor: pointer;
+}

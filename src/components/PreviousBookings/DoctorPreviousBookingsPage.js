@@ -79,7 +79,7 @@ function DoctorPreviousBookingsPage() {
         accessor: "consultancyFee",
       },
       {
-        Header: "Prescribition",
+        Header: "Prescription",
         accessor: "prescribtion",
       },
       {
@@ -113,7 +113,7 @@ function DoctorPreviousBookingsPage() {
               })
             : [];
         setData(newData);
-        setLoading(faalse);
+        setLoading(false);
       })
       .catch((err) => {
         setLoading(false);

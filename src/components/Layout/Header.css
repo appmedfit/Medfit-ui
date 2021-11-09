@@ -316,3 +316,120 @@
   margin-top: -0.5rem !important
 ;
 }
+
+/* .footer {
+  width: 100%;
+
+  background-color: #070101;
+  color: white;
+  display: flex;
+  margin-top: 3rem;
+
+  box-shadow: 0 2px 8px rgba(211, 168, 168, 0.25);
+} */
+
+/* line 179, H:/admin_project/hospital/scss/_header.scss */
+.profile_info {
+  position: relative;
+}
+
+/* line 183, H:/admin_project/hospital/scss/_header.scss */
+.profile_info img {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* line 193, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_iner {
+  position: absolute;
+  right: 0;
+  background-color: #2e4765;
+  text-align: right;
+  width: 215px;
+  padding: 30px 30px 20px;
+  opacity: 0;
+  visibility: hidden;
+  top: 77px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 205, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_iner::before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  top: -14px;
+  right: 10px;
+  border-width: 0 15px 20px 15px;
+  border-color: transparent transparent #2e4765 transparent;
+}
+
+/* line 216, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_iner a {
+  display: block;
+}
+
+/* line 220, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_iner p {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 24px;
+  margin-bottom: 0px;
+  color: #828bb2;
+  font-family: "Poppins", sans-serif;
+}
+
+/* line 224, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_iner h5 {
+  font-size: 12px;
+  color: #fff;
+}
+
+/* line 230, H:/admin_project/hospital/scss/_header.scss */
+.profile_info:hover .profile_info_iner {
+  opacity: 1;
+  visibility: visible;
+  top: 77px;
+  z-index: 1;
+}
+
+/* line 236, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_details {
+  margin-top: 20px;
+  border-top: 1px solid #79838b;
+  padding-top: 10px;
+}
+
+/* line 240, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_details a {
+  color: #fff;
+  font-size: 13px;
+  display: block;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+/* line 245, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_details a:hover {
+  color: #fff;
+}
+
+/* line 247, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_details a:hover i {
+  color: #fff;
+}
+
+/* line 252, H:/admin_project/hospital/scss/_header.scss */
+.profile_info .profile_info_details i {
+  color: #cccccc;
+  font-size: 12px;
+  margin-left: 20px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}

@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
-import { createSlots, isTimeCompleted } from "../../helpers/createSlots";
+import { createSlots, getTimeDiff } from "../../helpers/createSlots";
 import { setBookingInfo } from "../../store/booking.slice";
 
 import LoadingPage from "../Loader/Loader";
@@ -61,11 +61,11 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
       .then((dbSlots) => {
         setLoading(false);
         let newSlots = dbSlots.filter((slot) => {
-          return isTimeCompleted(slot.fullDate + " " + slot.detailText) > 0;
+          return getTimeDiff(slot.fullDate + " " + slot.detailText) > 0;
         });
         console.log(newSlots);
         newSlots = newSlots.sort((slot1, slot2) =>
-          isTimeCompleted(
+          getTimeDiff(
             slot1.fullDate + " " + slot1.detailText,
             slot2.fullDate + " " + slot2.detailText
           )
