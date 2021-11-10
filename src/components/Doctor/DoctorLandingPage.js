@@ -1,6 +1,6 @@
 import "./Doctor.css";
 import doc1 from "../../assets/DocIconV2.png";
-
+import { useHistory } from "react-router";
 import edit_pencilIcon from "../../assets/edit_pencil.png";
 import submitIcon from "../../assets/submit.png";
 import bookedslotIcon from "../../assets/bookedslot.png";
@@ -27,7 +27,6 @@ const Doctor = () => {
   const [togglePresc, settogglePresc] = useState(false);
   const [toggleSlotBooking, setToggleSlotBooking] = useState(false);
   const handlePresbModalShowHide = () => {
-    console.log(togglePresc);
     settogglePresc((i) => !i);
   };
 
@@ -36,7 +35,7 @@ const Doctor = () => {
   };
   const [loading, setLoading] = useState(false);
   const [editFee, setEditFee] = useState(false);
-
+  const history = useHistory();
   const { currentUser: userDoctor } = useSelector((state) =>
     sessionStorage.getItem("user")
       ? JSON.parse(sessionStorage.getItem("user"))
@@ -55,11 +54,7 @@ const Doctor = () => {
           (prev, curr) => {
             let timeDiff =
               getTimeDiff(getDateTimestamp(curr.SlotDateTime)) + 20;
-            console.log(
-              timeDiff < 0 && curr.prescribtion == "",
-              curr.prescribtion,
-              timeDiff
-            );
+
             if (timeDiff < 0) {
               prev["completedSessions"]++;
               if (timeDiff < 0 && curr.prescribtion == "") {
@@ -81,7 +76,7 @@ const Doctor = () => {
           return getTimeDiff(getDateTimestamp(sess.SlotDateTime)) + 20 > 0;
         });
         setSessions(newData);
-        setUpComingSessions(upcomSess);
+        setUpComingSessions(upcomSess.slice(0, 3));
         setLoading(false);
         console.log(newData);
         console.log("up", upComingSessions);
@@ -95,7 +90,7 @@ const Doctor = () => {
       .then((res) => {
         let count = res && res.length > 0 ? res.length + 1 : 0;
 
-        setOpenSlots(164 - count);
+        setOpenSlots(168 - count);
         setLoading(false);
       })
       .catch((err) => {
@@ -122,113 +117,129 @@ const Doctor = () => {
       setEditFee(false);
     });
   };
+
   useEffect(() => {
-    getData();
-  }, []);
+    if (!togglePresc && !toggleSlotBooking) {
+      console.log(!togglePresc && !toggleSlotBooking);
+      getData();
+    }
+  }, [toggleSlotBooking, togglePresc]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "#dee2e6",
-        minHeight: "75vh",
-        marginTop: "-30px",
-      }}
-    >
-      <div className="container quickActivityContainer">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="single_element" style={{ marginTop: "30px" }}>
-              <div className="quick_activity">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="quick_activity_wrap">
-                      <div className="single_quick_activity d-flex">
-                        <div className="icon">
-                          <img src={patientIcon} alt="" />
-                        </div>
-                        <div className="count_content">
-                          <h3>
-                            <span className="counter">
-                              {Sessions && Sessions.completedSessions}
-                            </span>{" "}
-                          </h3>
-                          <p>Completed Sessions</p>
-                        </div>
-                      </div>
-                      <div
-                        className="single_quick_activity d-flex"
-                        onClick={handlePresbModalShowHide}
-                      >
-                        <div className="icon">
-                          <img src={PrescriptionIcon} alt="" />
-                        </div>
-                        <div className="count_content">
-                          <h3>
-                            <span className="counter">
-                              {Sessions && Sessions.pendingPrescription}
-                            </span>{" "}
-                          </h3>
-                          <p>Prescriptions Pending</p>
-                        </div>
-                        <div className="doc-landing-button">
-                          <button className="btn  doc-btn">
-                            Write Prescription
-                          </button>
-                        </div>
-                      </div>
+    <>
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <div
+          style={{
+            backgroundColor: "#dee2e6",
+            minHeight: "75vh",
+            marginTop: "-30px",
+          }}
+        >
+          <div className="container quickActivityContainer">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="single_element" style={{ marginTop: "30px" }}>
+                  <div className="quick_activity">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="quick_activity_wrap">
+                          <div
+                            className="single_quick_activity d-flex"
+                            onClick={() => {
+                              history.push("/previousbookings/completed");
+                            }}
+                          >
+                            <div className="icon">
+                              <img src={patientIcon} alt="" />
+                            </div>
+                            <div className="count_content">
+                              <h3>
+                                <span className="counter">
+                                  {Sessions && Sessions.completedSessions}
+                                </span>{" "}
+                              </h3>
+                              <p>Completed Sessions</p>
+                            </div>
+                          </div>
+                          <div
+                            className="single_quick_activity d-flex"
+                            onClick={handlePresbModalShowHide}
+                          >
+                            <div className="icon">
+                              <img src={PrescriptionIcon} alt="" />
+                            </div>
+                            <div className="count_content">
+                              <h3>
+                                <span className="counter">
+                                  {Sessions && Sessions.pendingPrescription}
+                                </span>{" "}
+                              </h3>
+                              <p>Prescriptions Pending</p>
+                            </div>
+                            <div className="doc-landing-button">
+                              <button className="btn  doc-btn">
+                                Write Prescription
+                              </button>
+                            </div>
+                          </div>
 
-                      <div className="single_quick_activity d-flex">
-                        <div className="icon">
-                          <img src={bookedslotIcon} alt="" />
-                        </div>
-                        <div className="count_content">
-                          <h3>
-                            <span className="counter">
-                              {Sessions && Sessions.upcomingSessions}
-                            </span>{" "}
-                          </h3>
-                          <p>Upcoming Appointments</p>
-                        </div>
-                      </div>
-                      <div
-                        className="single_quick_activity d-flex"
-                        onClick={handlBookingModalShowHide}
-                      >
-                        <div className="icon">
-                          <img src={openbookingslotIcon} alt="" />
-                        </div>
-                        <div className="count_content">
-                          <h3>
-                            <span className="counter">{openSlots}</span>{" "}
-                          </h3>
-                          <p>Open Slots</p>
-                        </div>
-                        <div className="doc-landing-button">
-                          <button className="btn  doc-btn ">
-                            Mark Open Slots
-                          </button>
+                          <div
+                            className="single_quick_activity d-flex"
+                            onClick={() => {
+                              history.push("/previousbookings/upcoming");
+                            }}
+                          >
+                            <div className="icon">
+                              <img src={bookedslotIcon} alt="" />
+                            </div>
+                            <div className="count_content">
+                              <h3>
+                                <span className="counter">
+                                  {Sessions && Sessions.upcomingSessions}
+                                </span>{" "}
+                              </h3>
+                              <p>Upcoming Appointments</p>
+                            </div>
+                          </div>
+                          <div
+                            className="single_quick_activity d-flex"
+                            onClick={handlBookingModalShowHide}
+                          >
+                            <div className="icon">
+                              <img src={openbookingslotIcon} alt="" />
+                            </div>
+                            <div className="count_content">
+                              <h3>
+                                <span className="counter">{openSlots}</span>{" "}
+                              </h3>
+                              <p>Open Slots</p>
+                            </div>
+                            <div className="doc-landing-button">
+                              <button className="btn  doc-btn ">
+                                Mark Open Slots
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="col-xl-6">
-            <div className="white_box card_height_100">
-              {/* <div className="box_header border_bottom_1px  ">
-                <div className="main-title">
-                  <h3 className="mb_25">Recent Activity</h3>
-                </div>
-              </div> */}
-              <div className="Activity_timeline">
-                <div className="container  ">
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="card ">
-                        <div className="card-body">
+              <div className="col-xl-6">
+                <div className="white_box card_height_100">
+                  <div className="box_header border_bottom_1px  ">
+                    <div className="main-title">
+                      <h3 className="mb_25">Profile</h3>
+                    </div>
+                  </div>
+                  <div className="Activity_timeline sessionsActivity">
+                    <div className="container  ">
+                      <div className="row">
+                        <div className="col-sm-12">
                           <div className="row">
                             <div className="col-sm-4">
                               <img
@@ -348,45 +359,56 @@ const Doctor = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="col-xl-6">
-            <div className="white_box card_height_100">
-              <div className="box_header border_bottom_1px  ">
-                <div className="main-title">
-                  <h3 className="mb_25">Upcoming Sessions</h3>
+              <div className="col-xl-6">
+                <div className="white_box card_height_100">
+                  <div className="box_header border_bottom_1px  ">
+                    <div className="main-title">
+                      <h3 className="mb_25">Upcoming 3 Appointments</h3>
+                    </div>
+                  </div>
+                  <div className="Activity_timeline sessionsActivity">
+                    <ul>
+                      {upComingSessions &&
+                        upComingSessions.map((sess) => (
+                          <li key={sess.id}>
+                            <div className="activity_bell"></div>
+                            <div className="activity_wrap">
+                              <h6>
+                                {sess.fullDate + "  " + sess.detailText}{" "}
+                                <div className="">
+                                  <a
+                                    href={sess.zoomUrl}
+                                    target="_blank"
+                                    className="btn  join-btn "
+                                  >
+                                    join
+                                  </a>
+                                </div>
+                              </h6>
+                              <p>{sess.patientName}</p>
+                            </div>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div className="Activity_timeline">
-                <ul>
-                  {upComingSessions &&
-                    upComingSessions.map((sess) => (
-                      <li key={sess.id}>
-                        <div className="activity_bell"></div>
-                        <div className="activity_wrap">
-                          <h6>{sess.fullDate + "  " + sess.detailText}</h6>
-                          <p>{sess.patientName}</p>
-                        </div>
-                      </li>
-                    ))}
-                </ul>
-              </div>
             </div>
+            <br />
           </div>
-        </div>
-        <br />
-      </div>
 
-      <Prescription
-        togglePresc={togglePresc}
-        handlePresbModalShowHide={handlePresbModalShowHide}
-        doctor={userDoctor}
-      />
-      <DoctorSlotBooking
-        handlBookingModalShowHide={handlBookingModalShowHide}
-        toggleSlotBooking={toggleSlotBooking}
-      />
-    </div>
+          <Prescription
+            togglePresc={togglePresc}
+            handlePresbModalShowHide={handlePresbModalShowHide}
+            doctor={userDoctor}
+          />
+          <DoctorSlotBooking
+            handlBookingModalShowHide={handlBookingModalShowHide}
+            toggleSlotBooking={toggleSlotBooking}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

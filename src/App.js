@@ -7,8 +7,7 @@ import HomePage from "./views/HomePage";
 import Specialty from "./components/Specialty/Specialty";
 import Header from "./components/Layout/Header";
 import FooterPage from "./components/Footer/Footer";
-import PatientPreviousBookingsPage from "./components/PreviousBookings/PatientPreviousBookingsPage";
-import DoctorPreviousBookingsPage from "./components/PreviousBookings/DoctorPreviousBookingsPage";
+import PreviousBookingsPage from "./components/PreviousBookings/PreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
 import Checkout from "./components/Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,6 +19,7 @@ function App() {
       ? JSON.parse(sessionStorage.getItem("user"))
       : state.auth
   );
+
   return (
     <Router history={history}>
       <Header />
@@ -37,12 +37,8 @@ function App() {
           {/* <PrivateRoute exact path="/" component={HomePage} /> */}
           <Route path="/speciality/:specialityId" component={Specialty} />
           <Route
-            path="/previousbookings"
-            component={
-              currentUser && currentUser.role == "doctor"
-                ? DoctorPreviousBookingsPage
-                : PatientPreviousBookingsPage
-            }
+            path="/previousbookings/:filter"
+            component={PreviousBookingsPage}
           />
           <Route path="/checkout" component={Checkout} />
         </Switch>

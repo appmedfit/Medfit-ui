@@ -41,6 +41,7 @@ function Checkout(props) {
           <div>
             {bookingInfo && bookingInfo.doctor && (
               <div className="page-container">
+                <br />
                 <div className="left-div">
                   <div
                     className="go_back"

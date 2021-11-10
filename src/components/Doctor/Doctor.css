@@ -26,7 +26,6 @@
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  background-image: none;
   border: 1px solid transparent;
   padding: 8px 20px 7px !important;
   font-size: 14px;
@@ -307,7 +306,7 @@
 
 /* line 160, H:/admin_project/hospital/scss/_lms_category.scss */
 .Activity_timeline ul li .activity_wrap p {
-  font-size: 14px;
+  font-size: 19px;
   line-height: 28px;
   color: #818e94;
   font-weight: 400;
@@ -320,9 +319,32 @@
   font-size: 16px;
   border-radius: 12px;
 }
+.sessionsActivity {
+  height: 150px;
+  min-height: 150px;
+  overflow-y: auto;
+}
 
 .docFeeInput:focus-visible {
   border: gray 1px solid;
   outline: gray 1px solid;
 }
 /*  */
+.join-btn {
+  margin-top: -46px;
+  margin-left: 311px;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px 20px 7px !important;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #ff3278;
+  box-shadow: 0 3px 16px 0 #9b9b9b;
+  font-family: BrandonTextWeb-Bold, Helvetica Neue, Helvetica, Roboto, Arial,
+    sans-serif;
+}

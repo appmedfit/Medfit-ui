@@ -253,3 +253,8 @@ li {
   background-color: #007bff;
   margin-left: 20px;
 }
+
+.selected_slots_widget {
+  height: 250px;
+  overflow-y: auto;
+}

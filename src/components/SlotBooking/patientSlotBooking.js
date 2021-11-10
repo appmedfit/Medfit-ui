@@ -13,6 +13,7 @@ import {
   bookSlot,
   getDoctorSlots,
 } from "../../services/slots.service";
+import { handleLoginModal } from "../../store/auth.slice";
 
 function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
   const history = useHistory();
@@ -28,8 +29,8 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
   const handleBookSlot = (slot) => {
     if (!slot.isBooked) {
       setLoading(true);
-      if (patient.length == 0) {
-        alert("login");
+      if (!patient) {
+        dispatch(handleLoginModal(true));
         return;
       }
       slot.isBooked = !slot.isBooked;

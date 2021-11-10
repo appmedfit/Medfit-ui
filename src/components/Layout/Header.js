@@ -4,29 +4,30 @@ import medicon_login from "../../assets/medicon_login.png";
 import classes from "./Header.css";
 import login from "../../assets/login.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../store/auth.slice";
+import { handleLoginModal, logout } from "../../store/auth.slice";
 import { SignOut } from "../../services/auth.service";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import SignUpForm from "../SignUp/SignUp";
 import LoginForm from "../Login/Login";
 import { Button, Overlay, Popover } from "react-bootstrap";
+import { auth } from "../../services/firebase";
 const Header = (props) => {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
       ? JSON.parse(sessionStorage.getItem("user"))
-      : {}
+      : state.auth
   );
+
+  const { toggleLogin } = useSelector((state) => state.auth);
   const history = useHistory();
   const dispatch = useDispatch();
-  const [toggleLogin, setToggleLogin] = useState(false);
   const [toggleSignup, setToggleSignup] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [target, setTarget] = useState(null);
-  const ref = useRef(null);
+
   const handleLoginModalShowHide = () => {
-    setToggleLogin((i) => !i);
-    setShowPopup(false);
+    console.log("clicked", toggleLogin);
+    dispatch(handleLoginModal(!toggleLogin));
+    console.log(toggleLogin);
   };
 
   const handleProfileClick = (event) => {
@@ -47,7 +48,6 @@ const Header = (props) => {
         sessionStorage.clear();
         history.push("/");
         dispatch(logout());
-        setShowPopup(false);
       })
       .catch((error) => {
         // An error happened.
@@ -58,7 +58,7 @@ const Header = (props) => {
     if (!isAuthenticated) {
       handleLogout();
     }
-  }, [isAuthenticated]);
+  }, [toggleLogin]);
 
   return (
     <>
@@ -79,7 +79,7 @@ const Header = (props) => {
         <div>
           <div className="profile">
             {isAuthenticated ? (
-              <div ref={ref}>
+              <div>
                 {/* <img
                   className="login"
                   src={login}
@@ -113,14 +113,14 @@ const Header = (props) => {
                       </Popover>
                     </Overlay> */}
                   <div>
-                    <div class="profile_info">
+                    <div className="profile_info">
                       <img
                         src={login}
                         onClick={handleProfileClick}
                         style={{ maxWidth: "30px" }}
                         alt="#"
                       />
-                      <div class="profile_info_iner">
+                      <div className="profile_info_iner">
                         {currentUser.role == "doctor" ? (
                           <>
                             {" "}
@@ -133,24 +133,24 @@ const Header = (props) => {
                           </>
                         )}
 
-                        <div class="profile_info_details">
+                        <div className="profile_info_details">
                           <a
                             onClick={() => {
                               history.push("/");
                             }}
                           >
-                            Dashboard <i class="ti-user"></i>
+                            Dashboard <i className="ti-user"></i>
                           </a>
                           <a
                             onClick={() => {
-                              history.push("/previousbookings");
+                              history.push("/previousbookings/all");
                             }}
                           >
-                            Previous Sessions <i class="ti-user"></i>
+                            Previous Sessions <i className="ti-user"></i>
                           </a>
 
                           <a onClick={handleLogout}>
-                            Log Out <i class="ti-shift-left"></i>
+                            Log Out <i className="ti-shift-left"></i>
                           </a>
                         </div>
                       </div>

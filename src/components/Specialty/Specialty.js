@@ -93,11 +93,11 @@ const Specialty = () => {
         .catch((err) => {
           setLoading(false);
         });
-      getUsersWithCondition({ specialty: specialityId, role: "doctor" }).then(
-        (resp) => {
-          setDoctorsdata(resp);
-        }
-      );
+      dispatch(
+        getUsersWithCondition({ specialty: specialityId, role: "doctor" })
+      ).then((resp) => {
+        setDoctorsdata(resp);
+      });
     }
   }, [specialityId]);
 

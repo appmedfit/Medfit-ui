@@ -22,7 +22,7 @@ function Table({ columns, data }) {
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: 0, pageSize: 5 },
     },
     usePagination
   );
@@ -36,8 +36,10 @@ function Table({ columns, data }) {
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              {headerGroup.headers.map((column, index) => (
+                <th {...column.getHeaderProps()} key={index}>
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}
@@ -98,7 +100,7 @@ function Table({ columns, data }) {
             setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
+          {[5, 10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>

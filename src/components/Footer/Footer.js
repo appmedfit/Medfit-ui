@@ -5,27 +5,18 @@ const Footer = () => {
     <div>
       <header className={classes.footer}>
         <div className="container">
-          <img
-            src={medIcon}
-            width="50"
-            height="50"
-            style={{ marginTop: "20px" }}
-            alt=""
-          />
+          <br />
           <div className="row">
             <div className="col">
-              <br />
-              At MEDFIT, we make daily food healthy & tasty, mental fitness easy
-              with yoga and medical & lifestyle care hassle-free.
-              #BeBetterEveryDay
-            </div>
-            <div className="col">
-              <ul>
-                <li> CONTACT US</li>
-                <li>BLOG</li>
-              </ul>
+              <img src={medIcon} width="50" height="50" alt="" />
+              <span style={{ marginLeft: "23px" }}>
+                At MEDFIT, we make daily food healthy & tasty, mental fitness
+                easy with yoga and medical & lifestyle care hassle-free.
+                #BeBetterEveryDay
+              </span>
             </div>
           </div>
+          <br />
         </div>
       </header>
     </div>

@@ -1,0 +1,40 @@
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.booking_search {
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+  margin-bottom: 22px;
+  padding-bottom: 5px;
+  border-bottom: solid 2px black;
+  margin-right: 211px;
+  margin-top: 20px;
+}
+.booking-search-input-container {
+  width: 100%;
+  outline: none;
+  border: 0px;
+  height: auto;
+  font-family: BrandonTextWeb-Regular, Helvetica Neue, Helvetica, Roboto, Arial,
+    sans-serif;
+  font-size: 18px;
+  padding-left: 20px;
+  border: hidden;
+}
+
+.prev_book_go_back {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  font-weight: bold;
+  width: 114px;
+  background-color: #fd346d;
+  border-radius: 20px;
+  color: white;
+  padding: 4px;
+  height: 38px;
+  margin-left: 35px;
+}

@@ -214,7 +214,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
                       </div>
                       <section className="slot-selection ">
                         {timeSlotHeaders.map((tsHeader) => (
-                          <div className="slot">
+                          <div className="slot" key={tsHeader}>
                             <>
                               <div className="time-range">{tsHeader}</div>
 
@@ -223,6 +223,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
                                   (slot) =>
                                     tsHeader == slot.slotHeader && (
                                       <button
+                                        key={slot.id}
                                         onClick={() => handleBookSlot(slot)}
                                         className={`time-slot ${
                                           slot.isSelected && !slot.isBooked
@@ -290,21 +291,24 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
               </div>
               <div className="dialogBody ">
                 <div className="StyleWrapper-StyleWrapper">
-                  <section className="dates-available-widget">
-                    <ListGroup as="ol" numbered>
-                      {availableSlotsData &&
-                        availableSlotsData.length > 0 &&
-                        availableSlotsData.map((slot, index) => (
-                          <ListGroup.Item
-                            variant="light"
-                            style={{ color: "black" }}
-                            as="li"
-                          >
-                            {index + 1 + ".    "}
-                            {slot.fullDate + " " + slot.detailText}
-                          </ListGroup.Item>
-                        ))}
-                    </ListGroup>
+                  <section className="">
+                    <div className="selected_slots_widget">
+                      <ListGroup as="ol" numbered>
+                        {availableSlotsData &&
+                          availableSlotsData.length > 0 &&
+                          availableSlotsData.map((slot, index) => (
+                            <ListGroup.Item
+                              variant="light"
+                              style={{ color: "black" }}
+                              as="li"
+                              key={slot.id}
+                            >
+                              {index + 1 + ".    "}
+                              {slot.fullDate + " " + slot.detailText}
+                            </ListGroup.Item>
+                          ))}
+                      </ListGroup>
+                    </div>
                     <br />
                     <div className="SlotcnfirmActionContainer">
                       <button className="CnfirmButton" onClick={handleSubmit}>

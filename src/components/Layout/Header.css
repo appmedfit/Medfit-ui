@@ -308,25 +308,11 @@
   color: #28a745;
 }
 
-.profile {
-}
-
 .bs-popover-auto[x-placement^="bottom"],
 .bs-popover-bottom {
   margin-top: -0.5rem !important
 ;
 }
-
-/* .footer {
-  width: 100%;
-
-  background-color: #070101;
-  color: white;
-  display: flex;
-  margin-top: 3rem;
-
-  box-shadow: 0 2px 8px rgba(211, 168, 168, 0.25);
-} */
 
 /* line 179, H:/admin_project/hospital/scss/_header.scss */
 .profile_info {
@@ -335,8 +321,17 @@
 
 /* line 183, H:/admin_project/hospital/scss/_header.scss */
 .profile_info img {
+  max-width: 69px;
+  max-height: 69px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  /* line 183, H:/admin_project/hospital/scss/_header.scss */
+  .profile_info img {
+    max-width: 30px;
+  }
 }
 
 /* line 193, H:/admin_project/hospital/scss/_header.scss */
@@ -355,6 +350,7 @@
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  z-index: 1;
 }
 
 /* line 205, H:/admin_project/hospital/scss/_header.scss */
@@ -377,17 +373,14 @@
 
 /* line 220, H:/admin_project/hospital/scss/_header.scss */
 .profile_info .profile_info_iner p {
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 24px;
-  margin-bottom: 0px;
+  font-size: 15px;
+  font-weight: 500;
   color: #828bb2;
-  font-family: "Poppins", sans-serif;
 }
 
 /* line 224, H:/admin_project/hospital/scss/_header.scss */
 .profile_info .profile_info_iner h5 {
-  font-size: 12px;
+  font-size: 15px;
   color: #fff;
 }
 
@@ -396,7 +389,6 @@
   opacity: 1;
   visibility: visible;
   top: 77px;
-  z-index: 1;
 }
 
 /* line 236, H:/admin_project/hospital/scss/_header.scss */
@@ -409,10 +401,9 @@
 /* line 240, H:/admin_project/hospital/scss/_header.scss */
 .profile_info .profile_info_details a {
   color: #fff;
-  font-size: 13px;
+  font-size: 15px;
   display: block;
   padding: 10px 0;
-  cursor: pointer;
 }
 
 /* line 245, H:/admin_project/hospital/scss/_header.scss */
