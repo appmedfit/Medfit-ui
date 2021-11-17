@@ -10,8 +10,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import SignUpForm from "../SignUp/SignUp";
 import LoginForm from "../Login/Login";
-import { Button, Overlay, Popover } from "react-bootstrap";
-import { auth } from "../../services/firebase";
+
 const Header = (props) => {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -30,11 +29,7 @@ const Header = (props) => {
     console.log(toggleLogin);
   };
 
-  const handleProfileClick = (event) => {
-    console.log(event);
-    setShowPopup((i) => !i);
-    setTarget(event.target);
-  };
+  const handleProfileClick = (event) => {};
 
   const handleSignupModalShowHide = () => {
     setToggleSignup((i) => !i);
@@ -141,14 +136,35 @@ const Header = (props) => {
                           >
                             Dashboard <i className="ti-user"></i>
                           </a>
-                          <a
-                            onClick={() => {
-                              history.push("/previousbookings/all");
-                            }}
-                          >
-                            Previous Sessions <i className="ti-user"></i>
-                          </a>
 
+                          {currentUser.role !== "admin" &&
+                            currentUser.verificationStatus == "verified" && (
+                              <>
+                                {currentUser.role == "user" && (
+                                  <a
+                                    onClick={() => {
+                                      history.push("/profile");
+                                    }}
+                                  >
+                                    My Profile <i className="ti-user"></i>
+                                  </a>
+                                )}
+                                <a
+                                  onClick={() => {
+                                    history.push("/previousbookings/all");
+                                  }}
+                                >
+                                  Sessions <i className="ti-user"></i>
+                                </a>
+                                <a
+                                  onClick={() => {
+                                    history.push("/prescriptions");
+                                  }}
+                                >
+                                  Prescriptions <i className="ti-user"></i>
+                                </a>
+                              </>
+                            )}
                           <a onClick={handleLogout}>
                             Log Out <i className="ti-shift-left"></i>
                           </a>

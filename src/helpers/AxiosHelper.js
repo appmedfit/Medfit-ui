@@ -18,11 +18,16 @@ const axiosClient = async (options, dispatch) => {
   const onSuccess = (response) => response.data;
   const onError = (error) => {
     if (error.response) {
-      console.log("err", error.response.data);
-      if (error.response.data == "Unautorized") {
+      console.log("err", error.response);
+      if (
+        error.response.status == 401 ||
+        error.response.data == "Unautorized" ||
+        error.response["data"]["message"] == "Unautorized"
+      ) {
+        console.log("inside");
         sessionStorage.clear();
         dispatch(logout());
-        // history.go(0);
+        history.push("/");
         dispatch(handleLoginModal(true));
       }
       return Promise.reject(error.response || error.message);

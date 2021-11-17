@@ -303,13 +303,24 @@
   font-weight: 600;
   color: #2e4765;
 }
-
+.main-title h3 span {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: tomato;
+  line-height: 0.6;
+  /* margin-left: 102px; */
+  position: absolute;
+  right: 50px;
+  top: 32px;
+}
 /* line 160, H:/admin_project/hospital/scss/_lms_category.scss */
 .Activity_timeline ul li .activity_wrap p {
   font-size: 19px;
   line-height: 28px;
   color: #818e94;
   font-weight: 400;
+  margin-top: -25px;
 }
 
 .docFeeInput {
@@ -320,7 +331,7 @@
   border-radius: 12px;
 }
 .sessionsActivity {
-  height: 150px;
+  height: 198px;
   min-height: 150px;
   overflow-y: auto;
 }

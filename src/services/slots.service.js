@@ -72,3 +72,15 @@ export const updateBooking = (data) => async (dispatch) => {
     dispatch
   );
 };
+
+export const createRazorPayOrder = (data) => async (dispatch) => {
+  return axiosClient(
+    {
+      method: "POST",
+      url: constants.createRazorPayOrder,
+      data: data,
+      responseType: "json",
+    },
+    dispatch
+  );
+};

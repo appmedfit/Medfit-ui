@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import LoadingPage from "../Loader/Loader";
 import back_arrow from "../../assets/back_arrow.png";
-import { getDateTimestamp, getTimeDiff } from "../../helpers/createSlots";
+import { getDateTimestamp, getTimeDiff } from "../../helpers/helper";
 import "./Booking.css";
 function DoctorPreviousBookingsPage() {
   const dispatch = useDispatch();
@@ -82,12 +82,12 @@ function DoctorPreviousBookingsPage() {
         Header: "Fee ₹",
         accessor: "consultancyFee",
       },
-      {
-        Header: "Prescription",
-        accessor: "prescribtion",
-      },
+      // {
+      //   Header: "Prescription",
+      //   accessor: "prescribtion",
+      // },
     ];
-
+    console.log(currentUser);
     let obj =
       currentUser.role == "doctor"
         ? {
@@ -98,10 +98,11 @@ function DoctorPreviousBookingsPage() {
             Header: "Doctor Name",
             accessor: "doctorName",
           };
-    col.shift(obj);
+    col.unshift(obj);
+
     return col;
   };
-  const columns = getcolumns();
+  const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [filterBy, setFilterBy] = useState(filter);
@@ -152,10 +153,12 @@ function DoctorPreviousBookingsPage() {
   }, [filterBy, data, searchTerm]);
 
   useEffect(() => {
-    getData();
+    if (currentUser) getData();
   }, []);
   const getData = () => {
     setLoading(true);
+    console.log("col", getcolumns());
+    setColumns(getcolumns());
     let reqObj =
       currentUser.role == "doctor"
         ? { doctorId: currentUser.id }

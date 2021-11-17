@@ -20,7 +20,7 @@ import {
   bookingDetails,
   getNextSevenDaysDoctorSlots,
 } from "../../services/slots.service";
-import { getDateTimestamp, getTimeDiff } from "../../helpers/createSlots";
+import { getDateTimestamp, getTimeDiff } from "../../helpers/helper";
 import { updateConsultancyFee, updateUser } from "../../services/auth.service";
 const Doctor = () => {
   const dispatch = useDispatch();
@@ -129,6 +129,49 @@ const Doctor = () => {
     <>
       {loading ? (
         <LoadingPage />
+      ) : userDoctor.verificationStatus == "pending" ? (
+        <div>
+          <div
+            className="container quickActivityContainer"
+            style={{ backgroundColor: "white" }}
+          >
+            <div className="row justify-content-center">
+              <div className="col-lg-10">
+                <div className="single_element" style={{ marginTop: "30px" }}>
+                  <div className="quick_activity">
+                    <div className="row">
+                      <div className="col-12">
+                        <h3 style={{ color: "tomato" }}>
+                          You will be able to mark slots once admin verifies
+                          your account
+                        </h3>
+                        {/* <div
+                            className="single_quick_activity d-flex"
+                            onClick={() => {
+                              history.push("/previousbookings/upcoming");
+                            }}
+                          >
+                            <div className="icon">
+                              <img src={bookedslotIcon} alt="" />
+                            </div>
+                            <div className="count_content">
+                              <h3>
+                                <span className="counter">
+                                  {Sessions && Sessions.upcomingSessions}
+                                </span>{" "}
+                              </h3>
+                              <p>Upcoming Appointments</p>
+                            </div>
+                          </div> */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
       ) : (
         <div
           style={{
@@ -137,9 +180,9 @@ const Doctor = () => {
             marginTop: "-30px",
           }}
         >
-          <div className="container quickActivityContainer">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="container-fluid quickActivityContainer">
+            <div className="row justify-content-center">
+              <div className="col-lg-10">
                 <div className="single_element" style={{ marginTop: "30px" }}>
                   <div className="quick_activity">
                     <div className="row">
@@ -165,7 +208,7 @@ const Doctor = () => {
                           </div>
                           <div
                             className="single_quick_activity d-flex"
-                            onClick={handlePresbModalShowHide}
+                            onClick={() => history.push("/prescriptions")}
                           >
                             <div className="icon">
                               <img src={PrescriptionIcon} alt="" />
@@ -229,7 +272,7 @@ const Doctor = () => {
                 </div>
               </div>
 
-              <div className="col-xl-6">
+              <div className="col-xl-5">
                 <div className="white_box card_height_100">
                   <div className="box_header border_bottom_1px  ">
                     <div className="main-title">
@@ -359,7 +402,7 @@ const Doctor = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-6">
+              <div className="col-xl-5">
                 <div className="white_box card_height_100">
                   <div className="box_header border_bottom_1px  ">
                     <div className="main-title">

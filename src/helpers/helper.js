@@ -1,5 +1,4 @@
 import * as moment from "moment";
-
 export function createSlots() {
   let timeSlots = {
     timeSlotHeaders: ["9AM-12PM", "12PM-3PM", "3PM-6PM", "6PM-9PM"],
@@ -166,4 +165,8 @@ export const getTimeDiff = (day1, day2) => {
 export const getDateTimestamp = (day1) => {
   const someday = moment(day1);
   return someday;
+};
+
+export const isNullorUndefined = (obj) => {
+  return !(typeof obj !== "undefined" && obj !== null);
 };

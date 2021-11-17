@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Checkout.css";
 import doc from "../../assets//DocIcon.jpg";
+import medicon_login from "../../assets/medicon_login.png";
+
 import back_arrow from "../../assets/back_arrow.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -10,18 +12,22 @@ import {
   addDoctorSlots,
   bookSlot,
   getDoctorSlots,
+  createRazorPayOrder,
 } from "../../services/slots.service";
+import constants from "../../helpers/constants";
 function Checkout(props) {
   const { bookingInfo } = useSelector((state) => state.booking);
+
   console.log(bookingInfo);
   const dispatch = useDispatch();
   const history = useHistory();
   const [toggleSuccessModal, setToggleSuccessModal] = useState(false);
   //
   const [loading, setLoading] = useState(false);
-  const handleSubmit = () => {
+  const handleSubmit = (razorpayInfo) => {
     setLoading(true);
-    dispatch(bookSlot(bookingInfo))
+    let finalBookingData = { ...bookingInfo, paymentInfo: { ...razorpayInfo } };
+    dispatch(bookSlot(finalBookingData))
       .then((res) => {
         console.log(res);
         setLoading(false);
@@ -32,6 +38,64 @@ function Checkout(props) {
         setLoading(false);
       });
   };
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    console.log({ consultancyFee: bookingInfo.consultancyFee });
+    dispatch(
+      createRazorPayOrder({ consultancyFee: bookingInfo.consultancyFee })
+    ).then((data) => {
+      console.log(data);
+      const options = {
+        key: "rzp_test_nm9mAxHElJ1Y8r",
+        currency: data.currency,
+        amount: data.amount,
+        order_id: data.id,
+        name: "MedFIT",
+        description: `${bookingInfo.slot.specialty} Online Consultation`,
+        // description: "Thank you for nothing. Please give us some money",
+        image: constants.appUrl + "logo.png",
+        handler: function (response) {
+          handleSubmit(response);
+        },
+        prefill: {
+          name: bookingInfo.patientName,
+          email: bookingInfo.patientEmail,
+          phone_number: "",
+        },
+      };
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    });
+
+    // const data =
+
+    //   await fetch("http://localhost:1337/razorpay", {
+    //   method: "POST",
+    // }).then((t) => t.json());
+
+    // console.log("data", data);
+  }
   return (
     <>
       {!toggleSuccessModal &&
@@ -101,7 +165,7 @@ function Checkout(props) {
                     </div>
                     <div className="css-1ne0vsu-Data e1bck8jo3">
                       <div className="css-2uoqjy-Title e1bck8jo1">
-                        <b>{bookingInfo.slot.specialty}Online Consultation</b>
+                        <b>{bookingInfo.slot.specialty} Online Consultation</b>
                       </div>
                       <div className="sub-title">
                         {bookingInfo.slot.fullDate} |{" "}
@@ -125,7 +189,7 @@ function Checkout(props) {
                       color="primary"
                       type="button"
                       className="css-1vndij4-Button e1op617e0"
-                      onClick={handleSubmit}
+                      onClick={displayRazorpay}
                     >
                       Proceed to pay
                     </button>

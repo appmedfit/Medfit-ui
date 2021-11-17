@@ -37,4 +37,9 @@
   padding: 4px;
   height: 38px;
   margin-left: 35px;
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
 }

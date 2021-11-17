@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import "./Prescription.css";
 import { bookingDetails, updateBooking } from "../../services/slots.service";
 import LoadingPage from "../Loader/Loader";
-import { getTimeDiff } from "../../helpers/createSlots";
+import { getTimeDiff } from "../../helpers/helper";
 
 function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
   const [loading, setLoading] = useState(false);

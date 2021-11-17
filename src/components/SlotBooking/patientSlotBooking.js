@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
-import { createSlots, getTimeDiff } from "../../helpers/createSlots";
+import { createSlots, getTimeDiff } from "../../helpers/helper";
 import { setBookingInfo } from "../../store/booking.slice";
 
 import LoadingPage from "../Loader/Loader";

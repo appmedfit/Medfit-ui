@@ -9,10 +9,12 @@ import Header from "./components/Layout/Header";
 import FooterPage from "./components/Footer/Footer";
 import PreviousBookingsPage from "./components/PreviousBookings/PreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
+import AdminLandingPage from "./components/admin/AdminLandingPage";
 import Checkout from "./components/Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
-
+import PrescriptionNew from "./components/Doctor/PrescriptionV2";
+import ProfilePage from "./components/profile-page/ProfilePage";
 function App() {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -29,7 +31,9 @@ function App() {
             exact
             path="/"
             component={
-              currentUser && currentUser.role == "doctor"
+              currentUser && currentUser.role == "admin"
+                ? AdminLandingPage
+                : currentUser && currentUser.role == "doctor"
                 ? DoctorLandingPage
                 : HomePage
             }
@@ -40,7 +44,10 @@ function App() {
             path="/previousbookings/:filter"
             component={PreviousBookingsPage}
           />
+          <Route path="/prescriptions" component={PrescriptionNew} />
+
           <Route path="/checkout" component={Checkout} />
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </div>
       <FooterPage />
