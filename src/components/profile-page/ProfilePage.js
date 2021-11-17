@@ -94,7 +94,7 @@ const ProfilePage = () => {
             >
               <img src={back_arrow} /> Go Back
             </div>
-            <div className="css-ipiq2k-profileFormOpenStyles">
+            <div className="profileFormOpenStyles">
               <center>
                 <button className="profile-image-container">
                   <img

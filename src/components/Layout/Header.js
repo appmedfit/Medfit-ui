@@ -136,30 +136,35 @@ const Header = (props) => {
                           >
                             Dashboard <i className="ti-user"></i>
                           </a>
-                          {currentUser.role == "user" && (
-                            <a
-                              onClick={() => {
-                                history.push("/profile");
-                              }}
-                            >
-                              My Profile <i className="ti-user"></i>
-                            </a>
-                          )}
-                          <a
-                            onClick={() => {
-                              history.push("/previousbookings/all");
-                            }}
-                          >
-                            Sessions <i className="ti-user"></i>
-                          </a>
-                          <a
-                            onClick={() => {
-                              history.push("/prescriptions");
-                            }}
-                          >
-                            Prescriptions <i className="ti-user"></i>
-                          </a>
 
+                          {currentUser.role !== "admin" &&
+                            currentUser.verificationStatus == "verified" && (
+                              <>
+                                {currentUser.role == "user" && (
+                                  <a
+                                    onClick={() => {
+                                      history.push("/profile");
+                                    }}
+                                  >
+                                    My Profile <i className="ti-user"></i>
+                                  </a>
+                                )}
+                                <a
+                                  onClick={() => {
+                                    history.push("/previousbookings/all");
+                                  }}
+                                >
+                                  Sessions <i className="ti-user"></i>
+                                </a>
+                                <a
+                                  onClick={() => {
+                                    history.push("/prescriptions");
+                                  }}
+                                >
+                                  Prescriptions <i className="ti-user"></i>
+                                </a>
+                              </>
+                            )}
                           <a onClick={handleLogout}>
                             Log Out <i className="ti-shift-left"></i>
                           </a>

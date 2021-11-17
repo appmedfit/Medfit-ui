@@ -9,6 +9,7 @@ import Header from "./components/Layout/Header";
 import FooterPage from "./components/Footer/Footer";
 import PreviousBookingsPage from "./components/PreviousBookings/PreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
+import AdminLandingPage from "./components/admin/AdminLandingPage";
 import Checkout from "./components/Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
@@ -30,7 +31,9 @@ function App() {
             exact
             path="/"
             component={
-              currentUser && currentUser.role == "doctor"
+              currentUser && currentUser.role == "admin"
+                ? AdminLandingPage
+                : currentUser && currentUser.role == "doctor"
                 ? DoctorLandingPage
                 : HomePage
             }
