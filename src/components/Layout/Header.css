@@ -404,6 +404,7 @@
   font-size: 15px;
   display: block;
   padding: 10px 0;
+  cursor: pointer;
 }
 
 /* line 245, H:/admin_project/hospital/scss/_header.scss */

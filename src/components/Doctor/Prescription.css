@@ -64,12 +64,169 @@
   color: rgb(255, 255, 255);
   box-shadow: rgb(247 123 155 / 71%) 0px 3px 16px 0px;
   opacity: 1;
-  width: 100%;
+  width: 46%;
   font-family: BrandonTextWeb-Medium, "Helvetica Neue", Helvetica, Roboto, Arial,
     sans-serif;
   padding: 8px 24px !important;
+  margin-left: 187px;
 }
 
 .loading {
   margin-top: 74%;
 }
+
+.patient_arrow {
+  background-color: #fb3959;
+  width: 85%;
+  height: 81px;
+  margin: 0 0;
+  /* border-top: 40px solid transparent; */
+  /* border-bottom: 40px solid transparent; */
+  /* border-left: 40px solid #f8f9fa; */
+  display: flex;
+  flex-direction: row;
+}
+.patient_arrow::before {
+  border-top: 40px solid rgb(255 50 120);
+  border-bottom: 40px solid rgb(255 50 120);
+  border-left: 40px solid #f8f9fa;
+  content: " ";
+  display: block;
+  /* margin-top: 0px; */
+}
+.patient_arrow_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.patient_arrow_container::after {
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 40px solid rgb(255, 50, 120);
+  content: " ";
+  display: block;
+  margin-top: 0px;
+}
+.patient_arrow img {
+  width: 72px;
+  padding: 10px;
+}
+
+.patient_arrow .text {
+  font-size: 22px;
+  color: white;
+  font-weight: 500;
+  padding: 18px;
+}
+
+.patient_TimeLine {
+  width: 97%;
+
+  margin-left: 3%;
+}
+/* line 135, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul {
+  border-left: 1px solid #ecfdff;
+  margin-bottom: 15px;
+  padding-left: 0px;
+}
+
+/* line 137, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul li {
+  background: #e9ecef;
+  position: relative;
+  margin-bottom: 15px;
+  list-style: none;
+  border-radius: 7px;
+}
+
+.pres_active {
+  color: #fb3959 !important;
+}
+/* line 140, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul li:last-child {
+  margin-bottom: 20px;
+}
+
+/* line 143, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul li .activity_bell {
+  width: 20px;
+  position: absolute;
+  left: 92%;
+  top: 35px;
+}
+
+.pres_selected {
+  display: none;
+}
+.pres_sec_unselected {
+  opacity: 0.2 !important;
+}
+/* line 152, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul li .activity_wrap {
+  position: relative;
+  padding-left: 30px;
+  padding-top: 8px;
+  padding-bottom: 3px;
+}
+
+/* line 155, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul li .activity_wrap h6 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2e4765;
+}
+
+/* line 160, H:/admin_project/hospital/scss/_lms_category.scss */
+.patient_TimeLine ul li .activity_wrap p {
+  font-size: 19px;
+  line-height: 28px;
+  color: #818e94;
+  font-weight: 400;
+}
+
+.patient_inner_container {
+  margin-top: 40px;
+  height: 500px;
+  overflow-y: auto;
+  min-height: 500px;
+}
+
+.patient_inner_container::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+
+/* line 472, H:/admin_project/hospital/scss/_patient_inner_container.scss */
+.patient_inner_container::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+  background-color: #ddd;
+}
+
+/* line 477, H:/admin_project/hospital/scss/_patient_inner_container.scss */
+.patient_inner_container::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #f8dbdd;
+}
+
+/* line 483, H:/admin_project/hospital/scss/_patient_inner_container.scss */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+/* 
+.activity_bell::after {
+  position: absolute;
+  content: "";
+  transform: rotate(-90deg) translate(0, -50%);
+  transform-origin: top;
+  top: 50%;
+  transition: all 0.3s ease-out;
+  right: 40px;
+  content: "\e64b";
+  font-family: "themify";
+  color: #a5adc6;
+  font-weight: 600;
+  font-size: 14px;
+} */

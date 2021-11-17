@@ -3,7 +3,7 @@ import { Button, Modal, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
-import { createSlots, getDateTimestamp } from "../../helpers/createSlots";
+import { createSlots, getDateTimestamp } from "../../helpers/helper";
 import LoadingPage from "../Loader/Loader";
 import "./SlotBooking.css";
 import { addDoctorSlots, getDoctorSlots } from "../../services/slots.service";

@@ -37,6 +37,28 @@ export const updateUser = (data) => async (dispatch) => {
     dispatch
   );
 };
+export const addUser = (data) => async (dispatch) => {
+  return axiosClient(
+    {
+      method: "POST",
+      url: constants.addUser,
+      data: data,
+      responseType: "json",
+    },
+    dispatch
+  );
+};
+export const getUser = (data) => async (dispatch) => {
+  return axiosClient(
+    {
+      method: "POST",
+      url: constants.getUser,
+      data: data,
+      responseType: "json",
+    },
+    dispatch
+  );
+};
 
 export const SignOut = (data) => async (dispatch) => {
   return axiosClient(

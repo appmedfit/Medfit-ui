@@ -12,7 +12,8 @@ import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";
 import Checkout from "./components/Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
-
+import PrescriptionNew from "./components/Doctor/PrescriptionV2";
+import ProfilePage from "./components/profile-page/ProfilePage";
 function App() {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -40,7 +41,10 @@ function App() {
             path="/previousbookings/:filter"
             component={PreviousBookingsPage}
           />
+          <Route path="/prescriptions" component={PrescriptionNew} />
+
           <Route path="/checkout" component={Checkout} />
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </div>
       <FooterPage />

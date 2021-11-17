@@ -20,7 +20,7 @@ import {
   bookingDetails,
   getNextSevenDaysDoctorSlots,
 } from "../../services/slots.service";
-import { getDateTimestamp, getTimeDiff } from "../../helpers/createSlots";
+import { getDateTimestamp, getTimeDiff } from "../../helpers/helper";
 import { updateConsultancyFee, updateUser } from "../../services/auth.service";
 const Doctor = () => {
   const dispatch = useDispatch();
@@ -165,7 +165,7 @@ const Doctor = () => {
                           </div>
                           <div
                             className="single_quick_activity d-flex"
-                            onClick={handlePresbModalShowHide}
+                            onClick={() => history.push("/prescriptions")}
                           >
                             <div className="icon">
                               <img src={PrescriptionIcon} alt="" />

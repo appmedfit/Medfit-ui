@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Login as loginService, updateUser } from "../../services/auth.service";
+import {
+  addUser,
+  Login as loginService,
+  updateUser,
+} from "../../services/auth.service";
 import medicon_login from "../../assets/medicon_login.png";
 import { login as loginAction } from "../../store/auth.slice";
 import { auth, provider } from "../../services/firebase";
@@ -34,7 +38,7 @@ function LoginForm({
         const id = user.uid;
         user = mapUser(user);
         let newUser = { user: { ...newUser, token } };
-        dispatch(updateUser(user))
+        dispatch(addUser(user))
           .then(() => {
             sessionStorage.setItem(
               "user",
