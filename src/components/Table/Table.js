@@ -2,7 +2,7 @@ import React from "react";
 
 import { useTable, usePagination } from "react-table";
 
-function Table({ columns, data }) {
+function Table({ columns, data, handleUploadClick }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -47,11 +47,33 @@ function Table({ columns, data }) {
         <tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
             prepareRow(row);
+
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
+                  // console.log("cell", cell, cell.row.values);
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <>
+                      {cell.column.Header == "Upload file" ? (
+                        <td style={{ maxWidth: "150px" }}>
+                          {cell.row.values.file_link ? (
+                            <button>fff</button>
+                          ) : (
+                            <input
+                              accept="application/pdf"
+                              className=""
+                              id="contained-button-file"
+                              type="file"
+                              onChange={(event) => handleUploadClick(event)}
+                            />
+                          )}
+                        </td>
+                      ) : (
+                        <td {...cell.getCellProps()} on>
+                          {cell.render("Cell")}
+                        </td>
+                      )}
+                    </>
                   );
                 })}
               </tr>

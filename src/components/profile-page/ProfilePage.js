@@ -12,10 +12,12 @@ import profileIcon from "../../assets/profilev2.jpg";
 import { login as loginAction } from "../../store/auth.slice";
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-const ProfilePage = () => {
+const ProfilePage = (props) => {
   const dispatch = useDispatch();
-  const { isAuthenticated, currentUser } = useSelector((state) =>
-    sessionStorage.getItem("user")
+  const { currentUser } = useSelector((state) =>
+    props.currentUser
+      ? props
+      : sessionStorage.getItem("user")
       ? JSON.parse(sessionStorage.getItem("user"))
       : state.auth
   );

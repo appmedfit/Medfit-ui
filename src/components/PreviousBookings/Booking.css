@@ -43,3 +43,6 @@
 select {
   cursor: pointer;
 }
+input[type="file" i] {
+  max-width: 200px;
+}

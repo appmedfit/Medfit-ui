@@ -8,6 +8,7 @@ import LoadingPage from "../Loader/Loader";
 import back_arrow from "../../assets/back_arrow.png";
 import { getDateTimestamp, getTimeDiff } from "../../helpers/helper";
 import "./Booking.css";
+import { fileupload } from "../../services/fileupload.service";
 function DoctorPreviousBookingsPage() {
   const dispatch = useDispatch();
   let { filter } = useParams();
@@ -82,10 +83,10 @@ function DoctorPreviousBookingsPage() {
         Header: "Fee ₹",
         accessor: "consultancyFee",
       },
-      // {
-      //   Header: "Prescription",
-      //   accessor: "prescribtion",
-      // },
+      {
+        Header: "Comment",
+        accessor: "comment",
+      },
     ];
     console.log(currentUser);
     let obj =
@@ -100,6 +101,17 @@ function DoctorPreviousBookingsPage() {
           };
     col.unshift(obj);
 
+    obj =
+      currentUser.role == "user"
+        ? {
+            Header: "Upload file",
+            accessor: "file_link",
+          }
+        : {
+            Header: "view file",
+            accessor: "file_link",
+          };
+    col.push(obj);
     return col;
   };
   const [columns, setColumns] = useState([]);
@@ -132,6 +144,18 @@ function DoctorPreviousBookingsPage() {
     searchHandle(newData);
   };
 
+  const handleUploadClick = (event) => {
+    const data = new FormData();
+    data.append("file", event.target.files[0]);
+    data.append("name", event.target.files[0].name);
+
+    dispatch(fileupload(data))
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    console.log(data);
+  };
   const searchHandle = (newData) => {
     console.log("search", searchTerm);
     let Searchdata = newData.filter((data) => {
@@ -247,7 +271,11 @@ function DoctorPreviousBookingsPage() {
             </div>
           </div>
           <Styles>
-            <Table columns={columns} data={filterData} />
+            <Table
+              columns={columns}
+              data={filterData}
+              handleUploadClick={handleUploadClick}
+            />
           </Styles>
         </>
       ) : (

@@ -142,8 +142,8 @@ const Doctor = () => {
                     <div className="row">
                       <div className="col-12">
                         <h3 style={{ color: "tomato" }}>
-                          You will be able to mark slots once admin verifies
-                          your account
+                          You will be able to take appointments once admin
+                          verifies your account
                         </h3>
                         {/* <div
                             className="single_quick_activity d-flex"

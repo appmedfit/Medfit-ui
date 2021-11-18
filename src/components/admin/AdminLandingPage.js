@@ -20,6 +20,7 @@ const Doctor = () => {
   const [toggleViewUser, settoggleViewUser] = useState(false);
   const handleviewUserModalShowHide = () => {
     settoggleViewUser((i) => !i);
+    if (toggleViewUser) getData();
   };
 
   const [loading, setLoading] = useState(false);
@@ -161,9 +162,7 @@ const Doctor = () => {
                         <div className="quick_activity_wrap">
                           <div
                             className="single_quick_activity d-flex  pd-0"
-                            onClick={() => {
-                              history.push("/previousbookings/completed");
-                            }}
+                            onClick={() => {}}
                           >
                             <div className="icon">
                               <img src={patientIcon} alt="" />
@@ -194,19 +193,19 @@ const Doctor = () => {
                                   <li style={{ cursor: "pointer" }}>
                                     <div className="activity_bell"></div>
                                     <div className="activity_wrap">
-                                      <h6> DR Charan</h6>
+                                      <h6> Dr. Charan</h6>
                                     </div>
                                   </li>
                                   <li style={{ cursor: "pointer" }}>
                                     <div className="activity_bell"></div>
                                     <div className="activity_wrap">
-                                      <h6> DR Chandu</h6>
+                                      <h6> Dr. Chandu</h6>
                                     </div>
                                   </li>
                                   <li style={{ cursor: "pointer" }}>
                                     <div className="activity_bell"></div>
                                     <div className="activity_wrap">
-                                      <h6> DR Thimmaraju</h6>
+                                      <h6> Dr. Thimmaraju</h6>
                                     </div>
                                   </li>
                                 </ul>
@@ -293,7 +292,13 @@ const Doctor = () => {
                             style={{ cursor: "pointer" }}
                             onClick={() => handleUserChange(user)}
                           >
-                            <div className="activity_bell"></div>
+                            <div
+                              className="activity_bell"
+                              className={`activity_bell ${
+                                user.verificationStatus != "verified" &&
+                                "pending_verification"
+                              } `}
+                            ></div>
                             <div className="activity_wrap">
                               <h6>{user.name}</h6>
                               <p style={{ marginTop: "0px" }}>{user.email}</p>
@@ -335,7 +340,7 @@ const Doctor = () => {
                           >
                             <div
                               className={`activity_bell ${
-                                doc.verificationStatus == "pending" &&
+                                doc.verificationStatus != "verified" &&
                                 "pending_verification"
                               } `}
                             ></div>
