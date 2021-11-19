@@ -123,6 +123,7 @@ function ViewUserPage({ toggleViewUser, handleviewUserModalShowHide, user }) {
                                       className="css-1los70s-MePageComponentText eh1nvsm1"
                                       style={{
                                         textTransform: "capitalize",
+                                        marginLeft: "83px",
                                       }}
                                     >
                                       {state.role} Account Status :{" "}
@@ -342,7 +343,7 @@ function ViewUserPage({ toggleViewUser, handleviewUserModalShowHide, user }) {
                                           width: "200px",
                                         }}
                                       >
-                                        Disable User
+                                        Disable
                                       </button>
                                     ) : (
                                       <div>
@@ -356,7 +357,7 @@ function ViewUserPage({ toggleViewUser, handleviewUserModalShowHide, user }) {
                                             width: "200px",
                                           }}
                                         >
-                                          Enable User
+                                          Enable
                                         </button>{" "}
                                       </div>
                                     )}

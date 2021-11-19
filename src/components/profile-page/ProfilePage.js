@@ -105,9 +105,7 @@ const ProfilePage = (props) => {
             </center>
             <div className="profile-header">
               <div className="css-hc2239-MePageComponentHeader eh1nvsm0">
-                <p className="css-1los70s-MePageComponentText eh1nvsm1">
-                  PROFILE
-                </p>
+                <p className="css-1los70s-MePageComponentText eh1nvsm1"></p>
               </div>
             </div>
             <div className="form-container">
@@ -217,7 +215,7 @@ const ProfilePage = (props) => {
                 </div>
               </form>
               <div className="form-buttons">
-                <button className="discard-button" onClick={handleDiscard}>
+                <button className="save-button" onClick={handleDiscard}>
                   DISCARD
                 </button>
                 <button className="save-button" onClick={handleSubmit}>

@@ -132,14 +132,13 @@ function DoctorPreviousBookingsPage() {
     console.log(filterBy);
   };
   const handleFilterData = () => {
-    console.log("data", data);
     let newData = data.filter((sess) => {
       if (filterBy == "upcoming") {
-        return getTimeDiff(getDateTimestamp(sess.bookingDate)) + 20 > 0;
+        return getTimeDiff(getDateTimestamp(sess.bookingDate)) + 20 < 0;
       }
 
       if (filterBy == "completed") {
-        return getTimeDiff(getDateTimestamp(sess.bookingDate)) + 20 < 0;
+        return getTimeDiff(getDateTimestamp(sess.bookingDate)) + 20 > 0;
       }
 
       if (filterBy == "all") {

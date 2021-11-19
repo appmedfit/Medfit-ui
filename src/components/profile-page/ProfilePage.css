@@ -378,20 +378,10 @@ label {
 }
 
 .profileFormOpenStyles .form-container .form-buttons {
-  position: static;
-  left: 26%;
-  width: unset;
   flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
-  bottom: 15%;
-  width: 40%;
-}
-
-.profileFormOpenStyles .form-container .form-buttons .discard-button {
-  width: 12%;
-  margin-left: 5px;
-  padding: 10px 16px 6px;
+  display: flex;
+  width: 50%;
+  margin-left: 200px;
 }
 
 .profileFormOpenStyles .form-container .form-buttons .discard-button {
@@ -404,11 +394,6 @@ label {
   margin-left: 11%;
   font-family: BrandonTextWeb-Bold, "Helvetica Neue", Helvetica, Roboto, Arial,
     sans-serif !important;
-}
-
-.profileFormOpenStyles .form-container .form-buttons .save-button {
-  width: 12%;
-  padding: 10px 16px 6px;
 }
 
 .profileFormOpenStyles .form-container .form-buttons .save-button {

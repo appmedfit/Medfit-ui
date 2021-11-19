@@ -102,10 +102,11 @@ function Comment({ toggleComment, handleCommModalShowHide, comment }) {
                         }}
                       >
                         {" "}
-                        To:{"  "}
-                        <span style={{ textTransform: "capitalize" }}>
-                          {commentData.toName}, {commentData.sessionDate}
-                        </span>
+                        Session Details:{"  "}
+                        <h6 style={{ textTransform: "capitalize" }}>
+                          {commentData.toName},
+                        </h6>
+                        <h6> {commentData.sessionDate}</h6>
                       </div>
                     </div>
                     <div className="InputContainer">

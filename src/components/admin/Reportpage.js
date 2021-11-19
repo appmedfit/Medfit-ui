@@ -102,49 +102,59 @@ function ReportPage() {
                 </div>
                 <div className="patient_inner_container">
                   <div className="patient_TimeLine">
-                    <ul>
-                      {reportsData &&
-                        reportsData.map((rec) => (
-                          <li
-                            className={`${
-                              rec.id == selectedReport.id && "pres_active"
-                            }`}
-                            key={rec.id}
-                            onClick={() => handleChangeReport(rec)}
-                          >
-                            <div className="activity_wrap">
-                              <h6
-                                className={`${
-                                  rec.id == selectedReport.id && "pres_active"
-                                }`}
-                              >
-                                {rec.sessionDate}
-                              </h6>
-                              <p
-                                className={`${
-                                  rec.id == selectedReport.id && "pres_active"
-                                }`}
-                              >
-                                to {rec.toName}
-                              </p>
-                              <p
-                                className={`${
-                                  rec.id == selectedReport.id && "pres_active"
-                                }`}
-                              >
-                                From {rec.fromName}
-                              </p>
-                            </div>
-                            <div
-                              className={`activity_bell ${
-                                rec.id == selectedReport.id && "pres_selected"
+                    {reportsData && reportsData.length > 0 ? (
+                      <ul>
+                        {reportsData &&
+                          reportsData.map((rec) => (
+                            <li
+                              className={`${
+                                rec.id == selectedReport.id && "pres_active"
                               }`}
+                              key={rec.id}
+                              onClick={() => handleChangeReport(rec)}
                             >
-                              <img src={sideArrowIcon} />
-                            </div>
-                          </li>
-                        ))}
-                    </ul>
+                              <div className="activity_wrap">
+                                <h6
+                                  className={`${
+                                    rec.id == selectedReport.id && "pres_active"
+                                  }`}
+                                >
+                                  {rec.sessionDate}
+                                </h6>
+                                <p
+                                  className={`${
+                                    rec.id == selectedReport.id && "pres_active"
+                                  }`}
+                                >
+                                  to {rec.toName}
+                                </p>
+                                <p
+                                  className={`${
+                                    rec.id == selectedReport.id && "pres_active"
+                                  }`}
+                                >
+                                  From {rec.fromName}
+                                </p>
+                              </div>
+                              <div
+                                className={`activity_bell ${
+                                  rec.id == selectedReport.id && "pres_selected"
+                                }`}
+                              >
+                                <img src={sideArrowIcon} />
+                              </div>
+                            </li>
+                          ))}
+                      </ul>
+                    ) : (
+                      <div className="norecords">
+                        <div className="col">
+                          <br />
+
+                          <h2> Reports Not Available</h2>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -160,7 +170,7 @@ function ReportPage() {
                     <span>
                       <img src={PrescriptionIcon} />
                     </span>
-                    <span className="text"> Prescription</span>
+                    <span className="text"> Comment</span>
                   </div>
                 </div>
                 <div className="patient_inner_container">
@@ -204,7 +214,7 @@ function ReportPage() {
                                 style={{ marginLeft: "65px", width: "90%" }}
                                 onClick={handleDisableUser}
                               >
-                                Disable the user
+                                Disable
                               </button>
                             </div>
                           </div>

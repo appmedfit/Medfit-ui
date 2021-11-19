@@ -31,7 +31,7 @@ function LoginForm({
   const [dummyLogin, setDummyLogin] = useState(false);
   const handleModal = () => {
     handleLoginModalShowHide();
-    setDummyLogin((i) => !i);
+    setDummyLogin(false);
     setState(initialState);
     setRole("");
   };
@@ -166,7 +166,7 @@ function LoginForm({
                         checked={role === "user"}
                       />
                       <label className="custom-control-label" htmlFor="user">
-                        User
+                        Patient
                       </label>
                     </div>
                     <div className="custom-control custom-radio custom-control-inline">

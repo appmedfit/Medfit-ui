@@ -118,43 +118,53 @@ function PrescriptionNew() {
                 </div>
                 <div className="patient_inner_container">
                   <div className="patient_TimeLine">
-                    <ul>
-                      {data.map((rec) => (
-                        <li
-                          className={`${
-                            rec.id == selectedBooking.id && "pres_active"
-                          }`}
-                          key={rec.id}
-                          onClick={() => handleChangeBooking(rec)}
-                        >
-                          <div className="activity_wrap">
-                            <h6
-                              className={`${
-                                rec.id == selectedBooking.id && "pres_active"
-                              }`}
-                            >
-                              {rec.fullDate + " " + rec.detailText}
-                            </h6>
-                            <p
-                              className={`${
-                                rec.id == selectedBooking.id && "pres_active"
-                              }`}
-                            >
-                              {currentUser && currentUser.role == "doctor"
-                                ? rec.patientName
-                                : "DR. " + rec.doctorName}
-                            </p>
-                          </div>
-                          <div
-                            className={`activity_bell ${
-                              rec.id == selectedBooking.id && "pres_selected"
+                    {data && data.length > 0 ? (
+                      <ul>
+                        {data.map((rec) => (
+                          <li
+                            className={`${
+                              rec.id == selectedBooking.id && "pres_active"
                             }`}
+                            key={rec.id}
+                            onClick={() => handleChangeBooking(rec)}
                           >
-                            <img src={sideArrowIcon} />
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                            <div className="activity_wrap">
+                              <h6
+                                className={`${
+                                  rec.id == selectedBooking.id && "pres_active"
+                                }`}
+                              >
+                                {rec.fullDate + " " + rec.detailText}
+                              </h6>
+                              <p
+                                className={`${
+                                  rec.id == selectedBooking.id && "pres_active"
+                                }`}
+                              >
+                                {currentUser && currentUser.role == "doctor"
+                                  ? rec.patientName
+                                  : "DR. " + rec.doctorName}
+                              </p>
+                            </div>
+                            <div
+                              className={`activity_bell ${
+                                rec.id == selectedBooking.id && "pres_selected"
+                              }`}
+                            >
+                              <img src={sideArrowIcon} />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="norecords">
+                        <div className="col">
+                          <br />
+
+                          <h2> Prescription Not Available</h2>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
