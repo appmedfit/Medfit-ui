@@ -5,7 +5,7 @@ import PrescriptionIcon from "../../assets/prescriptionV2.png";
 import { useDispatch, useSelector } from "react-redux";
 import "./Prescription.css";
 import { bookingDetails, updateBooking } from "../../services/slots.service";
-import LoadingPage from "../Loader/Loader";
+import { setLoading } from "../../store/auth.slice";
 import { getTimeDiff } from "../../helpers/helper";
 import back_arrow from "../../assets/back_arrow.png";
 import PageContainer from "../TextEditor/PageContainer";
@@ -13,7 +13,7 @@ import { setBookingInfo } from "../../store/booking.slice";
 import { useHistory } from "react-router";
 function PrescriptionNew() {
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
+
   const [prescriptionState, setPrescriptionState] = useState();
   const { currentUser: currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -30,15 +30,15 @@ function PrescriptionNew() {
   const handleSubmit = (editorState) => {
     console.log(editorState);
     let booking = { ...selectedBooking, prescribtion: editorState };
-    setLoading(true);
+    dispatch(setLoading(true));
     dispatch(updateBooking(booking))
       .then((res) => {
         console.log(res);
-        setLoading(false);
+        dispatch(setLoading(false));
         getData();
       })
       .catch((err) => {
-        setLoading(false);
+        dispatch(setLoading(false));
         console.log(err);
       });
   };
@@ -49,12 +49,12 @@ function PrescriptionNew() {
   };
 
   const getData = () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     let reqobj =
       currentUser && currentUser.role == "doctor"
         ? { doctorId: currentUser.id }
         : { patientId: currentUser.id };
-    dispatch(bookingDetails())
+    dispatch(bookingDetails(reqobj))
       .then((res) => {
         let data = res.filter((booking) => {
           let diff = getTimeDiff(booking.SlotDateTime, "today");
@@ -75,10 +75,10 @@ function PrescriptionNew() {
             selectedBooking.length
           );
         }
-        setLoading(false);
+        dispatch(setLoading(false));
       })
       .catch((err) => {
-        setLoading(false);
+        dispatch(setLoading(false));
       });
   };
 
@@ -88,129 +88,125 @@ function PrescriptionNew() {
   return (
     <>
       <>
-        {loading ? (
-          <LoadingPage />
-        ) : (
-          <div
-            style={{
-              minHeight: "75vh",
-              marginTop: "30px",
-            }}
-          >
-            <div className="container-fluid">
-              <div
-                className="prev_book_go_back"
-                onClick={() => {
-                  history.goBack();
-                }}
-              >
-                <img src={back_arrow} /> Go Back
-              </div>
-              <div
-                className="row justify-content-md-center"
-                style={{ marginTop: "26px" }}
-              >
-                <div className="col-lg-4">
-                  <div className="patient_arrow_container">
-                    <div className="patient_arrow">
-                      <span>
-                        <img src={patientsIcon} />
-                      </span>
-                      <span className="text"> Sessions</span>
-                    </div>
-                  </div>
-                  <div className="patient_inner_container">
-                    <div className="patient_TimeLine">
-                      <ul>
-                        {data.map((rec) => (
-                          <li
-                            className={`${
-                              rec.id == selectedBooking.id && "pres_active"
-                            }`}
-                            key={rec.id}
-                            onClick={() => handleChangeBooking(rec)}
-                          >
-                            <div className="activity_wrap">
-                              <h6
-                                className={`${
-                                  rec.id == selectedBooking.id && "pres_active"
-                                }`}
-                              >
-                                {rec.fullDate + " " + rec.detailText}
-                              </h6>
-                              <p
-                                className={`${
-                                  rec.id == selectedBooking.id && "pres_active"
-                                }`}
-                              >
-                                {currentUser && currentUser.role == "doctor"
-                                  ? rec.patientName
-                                  : "DR. " + rec.doctorName}
-                              </p>
-                            </div>
-                            <div
-                              className={`activity_bell ${
-                                rec.id == selectedBooking.id && "pres_selected"
-                              }`}
-                            >
-                              <img src={sideArrowIcon} />
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+        <div
+          style={{
+            minHeight: "75vh",
+            marginTop: "30px",
+          }}
+        >
+          <div className="container-fluid">
+            <div
+              className="prev_book_go_back"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              <img src={back_arrow} /> Go Back
+            </div>
+            <div
+              className="row justify-content-md-center"
+              style={{ marginTop: "26px" }}
+            >
+              <div className="col-lg-4">
+                <div className="patient_arrow_container">
+                  <div className="patient_arrow">
+                    <span>
+                      <img src={patientsIcon} />
+                    </span>
+                    <span className="text"> Sessions</span>
                   </div>
                 </div>
-                <div
-                  className={`col-lg-6 ${
-                    selectedBooking && selectedBooking.id
-                      ? ""
-                      : "pres_sec_unselected"
-                  }`}
-                >
-                  <div className="patient_arrow_container">
-                    <div className="patient_arrow">
-                      <span>
-                        <img src={PrescriptionIcon} />
-                      </span>
-                      <span className="text"> Prescription</span>
-                    </div>
+                <div className="patient_inner_container">
+                  <div className="patient_TimeLine">
+                    <ul>
+                      {data.map((rec) => (
+                        <li
+                          className={`${
+                            rec.id == selectedBooking.id && "pres_active"
+                          }`}
+                          key={rec.id}
+                          onClick={() => handleChangeBooking(rec)}
+                        >
+                          <div className="activity_wrap">
+                            <h6
+                              className={`${
+                                rec.id == selectedBooking.id && "pres_active"
+                              }`}
+                            >
+                              {rec.fullDate + " " + rec.detailText}
+                            </h6>
+                            <p
+                              className={`${
+                                rec.id == selectedBooking.id && "pres_active"
+                              }`}
+                            >
+                              {currentUser && currentUser.role == "doctor"
+                                ? rec.patientName
+                                : "DR. " + rec.doctorName}
+                            </p>
+                          </div>
+                          <div
+                            className={`activity_bell ${
+                              rec.id == selectedBooking.id && "pres_selected"
+                            }`}
+                          >
+                            <img src={sideArrowIcon} />
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="patient_inner_container">
-                    <div
-                      className="white_box "
-                      style={{ backgroundColor: "#e9ecef" }}
-                    >
-                      {" "}
-                      {selectedBooking && selectedBooking.id && (
-                        <>
-                          {/* <div className="box_header border_bottom_1px  ">
+                </div>
+              </div>
+              <div
+                className={`col-lg-6 ${
+                  selectedBooking && selectedBooking.id
+                    ? ""
+                    : "pres_sec_unselected"
+                }`}
+              >
+                <div className="patient_arrow_container">
+                  <div className="patient_arrow">
+                    <span>
+                      <img src={PrescriptionIcon} />
+                    </span>
+                    <span className="text"> Prescription</span>
+                  </div>
+                </div>
+                <div className="patient_inner_container">
+                  <div
+                    className="white_box "
+                    style={{ backgroundColor: "#e9ecef" }}
+                  >
+                    {" "}
+                    {selectedBooking && selectedBooking.id && (
+                      <>
+                        {/* <div className="box_header border_bottom_1px  ">
                             <div className="main-title">
                               <h3 className="mb_25">Prescription</h3>
                             </div>
                           </div> */}
-                          <div
-                            className="Activity_timeline sessionsActivity"
-                            style={{ height: "430px" }}
-                          >
-                            {/* <ReadOnlyEditor
+                        <div
+                          className="Activity_timeline sessionsActivity"
+                          style={{ height: "430px" }}
+                        >
+                          {/* <ReadOnlyEditor
                               value={selectedBooking.prescribtion}
                             /> */}
-                            <PageContainer
-                              handleSubmit={(editorState) =>
-                                handleSubmit(editorState)
-                              }
-                            />
-                          </div>
-                        </>
-                      )}
-                    </div>
+                          <PageContainer
+                            handleSubmit={(editorState) =>
+                              handleSubmit(editorState)
+                            }
+                          />
+                        </div>
+                      </>
+                    )}
                   </div>
-                </div>{" "}
-              </div>
+                </div>
+              </div>{" "}
             </div>
           </div>
-        )}
+        </div>
       </>
     </>
   );

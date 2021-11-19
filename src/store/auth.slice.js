@@ -5,6 +5,7 @@ const initialState = {
   isAuthenticated: false,
   toggleLogin: false,
   error: null,
+  loading: false,
 };
 
 const authSlice = createSlice({
@@ -24,8 +25,13 @@ const authSlice = createSlice({
       console.log(payload);
       state.toggleLogin = payload;
     },
+    setLoading(state, { payload }) {
+      console.log("pay", payload);
+      state.loading = payload;
+    },
   },
 });
 
-export const { login, logout, handleLoginModal } = authSlice.actions;
+export const { login, logout, handleLoginModal, setLoading } =
+  authSlice.actions;
 export default authSlice.reducer;

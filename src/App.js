@@ -15,6 +15,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
 import PrescriptionNew from "./components/Doctor/PrescriptionV2";
 import ProfilePage from "./components/profile-page/ProfilePage";
+import LoadingPage from "./components/Loader/Loader";
+import ReportPage from "./components/admin/Reportpage";
 function App() {
   const { isAuthenticated, currentUser } = useSelector((state) =>
     sessionStorage.getItem("user")
@@ -25,31 +27,34 @@ function App() {
   return (
     <Router history={history}>
       <Header />
-      <div className="appBody">
-        <Switch>
-          <Route
-            exact
-            path="/"
-            component={
-              currentUser && currentUser.role == "admin"
-                ? AdminLandingPage
-                : currentUser && currentUser.role == "doctor"
-                ? DoctorLandingPage
-                : HomePage
-            }
-          />
-          {/* <PrivateRoute exact path="/" component={HomePage} /> */}
-          <Route path="/speciality/:specialityId" component={Specialty} />
-          <Route
-            path="/previousbookings/:filter"
-            component={PreviousBookingsPage}
-          />
-          <Route path="/prescriptions" component={PrescriptionNew} />
+      <LoadingPage>
+        <div className="appBody">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={
+                currentUser && currentUser.role == "admin"
+                  ? AdminLandingPage
+                  : currentUser && currentUser.role == "doctor"
+                  ? DoctorLandingPage
+                  : HomePage
+              }
+            />
+            {/* <PrivateRoute exact path="/" component={HomePage} /> */}
+            <Route path="/speciality/:specialityId" component={Specialty} />
+            <Route
+              path="/previousbookings/:filter"
+              component={PreviousBookingsPage}
+            />
+            <Route path="/prescriptions" component={PrescriptionNew} />
 
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/profile" component={ProfilePage} />
-        </Switch>
-      </div>
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/profile" component={ProfilePage} />
+            <Route path="/reports" component={ReportPage} />
+          </Switch>
+        </div>
+      </LoadingPage>
       <FooterPage />
     </Router>
   );

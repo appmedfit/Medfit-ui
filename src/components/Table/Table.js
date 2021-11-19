@@ -2,7 +2,7 @@ import React from "react";
 
 import { useTable, usePagination } from "react-table";
 
-function Table({ columns, data, handleUploadClick }) {
+function Table({ columns, data, handleUploadClick, handleAddCommentClick }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -51,22 +51,72 @@ function Table({ columns, data, handleUploadClick }) {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  // console.log("cell", cell, cell.row.values);
+                  //  console.log(cell.row.original.id);
+                  console.log(cell.row.values.file_url);
                   return (
                     <>
                       {cell.column.Header == "Upload file" ? (
-                        <td style={{ maxWidth: "150px" }}>
-                          {cell.row.values.file_link ? (
-                            <button>fff</button>
+                        <td>
+                          {cell.row.values.file_url ? (
+                            <a
+                              href={cell.row.values.file_url}
+                              className="btn "
+                              target="_blank"
+                              style={{ border: "1px solid black" }}
+                            >
+                              {" "}
+                              View File
+                            </a>
                           ) : (
-                            <input
-                              accept="application/pdf"
-                              className=""
-                              id="contained-button-file"
-                              type="file"
-                              onChange={(event) => handleUploadClick(event)}
-                            />
+                            <>
+                              <label
+                                htmlFor="contained-button-file"
+                                className="btn"
+                                style={{ border: "1px solid black" }}
+                              >
+                                Upload File
+                              </label>
+                              <input
+                                style={{ width: "100px", display: "none" }}
+                                accept="application/pdf"
+                                className=""
+                                id="contained-button-file"
+                                type="file"
+                                onChange={(event) =>
+                                  handleUploadClick(event, cell.row.original.id)
+                                }
+                              />
+                            </>
                           )}
+                        </td>
+                      ) : cell.column.Header == "View file" ? (
+                        <td {...cell.getCellProps()} on>
+                          {cell.row.values.file_url ? (
+                            <a
+                              href={cell.row.values.file_url}
+                              className="btn "
+                              target="_blank"
+                              style={{ border: "1px solid black" }}
+                            >
+                              {" "}
+                              View File
+                            </a>
+                          ) : (
+                            "No files available"
+                          )}
+                        </td>
+                      ) : cell.column.Header == "Comment" ? (
+                        <td {...cell.getCellProps()} on>
+                          <button
+                            className="btn "
+                            onClick={() =>
+                              handleAddCommentClick(cell.row.original.id)
+                            }
+                            style={{ border: "1px solid black" }}
+                          >
+                            {" "}
+                            Add Comment
+                          </button>
                         </td>
                       ) : (
                         <td {...cell.getCellProps()} on>

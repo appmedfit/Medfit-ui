@@ -1,5 +1,5 @@
 const constants = {
-  baseUrl: "http://localhost:8080/api/v1/",
+  baseUrl: "https://medfit-backend.herokuapp.com/api/v1/",
   //"http://localhost:8080/api/v1/",
   //"https://medfit-backend.herokuapp.com/api/v1/",
   appUrl: "http://localhost:3000/",
@@ -9,9 +9,9 @@ const constants = {
   getStudents: "/student",
   SignOut: "user/signOut",
   getUsersWithCondition: "user/getUsersWithCondition",
-  updateUser: "user/updateUser",
-  addUser: "user/addUser",
-  getUser: "user/getUser",
+  updateUser: "user/update",
+  addUser: "user/add",
+  getUser: "user/get",
   getSpeciality: "specialty",
   getDoctorSlots: "slots/getSlots",
   addDoctorSlots: "slots",
@@ -23,6 +23,14 @@ const constants = {
   updateConsultancyFee: "user/updateConsultancyFee",
   createRazorPayOrder: "razorpay/createRazorPayOrder",
   fileupload: "fileupload",
+  getReports: "reports/get",
+  addReports: "reports/add",
+  updateReports: "reports/update",
+  dummyLogin: {
+    user: { email: "appmedfitpatient@gmail.com", password: "Medfit@123" },
+    admin: { email: "appmedfitadm1n@gmail.com", password: "Medfit@123" },
+    doctor: { email: "appmedfitdoctor@gmail.com", password: "Medfit@123" },
+  },
 };
 
 export default constants;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+
 import {
   addUser,
   Login as loginService,
@@ -11,6 +12,7 @@ import { login as loginAction } from "../../store/auth.slice";
 import { auth, provider } from "../../services/firebase";
 import "../Layout/Header.css";
 import { useHistory } from "react-router";
+import constants from "../../helpers/constants";
 function LoginForm({
   toggleLogin,
   handleLoginModalShowHide,
@@ -18,13 +20,24 @@ function LoginForm({
 }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [state, setState] = useState({
+  const initialState = {
     email: "",
     password: "",
-  });
+  };
+  const [state, setState] = useState(initialState);
+
+  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
+  const [dummyLogin, setDummyLogin] = useState(false);
   const handleModal = () => {
     handleLoginModalShowHide();
+    setDummyLogin((i) => !i);
+    setState(initialState);
+    setRole("");
+  };
+  const handleChangeRole = (e) => {
+    setRole(e.target.value);
+    setState(constants.dummyLogin[e.target.value]);
   };
 
   const handleGoogle = () => {
@@ -135,95 +148,219 @@ function LoginForm({
                 alt=""
               />
               <h3 className="loginicon">MEDFIT</h3>
-              <div>
-                <div className="InputContainer">
-                  <input
-                    name="email"
-                    type="text"
-                    placeholder="Enter your mail"
-                    className="emailInput"
-                    value={state.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="InputContainer">
-                  <input
-                    name="password"
-                    type="password"
-                    placeholder="Enter your Password"
-                    className="emailInput"
-                    value={state.password}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="ActionContainer">
-                  <button className="ContinueButton" onClick={handleSubmit}>
-                    {" "}
-                    Continue{" "}
-                    {loading ? (
-                      <Spinner animation="border" role="status" />
-                    ) : (
-                      ""
-                    )}
-                  </button>
-                </div>
-
-                <div className="Tnc">
-                  <div className="TncText">
-                    By Continuing you agree to the
-                    <a
-                      href=""
-                      target="_blank"
-                      rel="noreferrer"
-                      className="TncAnchor"
-                    >
-                      Terms of Services
-                    </a>{" "}
-                    and
-                    <a
-                      href=""
-                      target="_blank"
-                      rel="noreferrer"
-                      className="TncAnchor"
-                    >
-                      Privacy policy
-                    </a>
-                    .
+              {dummyLogin === true && (
+                <h6 className="loginicon">Dummy Login</h6>
+              )}
+              {dummyLogin === true ? (
+                <div>
+                  <div className="radioInputContainer">
+                    <br />
+                    <div className="custom-control custom-radio custom-control-inline">
+                      <input
+                        type="radio"
+                        id="user"
+                        name="role"
+                        value="user"
+                        className="custom-control-input"
+                        onChange={handleChangeRole}
+                        checked={role === "user"}
+                      />
+                      <label className="custom-control-label" htmlFor="user">
+                        User
+                      </label>
+                    </div>
+                    <div className="custom-control custom-radio custom-control-inline">
+                      <input
+                        type="radio"
+                        id="doctor"
+                        value="doctor"
+                        name="role"
+                        className="custom-control-input"
+                        onChange={handleChangeRole}
+                        checked={role === "doctor"}
+                      />
+                      <label className="custom-control-label" htmlFor="doctor">
+                        Doctor
+                      </label>
+                    </div>
+                    <div className="custom-control custom-radio custom-control-inline">
+                      <input
+                        type="radio"
+                        id="admin"
+                        value="admin"
+                        name="role"
+                        className="custom-control-input"
+                        onChange={handleChangeRole}
+                        checked={role === "admin"}
+                      />
+                      <label className="custom-control-label" htmlFor="admin">
+                        Admin
+                      </label>
+                    </div>
+                  </div>
+                  <div className="InputContainer">
+                    <input
+                      name="email"
+                      type="text"
+                      placeholder="Enter your mail"
+                      className="emailInput"
+                      value={state.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="InputContainer">
+                    <input
+                      name="password"
+                      type="password"
+                      placeholder="Enter your Password"
+                      className="emailInput"
+                      value={state.password}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="ActionContainer">
+                    <button className="ContinueButton" onClick={handleSubmit}>
+                      {" "}
+                      Continue{" "}
+                      {loading ? (
+                        <Spinner animation="border" role="status" />
+                      ) : (
+                        ""
+                      )}
+                    </button>
+                  </div>
+                  <div className="Tnc">
+                    <div className="TncText">
+                      By Continuing you agree to the
+                      <a
+                        href=""
+                        target="_blank"
+                        rel="noreferrer"
+                        className="TncAnchor"
+                      >
+                        Terms of Services
+                      </a>{" "}
+                      and
+                      <a
+                        href=""
+                        target="_blank"
+                        rel="noreferrer"
+                        className="TncAnchor"
+                      >
+                        Privacy policy
+                      </a>
+                      .
+                    </div>
                   </div>
                 </div>
+              ) : (
+                <div>
+                  <div className="InputContainer">
+                    <input
+                      name="email"
+                      type="text"
+                      placeholder="Enter your mail"
+                      className="emailInput"
+                      value={state.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="InputContainer">
+                    <input
+                      name="password"
+                      type="password"
+                      placeholder="Enter your Password"
+                      className="emailInput"
+                      value={state.password}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                <div className="ActionContainerOtherMethods">
-                  <div className="ContinueButtonWhite">
-                    Continue with
-                    <div className="SocialMediaEmailsContainer ">
-                      <img
+                  <div className="ActionContainer">
+                    <button className="ContinueButton" onClick={handleSubmit}>
+                      {" "}
+                      Continue{" "}
+                      {loading ? (
+                        <Spinner animation="border" role="status" />
+                      ) : (
+                        ""
+                      )}
+                    </button>
+                  </div>
+
+                  <div className="Tnc">
+                    <div className="TncText">
+                      By Continuing you agree to the
+                      <a
+                        href=""
+                        target="_blank"
+                        rel="noreferrer"
+                        className="TncAnchor"
+                      >
+                        Terms of Services
+                      </a>{" "}
+                      and
+                      <a
+                        href=""
+                        target="_blank"
+                        rel="noreferrer"
+                        className="TncAnchor"
+                      >
+                        Privacy policy
+                      </a>
+                      .
+                    </div>
+                  </div>
+
+                  <div className="ActionContainerOtherMethods">
+                    <div className="ContinueButtonWhite" onClick={handleGoogle}>
+                      Continue with
+                      <div className="SocialMediaEmailsContainer ">
+                        <img
+                          src="https://static.cure.fit/assets/images/google-logo.svg"
+                          className="SocialMediaIcon "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div
+                    className="ActionContainerOtherMethods"
+                    onClick={() => {
+                      handleSignupModalShowHide();
+                      handleLoginModalShowHide();
+                    }}
+                  >
+                    <div className="ContinueButtonBlue">
+                      Sign Up
+                      <div className="SocialMediaEmailsContainer ">
+                        <img
+                          src="https://static.cure.fit/assets/images/email.png"
+                          className="SocialMediaIcon "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="ActionContainerOtherMethods">
+                    <div
+                      className="ContinueButtonWhite"
+                      onClick={() => {
+                        setDummyLogin(true);
+                        console.log("j", dummyLogin, typeof dummyLogin);
+                      }}
+                    >
+                      Dummy Login
+                      <div className="SocialMediaEmailsContainer ">
+                        {/* <img
                         src="https://static.cure.fit/assets/images/google-logo.svg"
                         className="SocialMediaIcon "
-                        onClick={handleGoogle}
-                      />
+                      /> */}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <br />
-                <div
-                  className="ActionContainerOtherMethods"
-                  onClick={() => {
-                    handleSignupModalShowHide();
-                    handleLoginModalShowHide();
-                  }}
-                >
-                  <div className="ContinueButtonBlue">
-                    Sign Up
-                    <div className="SocialMediaEmailsContainer ">
-                      <img
-                        src="https://static.cure.fit/assets/images/email.png"
-                        className="SocialMediaIcon "
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </Modal.Body>
         </Modal>
