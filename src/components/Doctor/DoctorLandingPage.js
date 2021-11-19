@@ -14,7 +14,7 @@ import { Fragment, useState, useEffect } from "react";
 import Prescription from "./Prescription";
 import DoctorSlotBooking from "../SlotBooking/DoctorSlotBooking";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingPage from "../Loader/Loader";
+import { setLoading } from "../../store/auth.slice";
 import { login as loginAction } from "../../store/auth.slice";
 import {
   bookingDetails,
@@ -33,7 +33,7 @@ const Doctor = () => {
   const handlBookingModalShowHide = () => {
     setToggleSlotBooking((i) => !i);
   };
-  const [loading, setLoading] = useState(false);
+
   const [editFee, setEditFee] = useState(false);
   const history = useHistory();
   const { currentUser: userDoctor } = useSelector((state) =>
@@ -47,7 +47,7 @@ const Doctor = () => {
   const [upComingSessions, setUpComingSessions] = useState([]);
   const [openSlots, setOpenSlots] = useState(0);
   const getData = () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     dispatch(bookingDetails({ doctorId: userDoctor.id }))
       .then((res) => {
         let newData = res.reduce(
@@ -77,25 +77,25 @@ const Doctor = () => {
         });
         setSessions(newData);
         setUpComingSessions(upcomSess.slice(0, 3));
-        setLoading(false);
+        dispatch(setLoading(false));
         console.log(newData);
         console.log("up", upComingSessions);
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
+        dispatch(setLoading(false));
       });
-    setLoading(true);
+    dispatch(setLoading(true));
     dispatch(getNextSevenDaysDoctorSlots({ doctorId: userDoctor.id }))
       .then((res) => {
         let count = res && res.length > 0 ? res.length + 1 : 0;
 
         setOpenSlots(168 - count);
-        setLoading(false);
+        dispatch(setLoading(false));
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
+        dispatch(setLoading(false));
       });
   };
 
@@ -127,9 +127,8 @@ const Doctor = () => {
 
   return (
     <>
-      {loading ? (
-        <LoadingPage />
-      ) : userDoctor.verificationStatus == "pending" ? (
+      {userDoctor.verificationStatus == "pending" ||
+      userDoctor.verificationStatus == "disabled" ? (
         <div>
           <div
             className="container quickActivityContainer"
@@ -142,8 +141,8 @@ const Doctor = () => {
                     <div className="row">
                       <div className="col-12">
                         <h3 style={{ color: "tomato" }}>
-                          You will be able to mark slots once admin verifies
-                          your account
+                          You will be able to take appointments once admin
+                          verifies your account
                         </h3>
                         {/* <div
                             className="single_quick_activity d-flex"

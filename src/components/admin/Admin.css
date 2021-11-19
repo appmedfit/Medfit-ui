@@ -4,3 +4,17 @@
 .pd-0 {
   padding-bottom: 0 !important;
 }
+.commenttextarea {
+  padding: 20px !important;
+  height: 300px !important;
+  width: 600px !important;
+}
+
+.report-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: -30px;
+}
+.report-button {
+}

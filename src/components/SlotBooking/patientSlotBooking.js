@@ -6,7 +6,7 @@ import getNextSevenDays from "../../helpers/GetNextSevenDays";
 import { createSlots, getTimeDiff } from "../../helpers/helper";
 import { setBookingInfo } from "../../store/booking.slice";
 
-import LoadingPage from "../Loader/Loader";
+import LoadingPage from "../Loader/ModalLoader";
 import "./SlotBooking.css";
 import {
   addDoctorSlots,

@@ -43,3 +43,12 @@
 select {
   cursor: pointer;
 }
+input[type="file" i] {
+  max-width: 200px;
+}
+
+.reportToAdminCheckbbox {
+  width: 21px;
+  height: 18px;
+  padding-left: 10px;
+}

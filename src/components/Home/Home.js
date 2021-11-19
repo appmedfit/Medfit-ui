@@ -46,7 +46,10 @@ const Home = () => {
                       history.push("/speciality/" + spl.name);
                     }}
                   >
-                    <div className="card" style={{ width: "11rem" }}>
+                    <div
+                      className="card"
+                      style={{ width: "11rem", cursor: "pointer" }}
+                    >
                       <img
                         className="card-img-top"
                         src={spl.imgSrc}

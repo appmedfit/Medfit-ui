@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import getNextSevenDays from "../../helpers/GetNextSevenDays";
 import { createSlots, getDateTimestamp } from "../../helpers/helper";
-import LoadingPage from "../Loader/Loader";
+import ModalLoadingPage from "../Loader/ModalLoader";
 import "./SlotBooking.css";
 import { addDoctorSlots, getDoctorSlots } from "../../services/slots.service";
 
@@ -175,7 +175,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide }) {
               </div>
               {loading ? (
                 <div className="doc-loading">
-                  <LoadingPage />
+                  <ModalLoadingPage />
                 </div>
               ) : (
                 <div className="dialogBody ">

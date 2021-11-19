@@ -4,10 +4,12 @@ import styled from "styled-components";
 import { bookingDetails } from "../../services/slots.service";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
-import LoadingPage from "../Loader/Loader";
+import { setLoading } from "../../store/auth.slice";
 import back_arrow from "../../assets/back_arrow.png";
 import { getDateTimestamp, getTimeDiff } from "../../helpers/helper";
+import CommentPage from "./CommentPage";
 import "./Booking.css";
+import { fileupload } from "../../services/fileupload.service";
 function DoctorPreviousBookingsPage() {
   const dispatch = useDispatch();
   let { filter } = useParams();
@@ -28,6 +30,7 @@ function DoctorPreviousBookingsPage() {
       margin-left: 40px;
       min-height: 460px;
       margin-top: -40px;
+      text-align: center;
     }
 
     table td,
@@ -82,10 +85,10 @@ function DoctorPreviousBookingsPage() {
         Header: "Fee ₹",
         accessor: "consultancyFee",
       },
-      // {
-      //   Header: "Prescription",
-      //   accessor: "prescribtion",
-      // },
+      {
+        Header: "Comment",
+        accessor: "comment",
+      },
     ];
     console.log(currentUser);
     let obj =
@@ -100,6 +103,17 @@ function DoctorPreviousBookingsPage() {
           };
     col.unshift(obj);
 
+    obj =
+      currentUser.role == "user"
+        ? {
+            Header: "Upload file",
+            accessor: "file_url",
+          }
+        : {
+            Header: "View file",
+            accessor: "file_url",
+          };
+    col.push(obj);
     return col;
   };
   const [columns, setColumns] = useState([]);
@@ -107,7 +121,12 @@ function DoctorPreviousBookingsPage() {
   const [filterData, setFilterData] = useState([]);
   const [filterBy, setFilterBy] = useState(filter);
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [commentData, setCommentData] = useState({});
+  const [toggleComment, settoggleComment] = useState(false);
+
+  const handleCommModalShowHide = () => {
+    settoggleComment((i) => !i);
+  };
   const handleChange = (e) => {
     setFilterBy(e.target.value);
     console.log(filterBy);
@@ -132,6 +151,56 @@ function DoctorPreviousBookingsPage() {
     searchHandle(newData);
   };
 
+  const handleAddCommentClick = (id) => {
+    console.log(id);
+    let selectedSess = data.filter((rec) => rec.id == id)[0];
+    console.log(selectedSess);
+    let newComm = {
+      toName:
+        currentUser.role == "doctor"
+          ? selectedSess.patientName
+          : selectedSess.doctorName,
+      fromName:
+        currentUser.role == "user"
+          ? selectedSess.patientName
+          : selectedSess.doctorName,
+      toId:
+        currentUser.role == "doctor"
+          ? selectedSess.patientId
+          : selectedSess.doctorId,
+      fromId:
+        currentUser.role == "user"
+          ? selectedSess.patientId
+          : selectedSess.doctorId,
+      reportToAdmin: false,
+      sessionDate: selectedSess.fullDate + " " + selectedSess.detailText,
+      sessionId: id,
+      comment: "",
+    };
+    setCommentData(newComm);
+    console.log(newComm);
+    settoggleComment(true);
+  };
+
+  const handleUploadClick = (event, id) => {
+    dispatch(setLoading(true));
+    const data = new FormData();
+    data.append("file", event.target.files[0]);
+    data.append("name", event.target.files[0].name);
+    data.append("id", id);
+
+    dispatch(fileupload(data))
+      .then((res) => {
+        console.log(res);
+        dispatch(setLoading(false));
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(setLoading(false));
+      });
+    console.log(data);
+  };
   const searchHandle = (newData) => {
     console.log("search", searchTerm);
     let Searchdata = newData.filter((data) => {
@@ -156,7 +225,7 @@ function DoctorPreviousBookingsPage() {
     if (currentUser) getData();
   }, []);
   const getData = () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     console.log("col", getcolumns());
     setColumns(getcolumns());
     let reqObj =
@@ -165,36 +234,17 @@ function DoctorPreviousBookingsPage() {
         : { patientId: currentUser.id };
     dispatch(bookingDetails(reqObj))
       .then((res) => {
-        let newData =
-          res.length > 0
-            ? res.map((data) => {
-                let row = {
-                  specialty: data.specialty,
-                  bookingDate: data.fullDate + " " + data.detailText,
-                  consultancyFee: data.consultancyFee + " ₹",
-                  prescribtion: data.prescribtion,
-                };
-                if (currentUser.role == "doctor") {
-                  row.patientName = data.patientName;
-                } else {
-                  row.doctorName = data.doctorName;
-                }
-                return row;
-              })
-            : [];
-        setData(newData);
-        setLoading(false);
+        setData(res);
+        dispatch(setLoading(false));
       })
       .catch((err) => {
-        setLoading(false);
+        dispatch(setLoading(false));
       });
   };
 
   return (
     <div className="table_container">
-      {loading ? (
-        <LoadingPage />
-      ) : data && data.length > 0 ? (
+      {data && data.length > 0 ? (
         <>
           <div className="filterContainer">
             {" "}
@@ -247,8 +297,18 @@ function DoctorPreviousBookingsPage() {
             </div>
           </div>
           <Styles>
-            <Table columns={columns} data={filterData} />
+            <Table
+              columns={columns}
+              data={filterData}
+              handleUploadClick={handleUploadClick}
+              handleAddCommentClick={handleAddCommentClick}
+            />
           </Styles>
+          <CommentPage
+            toggleComment={toggleComment}
+            handleCommModalShowHide={handleCommModalShowHide}
+            comment={commentData}
+          />
         </>
       ) : (
         <div className="norecords">

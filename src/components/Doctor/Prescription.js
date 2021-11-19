@@ -4,27 +4,25 @@ import medicon_login from "../../assets/medicon_login.png";
 import { useDispatch } from "react-redux";
 import "./Prescription.css";
 import { bookingDetails, updateBooking } from "../../services/slots.service";
-import LoadingPage from "../Loader/Loader";
+import { setLoading } from "../../store/auth.slice";
 import { getTimeDiff } from "../../helpers/helper";
 
 function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
-  const [loading, setLoading] = useState(false);
-
   const dispatch = useDispatch();
   const handleModal = () => {
     handlePresbModalShowHide();
   };
 
   const handleSubmit = () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     dispatch(updateBooking(selectedBooking))
       .then((res) => {
         console.log(res);
-        setLoading(false);
+        dispatch(setLoading(false));
         handleModal();
       })
       .catch((err) => {
-        setLoading(false);
+        dispatch(setLoading(false));
         console.log(err);
       });
   };
@@ -64,7 +62,7 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
   const [selectedBooking, setSelectedBooking] = useState({});
 
   const getData = () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     dispatch(bookingDetails({ doctorId: doctor.id, prescribtion: "" }))
       .then((res) => {
         let data = res.filter((booking) => {
@@ -72,10 +70,10 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
           return diff + 30 < 0;
         });
         setData(data);
-        setLoading(false);
+        dispatch(setLoading(false));
       })
       .catch((err) => {
-        setLoading(false);
+        dispatch(setLoading(false));
       });
   };
 
@@ -118,54 +116,50 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
 
               <>
                 <h3 className="loginicon">Prescription</h3>
-                {loading ? (
-                  <div className="loading">
-                    <LoadingPage />
+
+                <div>
+                  <div className="InputContainer">
+                    <select
+                      name="bookingid"
+                      className="SelectInput"
+                      onChange={handleChangeBooking}
+                    >
+                      <option value="">Select Slot</option>
+
+                      {data &&
+                        data.length > 0 &&
+                        data.map((row) => (
+                          <option value={row.id}>
+                            {row.patientName +
+                              " - " +
+                              row.fullDate +
+                              " " +
+                              row.detailText}
+                          </option>
+                        ))}
+                    </select>
                   </div>
-                ) : (
-                  <div>
-                    <div className="InputContainer">
-                      <select
-                        name="bookingid"
-                        className="SelectInput"
-                        onChange={handleChangeBooking}
-                      >
-                        <option value="">Select Slot</option>
+                  <div className="InputContainer">
+                    <textarea
+                      name="prescribtion"
+                      type="textarea"
+                      rows="10"
+                      cols="33"
+                      placeholder="Enter Prescription"
+                      className="textarea"
+                      value={selectedBooking.prescribtion}
+                      onChange={handleChangePrescribtion}
+                    />
+                  </div>
+                  <div className="">
+                    <button
+                      className="btn  prescription-btn"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </button>
 
-                        {data &&
-                          data.length > 0 &&
-                          data.map((row) => (
-                            <option value={row.id}>
-                              {row.patientName +
-                                " - " +
-                                row.fullDate +
-                                " " +
-                                row.detailText}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div className="InputContainer">
-                      <textarea
-                        name="prescribtion"
-                        type="textarea"
-                        rows="10"
-                        cols="33"
-                        placeholder="Enter Prescription"
-                        className="textarea"
-                        value={selectedBooking.prescribtion}
-                        onChange={handleChangePrescribtion}
-                      />
-                    </div>
-                    <div className="">
-                      <button
-                        className="btn  prescription-btn"
-                        onClick={handleSubmit}
-                      >
-                        Submit
-                      </button>
-
-                      {/* <div className="ActionButtonContainer-Prescription">
+                    {/* <div className="ActionButtonContainer-Prescription">
                     <button
                       color="primary"
                       type="button"
@@ -174,9 +168,8 @@ function Prescription({ togglePresc, handlePresbModalShowHide, doctor }) {
                       Proceed to pay
                     </button>
                   </div> */}
-                    </div>
                   </div>
-                )}
+                </div>
               </>
             </div>
           </Modal.Body>
