@@ -10,8 +10,8 @@ const Footer = () => {
             <div className="col">
               <img src={medIcon} width="50" height="50" alt="" />
               <span style={{ marginLeft: "23px" }}>
-                At MEDFIT, we make daily food healthy & tasty, mental fitness
-                easy with yoga and medical & lifestyle care hassle-free.
+                At MEDFIT, we care about mental fitness and try to provide
+                online consultation with the best doctors in the industry
                 #BeBetterEveryDay
               </span>
             </div>
