@@ -2,8 +2,10 @@ export default function getNextSevenDays() {
   var aryDates = [];
   var daysToAdd = 6;
   var startDate = new Date();
+  startDate.setDate(startDate.getDate() - 7);
   for (var i = 0; i <= daysToAdd; i++) {
     var currentDate = new Date();
+
     currentDate.setDate(startDate.getDate() + i);
     var fullDate =
       DayAsString(currentDate.getDay()) +

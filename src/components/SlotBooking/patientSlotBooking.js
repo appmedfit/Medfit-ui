@@ -62,7 +62,7 @@ function SlotBooking({ toggleSlotBooking, handlBookingModalShowHide, doctor }) {
       .then((dbSlots) => {
         setLoading(false);
         let newSlots = dbSlots.filter((slot) => {
-          return getTimeDiff(slot.fullDate + " " + slot.detailText) > 0;
+          return true;
         });
         console.log(newSlots);
         newSlots = newSlots.sort((slot1, slot2) =>
