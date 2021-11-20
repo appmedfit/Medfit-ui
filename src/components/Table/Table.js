@@ -51,7 +51,7 @@ function Table({ columns, data, handleUploadClick, handleAddCommentClick }) {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  //  console.log(cell.row.original.id);
+                  console.log(cell.row.original);
                   console.log(cell.row.values.file_url);
                   return (
                     <>
@@ -104,6 +104,12 @@ function Table({ columns, data, handleUploadClick, handleAddCommentClick }) {
                           ) : (
                             "No files available"
                           )}
+                        </td>
+                      ) : cell.column.Header == "Booking Date" ? (
+                        <td {...cell.getCellProps()} on>
+                          {cell.row.original.fullDate +
+                            " " +
+                            cell.row.original.detailText}
                         </td>
                       ) : cell.column.Header == "Comment" ? (
                         <td {...cell.getCellProps()} on>

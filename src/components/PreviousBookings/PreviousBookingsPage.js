@@ -79,7 +79,7 @@ function DoctorPreviousBookingsPage() {
       },
       {
         Header: "Booking Date",
-        accessor: "bookingDate",
+        accessor: "appDate",
       },
       {
         Header: "Fee ₹",
@@ -233,6 +233,10 @@ function DoctorPreviousBookingsPage() {
         : { patientId: currentUser.id };
     dispatch(bookingDetails(reqObj))
       .then((res) => {
+        let newdata = {
+          ...res,
+          appDate: res.fullDate + " " + res.detailText,
+        };
         setData(res);
         dispatch(setLoading(false));
       })
