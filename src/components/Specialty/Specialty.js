@@ -178,7 +178,7 @@ const Specialty = () => {
                                         </div>
                                         <div className="col-sm-8">
                                           <h5 className="card-title">
-                                            {doctor.name}{" "}
+                                            {"Dr."} {doctor.name}{" "}
                                             <span className="fee">
                                               {" "}
                                               ₹ {doctor.consultancyFee}{" "}
