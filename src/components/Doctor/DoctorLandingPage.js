@@ -405,7 +405,7 @@ const Doctor = () => {
                 <div className="white_box card_height_100">
                   <div className="box_header border_bottom_1px  ">
                     <div className="main-title">
-                      <h3 className="mb_25">Upcoming 3 Appointments</h3>
+                      <h3 className="mb_25">Upcoming Appointments</h3>
                     </div>
                   </div>
                   <div className="Activity_timeline sessionsActivity">

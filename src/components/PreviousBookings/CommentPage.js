@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import medicon_login from "../../assets/medicon_login.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bookingDetails, updateBooking } from "../../services/slots.service";
 import ModalLoadingPage from "../Loader/ModalLoader";
 import { addReports } from "../../services/reports.service";
@@ -14,6 +14,11 @@ function Comment({ toggleComment, handleCommModalShowHide, comment }) {
     handleCommModalShowHide();
   };
 
+  const { currentUser } = useSelector((state) =>
+    sessionStorage.getItem("user")
+      ? JSON.parse(sessionStorage.getItem("user"))
+      : state.auth
+  );
   const handleOnShow = () => {
     setCommentData(comment);
   };
@@ -104,6 +109,7 @@ function Comment({ toggleComment, handleCommModalShowHide, comment }) {
                         {" "}
                         Session Details:{"  "}
                         <h6 style={{ textTransform: "capitalize" }}>
+                          {currentUser.role == "user" && "Dr."}{" "}
                           {commentData.toName},
                         </h6>
                         <h6> {commentData.sessionDate}</h6>
