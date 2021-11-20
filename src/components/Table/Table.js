@@ -118,6 +118,12 @@ function Table({ columns, data, handleUploadClick, handleAddCommentClick }) {
                             Add Comment
                           </button>
                         </td>
+                      ) : cell.column.Header == "Booking Date" ? (
+                        <td {...cell.getCellProps()} on>
+                          {cell.row.original.fullDate +
+                            " " +
+                            cell.row.original.detailText}
+                        </td>
                       ) : (
                         <td {...cell.getCellProps()} on>
                           {cell.render("Cell")}
