@@ -24,7 +24,7 @@ const Specialty = () => {
   const dispatch = useDispatch();
   const Specialtyimg = {
     Dermatology: DermatologySpeciality,
-    GenPhysician: GeneralPhysicianSpeciality,
+    GeneralPhysician: GeneralPhysicianSpeciality,
     ENT: ENTSpeciality,
     Ortho: OrthoSpeciality,
     Paediatric: PaediatricSpeciality,
