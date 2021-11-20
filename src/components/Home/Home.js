@@ -18,7 +18,7 @@ const Home = () => {
   const history = useHistory();
   const SpecialtyData = [
     { name: "Dermatology", imgSrc: Dermatology, link: "" },
-    { name: "GenPhysician", imgSrc: GenPhysician, link: "" },
+    { name: "GeneralPhysician", imgSrc: GenPhysician, link: "" },
     { name: "ENT", imgSrc: ENT, link: "" },
     { name: "Ortho", imgSrc: Ortho, link: "" },
     { name: "Paediatric", imgSrc: Paediatric, link: "" },
