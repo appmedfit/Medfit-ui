@@ -1,33 +1,88 @@
 README
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a60744f-678f-4f08-a360-7d2e2dcb6560/deploy-status)](https://app.netlify.com/sites/remote-up/deploys)
 
-# medfit
+#
+
+![MedFit Logo](./src/assets/img/RemoteUpLogo.png)
 
 MedFit is an online medical consultation app which fits the patients’ need to consult the top doctors at the convenience and safety of their home at a given time.
 
-LOGIN
+Making this site gave us the opportunity to really stretch out and craft a site with great UX.
 
-Default login credentials are as follows
+Welcome! we hope you enjoy the site as much as we enjoyed making it.
 
-Patient: email: "appmedfitpatient@gmail.com", password: "Medfit@123" ,
-Admin: email: "appmedfitadm1n@gmail.com", password: "Medfit@123" ,
-Doctor: email: "appmedfitdoctor@gmail.com", password: "Medfit@123"
+<br/>
 
-WEBSITE
+# Table of Content
 
-The site is live at http://appmedfit.s3-website.us-east-2.amazonaws.com/
+1. [Demo](#demo)
+2. [Installation](#installation)
+3. [Technology Stack](#technology-stack)
+4. [Authors](#authors)
+5. [License](#license)
 
-GIT
+<br/>
 
-To download the latest source off the git server, do this
+# Demo
 
-Front End link: git clone https://github.com/appmedfit/Medfit-ui.git
+[Live Demo](http://appmedfit.s3-website.us-east-2.amazonaws.com/)
 
-Back End Link : git clone https://github.com/appmedfit/medfit-backend
+<br/>
 
-CONTACT
+Please Note:
 
-If you have problems,questions,ideas or suggestion. Please contact us at appmedfit@gmail.com
+1. We recommend using this app in Google Chrome
+2. Use the app on Laptop/desktop only as of now.
 
-NOTICE
+<br/>
+Test Credentials:
 
-This app contains pieces of source code that is copyright(C) 2021 Medit Team. This notice is included here to comply with the distribution terms.
+- For Patient (use Google)
+  - Email: appmedfitpatient@gmail.com
+  - Password: Medfit@123
+  
+- For Doctor 
+  - Email: appmedfitdoctor@gmail.com
+  - Password:  Medfit@123
+  
+- For Admin 
+  - Email: appmedfitadm1n@gmail.com
+  - Password: Medfit@123
+<br/>
+
+
+
+<br/>
+
+# Installation
+
+- Fork or directly clone this repository to your local machine
+- Use the `npm install` command to install dependencies
+- Once the dependencies are finished installing, use the `npm start` command inside the root directory to open the app in your local browser of choice
+
+<br/>
+
+# Technology Stack
+
+We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
+
+- [Material UI](https://mui.com)
+- [Formik](https://formik.org/)
+- [Yup](https://github.com/jquense/yup)
+- [Axios](https://axios-http.com/docs/intro)
+- [React Query](https://react-query.tanstack.com/)
+- [Auth0-lock](https://github.com/auth0/lock)
+
+<br/>
+
+# Authors
+
+- [Venkata Charan](https://www.github.com/minithb)
+- [Suman Shah]()
+
+<br/>
+
+# License
+
+[MIT](https://opensource.org/licenses/MIT)
+
