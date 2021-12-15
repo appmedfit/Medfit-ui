@@ -2,7 +2,7 @@ README
 
 #
 
-![MedFit Logo](./src/assets/medicon.jpg) 
+![MedFit Logo](https://images.squarespace-cdn.com/content/v1/57d94febf7e0aba89b07f9bb/1474459898228-1PZLXY8NRZQCC1L9AUPU/92238_MPS_Logo_SG_final.png?format=100w) 
 
 MedFit is an online medical consultation app which fits the patients’ need to consult the top doctors at the convenience and safety of their home at a given time.
 
