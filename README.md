@@ -1,5 +1,4 @@
 README
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3a60744f-678f-4f08-a360-7d2e2dcb6560/deploy-status)](https://app.netlify.com/sites/remote-up/deploys)
 
 #
 
