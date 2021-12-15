@@ -2,7 +2,7 @@ README
 
 #
 
-![MedFit Logo](./src/assets/img/RemoteUpLogo.png)
+![MedFit Logo](./src/assets/medicon.jpg) 
 
 MedFit is an online medical consultation app which fits the patients’ need to consult the top doctors at the convenience and safety of their home at a given time.
 
@@ -65,18 +65,19 @@ Test Credentials:
 
 We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
 
-- [Material UI](https://mui.com)
-- [Formik](https://formik.org/)
-- [Yup](https://github.com/jquense/yup)
+- [ReactJs](https://reactjs.org/)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [NodeJs](https://nodejs.org/en/docs/)
+- [Firebase](https://firebase.google.com/docs)
 - [Axios](https://axios-http.com/docs/intro)
-- [React Query](https://react-query.tanstack.com/)
-- [Auth0-lock](https://github.com/auth0/lock)
+- [Zoom](https://marketplace.zoom.us/docs/api-reference/zoom-api)
+- [Razorpay](https://razorpay.com/docs/)
 
 <br/>
 
 # Authors
 
-- [Venkata Charan](https://www.github.com/minithb)
+- [Venkata Charan](https://github.com/charan-kanaparthi)
 - [Suman Shah]()
 
 <br/>
