@@ -1,33 +1,88 @@
 README
 
-# medfit
+#
+
+![MedFit Logo](https://images.squarespace-cdn.com/content/v1/57d94febf7e0aba89b07f9bb/1474459898228-1PZLXY8NRZQCC1L9AUPU/92238_MPS_Logo_SG_final.png?format=100w) 
 
 MedFit is an online medical consultation app which fits the patients’ need to consult the top doctors at the convenience and safety of their home at a given time.
 
-LOGIN
+Making this site gave us the opportunity to really stretch out and craft a site with great UX.
 
-Default login credentials are as follows
+Welcome! we hope you enjoy the site as much as we enjoyed making it.
 
-Patient: email: "appmedfitpatient@gmail.com", password: "Medfit@123" ,
-Admin: email: "appmedfitadm1n@gmail.com", password: "Medfit@123" ,
-Doctor: email: "appmedfitdoctor@gmail.com", password: "Medfit@123"
+<br/>
 
-WEBSITE
+# Table of Content
 
-The site is live at http://appmedfit.s3-website.us-east-2.amazonaws.com/
+1. [Demo](#demo)
+2. [Installation](#installation)
+3. [Technology Stack](#technology-stack)
+4. [Authors](#authors)
+5. [License](#license)
 
-GIT
+<br/>
 
-To download the latest source off the git server, do this
+# Demo
 
-Front End link: git clone https://github.com/appmedfit/Medfit-ui.git
+[Live Demo](http://appmedfit.s3-website.us-east-2.amazonaws.com/)
 
-Back End Link : git clone https://github.com/appmedfit/medfit-backend
+<br/>
 
-CONTACT
+Please Note:
 
-If you have problems,questions,ideas or suggestion. Please contact us at appmedfit@gmail.com
+1. We recommend using this app in Google Chrome
+2. Use the app on Laptop/desktop only as of now.
 
-NOTICE
+<br/>
+Test Credentials:
 
-This app contains pieces of source code that is copyright(C) 2021 Medit Team. This notice is included here to comply with the distribution terms.
+- For Patient (use Google)
+  - Email: appmedfitpatient@gmail.com
+  - Password: Medfit@123
+  
+- For Doctor 
+  - Email: appmedfitdoctor@gmail.com
+  - Password:  Medfit@123
+  
+- For Admin 
+  - Email: appmedfitadm1n@gmail.com
+  - Password: Medfit@123
+<br/>
+
+
+
+<br/>
+
+# Installation
+
+- Fork or directly clone this repository to your local machine
+- Use the `npm install` command to install dependencies
+- Once the dependencies are finished installing, use the `npm start` command inside the root directory to open the app in your local browser of choice
+
+<br/>
+
+# Technology Stack
+
+We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
+
+- [ReactJs](https://reactjs.org/)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [NodeJs](https://nodejs.org/en/docs/)
+- [Firebase](https://firebase.google.com/docs)
+- [Axios](https://axios-http.com/docs/intro)
+- [Zoom](https://marketplace.zoom.us/docs/api-reference/zoom-api)
+- [Razorpay](https://razorpay.com/docs/)
+
+<br/>
+
+# Authors
+
+- [Venkata Charan](https://github.com/charan-kanaparthi)
+- [Suman Shah]()
+
+<br/>
+
+# License
+
+[MIT](https://opensource.org/licenses/MIT)
+
