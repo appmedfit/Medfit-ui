@@ -16,6 +16,18 @@ function SignUpForm({
   const [msg, setMsg] = useState("");
   const [err, seterr] = useState("");
   const [loading, setLoading] = useState(false);
+  const SpecialtyData = [
+    { value: "Dermatology", option: "Dermatology" },
+    { value: "GeneralPhysician", option: "General Physician" },
+    { value: "ENT", option: "ENT" },
+    { value: "Ortho", option: "Orthopaedic" },
+    { value: "Paediatric", option: "Paediatric" },
+    { value: "Sexology", option: "Sexology" },
+    { value: "Urology", option: "Urology" },
+    { value: "PhysioTheraphy", option: "Physio Theraphy" },
+    { value: "Dental", option: "Dental" },
+    { value: "Ophthal", option: "Opthalmology" },
+  ];
   const { values, errors, handleChange, handleSubmit } = useForm(
     handleSignup,
     validate
@@ -214,10 +226,9 @@ function SignUpForm({
                               onChange={handleChange}
                             >
                               <option value="">Select specialty</option>
-                              <option value="Dermatology">Dermatology</option>
-                              <option value="GeneralPhysician">
-                                General Physician
-                              </option>
+                              {SpecialtyData.map((spl) => (
+                                <option value={spl.value}>{spl.option}</option>
+                              ))}
                             </select>
                           </div>
                           <div className="invalid-feedback">
