@@ -29,7 +29,7 @@ const Specialty = () => {
     Ortho: OrthoSpeciality,
     Paediatric: PaediatricSpeciality,
     Sexology: SexologistSpeciality,
-    Urolgogy: UrologySpeciality,
+    Urology: UrologySpeciality,
     PhysioTheraphy: PhysioTheraphySpeciality,
     Dental: DentalSpeciality,
     Ophthal: OphthalSpeciality,
@@ -77,9 +77,9 @@ const Specialty = () => {
   };
 
   const handleLoadMore = () => {
-    setRecCount((count) => count + 3);
     let data = doctorsSearchdata;
-    setLazyData(data.slice(0, recCount));
+    setLazyData(data.slice(0, recCount + 3));
+    setRecCount((count) => count + 3);
   };
 
   useEffect(() => {
@@ -302,12 +302,16 @@ const Specialty = () => {
                                   </div>
                                 </div>
                               ))}
-                            <div
-                              className="load_more"
-                              onClick={() => handleLoadMore(recCount)}
-                            >
-                              <span>Load more..</span>
-                            </div>
+                            {lazyData &&
+                              doctorsSearchdata &&
+                              lazyData.length < doctorsSearchdata.length && (
+                                <div
+                                  className="load_more"
+                                  onClick={() => handleLoadMore(recCount)}
+                                >
+                                  <span>Load more..</span>
+                                </div>
+                              )}
                           </>
                         )}
                       </div>
