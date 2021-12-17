@@ -12,7 +12,7 @@ Welcome! we hope you enjoy the site as much as we enjoyed making it.
 
 <br/>
 
-# Table of Content
+# Table of Contents
 
 1. [Demo](#demo)
 2. [Installation](#installation)
@@ -67,9 +67,7 @@ We tried to use a completely modern tech stack while testing out some new techno
 
 - [ReactJs](https://reactjs.org/)
 - [React-Bootstrap](https://react-bootstrap.github.io/)
-- [NodeJs](https://nodejs.org/en/docs/)
-- [Firebase](https://firebase.google.com/docs)
-- [Axios](https://axios-http.com/docs/intro)
+- [Redux] (https://redux.js.org)
 - [Zoom](https://marketplace.zoom.us/docs/api-reference/zoom-api)
 - [Razorpay](https://razorpay.com/docs/)
 
