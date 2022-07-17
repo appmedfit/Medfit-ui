@@ -111,7 +111,7 @@ input:focus-visible {
 
 .doc_profile_image {
   width: 128px;
-  height: fit-content;
+  height: 128px;
 }
 .card-text {
   -webkit-line-clamp: 1;

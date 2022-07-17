@@ -5,7 +5,7 @@ import { history } from "./helpers/history";
 import { PrivateRoute } from "./routing/PrivateRouter";
 import HomePage from "./views/HomePage";
 import Specialty from "./components/Specialty/Specialty";
-import Header from "./components/Layout/Header";
+import Header from "./components/Header/Header";
 import FooterPage from "./components/Footer/Footer";
 import PreviousBookingsPage from "./components/PreviousBookings/PreviousBookingsPage";
 import DoctorLandingPage from "./components/Doctor/DoctorLandingPage";

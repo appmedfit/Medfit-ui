@@ -3,7 +3,7 @@ import { Modal, Row, Col, Container, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { SignUp as signUpService } from "../../services/auth.service";
 import medicon_login from "../../assets/medicon_login.png";
-import "../Layout/Header.css";
+import "../Header/Header.css";
 import useForm from "../../shared/useForm";
 import validate from "../../shared/SignupFormValidationRules";
 

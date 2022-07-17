@@ -11,3 +11,12 @@ export const getSpeciality = async (id) => {
     responseType: "json",
   });
 };
+
+export const getAllSpecialties = async () => {
+  console.log();
+  return axiosClient({
+    method: "Get",
+    url: constants.getSpeciality,
+    responseType: "json",
+  });
+};

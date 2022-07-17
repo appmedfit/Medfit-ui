@@ -1,68 +1,84 @@
-import { Fragment } from "react";
-import Dermatology from "../../assets/Dermatology.jpg";
-import GenPhysician from "../../assets/general_physician.jpg";
-import ENT from "../../assets/ENT.jpg";
-import Ortho from "../../assets/Ortho.jpg";
-import Paediatric from "../../assets/Paediatric.jpg";
-import Ophthal from "../../assets/Opthal.jpg";
-import Sexologist from "../../assets/Sexologist.jpg";
-import Urology from "../../assets/Urology.jpg";
-import PhysioTheraphy from "../../assets/PhysioTheraphy.jpg";
-import Dental from "../../assets/Dental.jpg";
-import classes from "./Home.module.css";
-
+import { Fragment, useEffect, useState, useRef } from "react";
+import "./Home.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading } from "../../store/auth.slice";
 import { useHistory } from "react-router";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { getAllSpecialties } from "../../services/specialty.service";
 const Home = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const SpecialtyData = [
-    { name: "Dermatology", imgSrc: Dermatology, link: "" },
-    { name: "GeneralPhysician", imgSrc: GenPhysician, link: "" },
-    { name: "ENT", imgSrc: ENT, link: "" },
-    { name: "Ortho", imgSrc: Ortho, link: "" },
-    { name: "Paediatric", imgSrc: Paediatric, link: "" },
-    { name: "Sexology", imgSrc: Sexologist, link: "" },
-    { name: "Urology", imgSrc: Urology, link: "" },
-    { name: "PhysioTheraphy", imgSrc: PhysioTheraphy, link: "" },
-    { name: "Dental", imgSrc: Dental, link: "" },
-    { name: "Ophthal", imgSrc: Ophthal, link: "" },
-  ];
+  const [loading, setImgLoading] = useState(false);
+  const [SpecialtyData, setspecialtyData] = useState([]);
+  const imgCounter = useRef(0);
+  const imageLoaded = () => {
+    imgCounter.current += 1;
+    if (imgCounter.current >= SpecialtyData?.length) {
+      console.log("load comp d");
+      dispatch(setLoading(false));
+      setImgLoading(false);
+    }
+  };
+  useEffect(() => {
+    setImgLoading(true);
+    dispatch(setLoading(true));
+    if (sessionStorage.getItem("specialities")) {
+      setspecialtyData(JSON.parse(sessionStorage.getItem("specialities")));
+    } else {
+      fetchSpecialities();
+    }
+  }, []);
 
+  const fetchSpecialities = () => {
+    getAllSpecialties()
+      .then((resp) => {
+        sessionStorage.setItem("specialities", JSON.stringify(resp));
+        setspecialtyData(resp);
+      })
+      .catch((err) => {
+        setImgLoading(false);
+        dispatch(setLoading(false));
+      });
+  };
   return (
     <Fragment>
-      <Router>
-        <div className="card">
-          <div className="card-body">
-            <p className={classes.spl}>Specialists</p>
-            <p className={classes.subtitle}>Consult with top Doctors</p>
-            <div className="container">
+      <div className="card">
+        <div className="card-body">
+          <p className="spl">Specialists</p>
+          <p className="subtitle">Consult with top Doctors</p>
+          <div className="container">
+            <div className="innerContainer">
               <div className="row ">
-                {SpecialtyData.map((spl, index) => (
-                  <div
-                    className={classes.col}
-                    key={index}
-                    onClick={() => {
-                      history.push("/speciality/" + spl.name);
-                    }}
-                  >
+                {SpecialtyData &&
+                  SpecialtyData.map((spl, index) => (
                     <div
-                      className="card"
-                      style={{ width: "11rem", cursor: "pointer" }}
+                      className="col"
+                      key={index}
+                      onClick={() => {
+                        history.push("/speciality/" + spl.name);
+                      }}
                     >
-                      <img
-                        className="card-img-top"
-                        src={spl.imgSrc}
-                        alt={spl.name}
-                      />
+                      <div
+                        className="card"
+                        style={{
+                          width: "11rem",
+                          cursor: "pointer",
+                          border: "none",
+                        }}
+                      >
+                        <img
+                          className="card-img-top"
+                          src={spl.thumbnail}
+                          alt={spl.name}
+                          onLoad={imageLoaded}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           </div>
         </div>
-      </Router>
+      </div>
     </Fragment>
   );
 };

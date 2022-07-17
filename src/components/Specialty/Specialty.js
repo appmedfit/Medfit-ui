@@ -3,16 +3,6 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import doc from "../../assets/DocIcon.jpg";
-import DermatologySpeciality from "../../assets/DermatologySpeciality.jpg";
-import GeneralPhysicianSpeciality from "../../assets/general_physician_speciality.jpg";
-import ENTSpeciality from "../../assets/ENTSpeciality.png";
-import OrthoSpeciality from "../../assets/OrthoSpeciality.jpg";
-import SexologistSpeciality from "../../assets/SexologistSpeciality.jpg";
-import PaediatricSpeciality from "../../assets/PaediatricSpeciality.jpg";
-import UrologySpeciality from "../../assets/UrologySpeciality.jpg";
-import PhysioTheraphySpeciality from "../../assets/PhysioTheraphySpeciality.jpg";
-import DentalSpeciality from "../../assets/DentalSpeciality.jpg";
-import OphthalSpeciality from "../../assets/OphthalSpeciality.jpg";
 import SlotBooking from "../SlotBooking/patientSlotBooking";
 import { getUsersWithCondition } from "../../services/auth.service";
 import { getSpeciality } from "../../services/specialty.service";
@@ -22,18 +12,6 @@ import { getDoctorSlots } from "../../services/slots.service";
 const Specialty = () => {
   let { specialityId } = useParams();
   const dispatch = useDispatch();
-  const Specialtyimg = {
-    Dermatology: DermatologySpeciality,
-    GeneralPhysician: GeneralPhysicianSpeciality,
-    ENT: ENTSpeciality,
-    Ortho: OrthoSpeciality,
-    Paediatric: PaediatricSpeciality,
-    Sexology: SexologistSpeciality,
-    Urology: UrologySpeciality,
-    PhysioTheraphy: PhysioTheraphySpeciality,
-    Dental: DentalSpeciality,
-    Ophthal: OphthalSpeciality,
-  };
 
   const [specialtyData, setspecialtyData] = useState({});
   const [doctorsdata, setDoctorsdata] = useState([]);
@@ -88,15 +66,11 @@ const Specialty = () => {
       getSpeciality(specialityId)
         .then((resp) => {
           setspecialtyData(resp);
-          dispatch(setLoading(false));
         })
-        .catch((err) => {
-          dispatch(setLoading(false));
-        });
+        .catch((err) => {});
       dispatch(
         getUsersWithCondition({ specialty: specialityId, role: "doctor" })
       ).then((resp) => {
-        dispatch(setLoading(false));
         setDoctorsdata(resp);
       });
     }
@@ -116,11 +90,19 @@ const Specialty = () => {
             <div className="row">
               <div className="col">
                 <div className="imgcard">
-                  <img
-                    className="spl_img"
-                    src={Specialtyimg[specialtyData.name]}
-                    alt="spl_img"
-                  />
+                  {specialtyData?.mainImage && (
+                    <img
+                      className="spl_img"
+                      src={specialtyData.mainImage}
+                      alt="spl_img"
+                      onLoad={() => {
+                        dispatch(setLoading(false));
+                      }}
+                      onError={() => {
+                        dispatch(setLoading(false));
+                      }}
+                    />
+                  )}
                 </div>
               </div>
               <div className="col">
